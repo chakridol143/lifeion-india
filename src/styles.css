@@ -3,3 +3,28 @@ html, body {
   padding: 0;
   overflow-x: hidden;
 }
+
+/* Fix invisible full-page anchor bug */
+a {
+  position: relative;
+}
+
+/* Stop navbar links from stretching over the page */
+nav a,
+.header a {
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Remove fake underline bars */
+nav a::before,
+nav a::after {
+  content: none !important;
+}
+
+/* Make sure sections are clickable */
+.mxl-section {
+  position: relative;
+  z-index: 10;
+}
