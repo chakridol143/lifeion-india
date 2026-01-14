@@ -8,6 +8,7 @@ import { Videos } from './learn/videos/videos';
 import { Blog } from './learn/blog/blog';
 import { Support } from './learn/support/support';
 import { FreeWaterReport } from './learn/free-water-report/free-water-report';
+import { Finance } from './finance/finance';
 
 
 export const routes: Routes = [
@@ -17,6 +18,8 @@ export const routes: Routes = [
   { path: 'water-systems', component: WaterSystems },
   
   { path:'compaison', component: Compaison },
+  { path: 'finance', component: Finance },
+
 
   {
     path: 'learn',
