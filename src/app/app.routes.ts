@@ -9,6 +9,7 @@ import { Blog } from './learn/blog/blog';
 import { Support } from './learn/support/support';
 import { FreeWaterReport } from './learn/free-water-report/free-water-report';
 import { Finance } from './finance/finance';
+import { Aboutus } from './aboutus/aboutus';
 
 
 export const routes: Routes = [
@@ -19,6 +20,8 @@ export const routes: Routes = [
   
   { path:'compaison', component: Compaison },
   { path: 'finance', component: Finance },
+
+  {path:'aboutus', component:Aboutus},
 
 
   {
