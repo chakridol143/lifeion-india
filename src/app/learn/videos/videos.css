@@ -1,0 +1,196 @@
+/* Full page background */
+.videos-page {
+    width: 100%;
+    background: #ffffff;
+    padding: 40px 0;
+  }
+  
+  /* Centered container like original site */
+  .videos-page > * {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Main title */
+  .videos-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 800;
+    color: #222;
+    margin: 40px auto 55px auto;
+    line-height: 1.2;
+  }
+  
+  /* SECTION TITLE */
+  .section-title {
+    text-align: center;
+    font-size: 46px;
+    font-weight: 800;
+    color: #222;
+    margin: 70px auto 55px auto;
+    line-height: 1.2;
+  }
+  
+  /* ===== Layout Grids ===== */
+  
+  /* 2 BIG cards row */
+  .top-videos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    margin-bottom: 65px;
+  }
+  
+  /* 3 cards row */
+  .middle-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    margin-bottom: 65px;
+  }
+  
+  /* 3 big cards row */
+  .bottom-videos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+    margin-bottom: 65px;
+  }
+  
+  /* 4 cards row */
+  .grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px;
+    margin-bottom: 65px;
+  }
+  
+  /* Single card (bottled water testing) */
+  .grid-single {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 65px;
+  }
+  
+  /* ===== Cards ===== */
+  .video-card {
+    background: transparent;
+    border-radius: 18px;
+  }
+  
+  /* Thumb wrapper */
+  .thumb-wrap {
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #f3f3f3;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.10);
+  }
+  
+  /* Default thumb size */
+  .thumb-wrap {
+    height: 190px;
+  }
+  
+  /* Large thumb size (top + big rows) */
+  .thumb-lg {
+    height: 280px;
+  }
+  
+  /* Single thumbnail size */
+  .single-thumb {
+    width: 300px;
+    height: 220px;
+  }
+  
+  /* Image */
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Text below image */
+  .video-text {
+    font-size: 18px;
+    color: #444;
+    margin-top: 12px;
+    line-height: 1.4;
+  }
+  
+  /* Link style like original (blue hover) */
+  .video-text:hover {
+    color: #0073e6;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* ===== Responsive ===== */
+  @media (max-width: 1300px) {
+    .videos-page > * {
+      max-width: 1050px;
+    }
+  }
+  
+  @media (max-width: 1100px) {
+    .videos-page > * {
+      max-width: 900px;
+    }
+  
+    .top-videos {
+      grid-template-columns: 1fr;
+    }
+  
+    .middle-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .bottom-videos {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 700px) {
+    .videos-page {
+      padding: 25px 0;
+    }
+  
+    .videos-page > * {
+      max-width: 95%;
+    }
+  
+    .videos-title {
+      font-size: 32px;
+    }
+  
+    .section-title {
+      font-size: 30px;
+    }
+  
+    .middle-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .bottom-videos {
+      grid-template-columns: 1fr;
+    }
+  
+    .grid-4 {
+      grid-template-columns: 1fr;
+    }
+  
+    .grid-single {
+      justify-content: center;
+    }
+  
+    .single-thumb {
+      width: 100%;
+    }
+  }
+  

@@ -1,0 +1,20 @@
+<section class="blog-detail-page">
+    <div class="container">
+  
+      <a class="back-btn" routerLink="/learn/blog">← Back to Blog</a>
+  
+      <p *ngIf="loading">Loading post...</p>
+      <p *ngIf="errorMsg">{{ errorMsg }}</p>
+  
+      <div *ngIf="post && !loading">
+        <h1 class="title">{{ post.title }}</h1>
+        <p class="date">{{ post.published | date:'MMMM d, y' }}</p>
+  
+        <img *ngIf="post.image" class="cover" [src]="post.image" [alt]="post.title" />
+  
+        <div class="content" [innerHTML]="post.contentHtml"></div>
+      </div>
+  
+    </div>
+  </section>
+  

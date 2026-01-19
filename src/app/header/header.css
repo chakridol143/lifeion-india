@@ -196,3 +196,15 @@
   background: transparent;
   color: #00b7bb; /* subtle brand hover */
 }
+.header-logo {
+  width: 200px;      /* reduce space */
+  height: 100px;      /* reduce height */
+  display: flex;
+  align-items: center;
+}
+
+.header-logo img {
+  height: 300px;      /* logo height */
+  width: auto;
+  object-fit: contain;
+}

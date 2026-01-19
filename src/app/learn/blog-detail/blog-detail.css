@@ -1,0 +1,43 @@
+.blog-detail-page {
+    padding: 40px 0;
+    background: #fff;
+  }
+  
+  .container {
+    width: min(1000px, 92%);
+    margin: 0 auto;
+  }
+  
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 18px;
+    text-decoration: none;
+    color: #0aa6b5;
+    font-weight: 600;
+  }
+  
+  .title {
+    font-size: 44px;
+    font-weight: 800;
+    margin: 10px 0 10px;
+  }
+  
+  .date {
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .cover {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin: 20px 0;
+  }
+  
+  .content {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #333;
+  }
+  

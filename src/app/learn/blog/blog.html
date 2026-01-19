@@ -1,0 +1,105 @@
+<section class="blog-page">
+    <div class="blog-container">
+      <h1 class="blog-title">Latest News</h1>
+  
+      <!-- Loading -->
+      <p *ngIf="loading" class="loading-text">Loading posts...</p>
+  
+      <!-- Error -->
+      <p *ngIf="!loading && errorMsg" class="error-text">
+        {{ errorMsg }}
+      </p>
+  
+      <!-- Blog List -->
+      <div class="blog-list" *ngIf="!loading && !errorMsg">
+        <div
+            class="blog-card"
+            *ngFor="let post of pagedPosts"
+            (click)="openPost(post)"
+            style="cursor:pointer;"
+         >
+      
+          <div class="blog-card-inner">
+            <div class="blog-image">
+              <img
+                *ngIf="post.image"
+                [src]="post.image"
+                [alt]="post.title"
+                loading="lazy"
+              />
+            </div>
+  
+            <div class="blog-content">
+              <div class="blog-category">{{ post.category || 'Water Ionizers' }}</div>
+  
+              <h2 class="blog-card-title">
+                {{ post.title }}
+              </h2>
+  
+              <p class="blog-summary" [innerHTML]="post.summaryHtml"></p>
+  
+              <p class="blog-date">
+                {{ post.published | date:'MMMM d, y' }}
+              </p>
+  
+              <div class="blog-arrow">
+                <span>→</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Pagination -->
+      <div class="pagination-wrap" *ngIf="!loading && !errorMsg && totalPages > 1">
+        <button
+          class="pagination-btn"
+          (click)="goToPage(page - 1)"
+          [disabled]="page === 1"
+        >
+          ‹ <span>Previous</span>
+        </button>
+  
+        <div class="pagination-numbers">
+          <button
+            class="page-num"
+            [class.active]="page === 1"
+            (click)="goToPage(1)"
+          >
+            1
+          </button>
+  
+          <button class="page-num" *ngIf="page > 3" disabled>...</button>
+  
+          <button
+            class="page-num"
+            *ngFor="let p of getMiddlePages()"
+            [class.active]="page === p"
+            (click)="goToPage(p)"
+          >
+            {{ p }}
+          </button>
+  
+          <button class="page-num" *ngIf="page < totalPages - 2" disabled>...</button>
+  
+          <button
+            class="page-num"
+            *ngIf="totalPages > 1"
+            [class.active]="page === totalPages"
+            (click)="goToPage(totalPages)"
+          >
+            {{ totalPages }}
+          </button>
+        </div>
+  
+        <button
+          class="pagination-btn"
+          (click)="goToPage(page + 1)"
+          [disabled]="page === totalPages"
+        >
+          <span>Next</span> ›
+        </button>
+      </div>
+    </div>
+  </section>
+  
