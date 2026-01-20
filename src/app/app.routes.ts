@@ -12,8 +12,12 @@ import { Finance } from './finance/finance';
 
 import { Aboutus } from './aboutus/aboutus';
 
-
 import { BlogDetailComponent } from './learn/blog-detail/blog-detail';
+import { TestimonialsComponent } from './testimonials/testimonials';
+import { CustomerComponent } from './customers/customers';
+import { HealthcareComponent } from './healthcare/healthcare';
+import { ActorComponent } from './actors/actors';
+import { AthleteComponent } from './athletes/athletes';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -27,6 +31,11 @@ export const routes: Routes = [
   {path:'aboutus', component:Aboutus},
 
 
+  { path: 'testimonials', component: TestimonialsComponent },
+  { path: 'customers', component: CustomerComponent },
+  { path: 'healthcare', component: HealthcareComponent },
+  { path: 'actors', component: ActorComponent },
+  { path: 'athletes', component: AthleteComponent },
   {
     path: 'learn',
     component: Learn,

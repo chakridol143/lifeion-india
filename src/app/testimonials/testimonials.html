@@ -1,0 +1,130 @@
+<!-- TESTIMONIALS MAIN SECTION -->
+<div class="testimonials-container">
+    <!-- HERO SECTION -->
+    <div class="testimonials-hero">
+      <div class="hero-content">
+        <h1 class="hero-title">+600,000 SATISFIED CUSTOMERS</h1>
+        <h2 class="hero-subtitle">AND COUNTING</h2>
+        
+        <div class="hero-rating">
+          <span class="stars">★★★★★</span>
+        </div>
+  
+        <p class="hero-description">
+          We believe in building ongoing relationships with our amazing customers. Therefore, 
+          we stay committed to providing the world's best water long after you purchase our products.
+        </p>
+  
+      </div>
+    </div>
+  
+    <!-- TESTIMONIALS GRID -->
+    <div class="testimonials-grid">
+      <!-- ROW 1 - CELEBRITIES/ATHLETES -->
+      <div class="testimonials-row">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials.row1" 
+             (click)="openVideo(testimonial)">
+          <div class="video-thumbnail">
+            <img [src]="testimonial.thumbnail" [alt]="testimonial.name" />
+            <div class="play-icon">
+              <i class="bx bx-play-circle"></i>
+            </div>
+          </div>
+          <div class="testimonial-info">
+            <h3 class="testimonial-name">{{ testimonial.name }}</h3>
+            <p class="testimonial-title">{{ testimonial.title }}</p>
+          </div>
+        </div>
+  
+        <!-- NAVIGATION BUTTON -->
+        <div class="nav-button next" (click)="scrollRight('row1')">
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div>
+  
+      <!-- ROW 2 - MEDICAL PROFESSIONALS/SURVIVORS -->
+      <div class="testimonials-row">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials.row2"
+             (click)="openVideo(testimonial)">
+          <div class="video-thumbnail">
+            <img [src]="testimonial.thumbnail" [alt]="testimonial.name" />
+            <div class="play-icon">
+              <i class="bx bx-play-circle"></i>
+            </div>
+          </div>
+          <div class="testimonial-info">
+            <h3 class="testimonial-name">{{ testimonial.name }}</h3>
+            <p class="testimonial-title">{{ testimonial.title }}</p>
+          </div>
+        </div>
+  
+        <!-- NAVIGATION BUTTON -->
+        <div class="nav-button next" (click)="scrollRight('row2')">
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div>
+  
+      <!-- ROW 3 - MORE TESTIMONIALS -->
+      <div class="testimonials-row">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials.row3"
+             (click)="openVideo(testimonial)">
+          <div class="video-thumbnail">
+            <img [src]="testimonial.thumbnail" [alt]="testimonial.name" />
+            <div class="play-icon">
+              <i class="bx bx-play-circle"></i>
+            </div>
+          </div>
+          <div class="testimonial-info">
+            <h3 class="testimonial-name">{{ testimonial.name }}</h3>
+            <p class="testimonial-title">{{ testimonial.title }}</p>
+          </div>
+        </div>
+  
+        <!-- NAVIGATION BUTTON -->
+        <div class="nav-button next" (click)="scrollRight('row3')">
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div>
+  
+      <!-- ROW 4 - FINAL TESTIMONIALS -->
+      <div class="testimonials-row">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials.row4"
+             (click)="openVideo(testimonial)">
+          <div class="video-thumbnail">
+            <img [src]="testimonial.thumbnail" [alt]="testimonial.name" />
+            <div class="play-icon">
+              <i class="bx bx-play-circle"></i>
+            </div>
+          </div>
+          <div class="testimonial-info">
+            <h3 class="testimonial-name">{{ testimonial.name }}</h3>
+            <p class="testimonial-title">{{ testimonial.title }}</p>
+          </div>
+        </div>
+  
+        <!-- NAVIGATION BUTTON -->
+        <div class="nav-button next" (click)="scrollRight('row4')">
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- VIDEO MODAL -->
+  <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeVideoModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeVideoModal()">
+        <i class="bx bx-x"></i>
+      </button>
+      <div class="video-player">
+        <iframe 
+          *ngIf="selectedTestimonial"
+          [src]="selectedTestimonial.videoUrl"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+  </div>

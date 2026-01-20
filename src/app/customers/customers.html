@@ -1,0 +1,31 @@
+<div class="customer-container">
+    <div class="customer-header">
+      <h1>Life Ionizer Reviews - Satisfied Customers</h1>
+      <p class="header-subtitle">What will your Life Ionizer review and testimonial be? Discover what makes Life Ionizers the top water ionizer on the market with reviews from athletes, celebrities, doctors, customers and more. With over 20 years of experience in the water ionizer industry, you can count on benefiting from alkaline ionized water for years to come. Call now and become one of our happy reviewers today!</p>
+    </div>
+  
+    <div class="reviews-grid">
+      <div class="review-card" *ngFor="let review of reviews" (click)="openTestimonial(review)">
+        <div class="review-image">
+          <div class="placeholder-image"></div>
+        </div>
+        <div class="review-content">
+          <div class="review-label">Satisfied Customer</div>
+          <h3 class="review-name">{{ review.name }}</h3>
+          <p class="review-quote">{{ review.quote }}</p>
+          <button class="read-button">READ FULL TESTIMONIAL</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal for full testimonial -->
+    <div class="modal" *ngIf="selectedReview" (click)="closeTestimonial()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="closeTestimonial()">×</button>
+        <h2>{{ selectedReview.name }} | Satisfied Customer</h2>
+        <p class="modal-testimonial">{{ selectedReview.fullTestimonial }}</p>
+        <button class="modal-close-button" (click)="closeTestimonial()">Close</button>
+      </div>
+    </div>
+  </div>
+  
