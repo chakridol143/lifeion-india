@@ -29,6 +29,7 @@ export const routes: Routes = [
   { path: 'finance', component: Finance },
 
   {path:'aboutus', component:Aboutus},
+  {path:'support', component:Support},
 
 
   { path: 'testimonials', component: TestimonialsComponent },
