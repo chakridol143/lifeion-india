@@ -1,113 +1,152 @@
 <div class="videos-page">
 
-    <!-- Main Title -->
-    <h1 class="videos-title">{{ mainTitle }}</h1>
-  
-    <!-- Top 2 Large Videos -->
-    <div class="top-videos">
-      <div class="video-card video-card-lg" *ngFor="let v of topVideos">
-        <div class="thumb-wrap thumb-lg">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
+  <!-- Main Title -->
+  <h1 class="videos-title">{{ mainTitle }}</h1>
+
+  <!-- Top 2 Large Videos -->
+  <div class="top-videos">
+    <div class="video-card video-card-lg" *ngFor="let v of topVideos" (click)="openVideo(v)">
+      <div class="thumb-wrap thumb-lg">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
       </div>
+      <p class="video-text">{{ v.title }}</p>
     </div>
-  
-    <!-- Middle Grid Videos -->
-    <div class="middle-grid">
-      <div class="video-card" *ngFor="let v of middleVideos">
-        <div class="thumb-wrap">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Product Overview Title -->
-    <h2 class="section-title">{{ sectionTitle }}</h2>
-  
-    <!-- Bottom 3 Large Videos -->
-    <div class="bottom-videos">
-      <div class="video-card video-card-lg" *ngFor="let v of productOverviewVideos">
-        <div class="thumb-wrap thumb-lg">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Continuation: 3 cards -->
-    <div class="bottom-videos">
-      <div class="video-card video-card-lg" *ngFor="let v of productOverviewMore1">
-        <div class="thumb-wrap thumb-lg">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Continuation: 4 cards -->
-    <div class="grid-4">
-      <div class="video-card" *ngFor="let v of productOverviewMore2">
-        <div class="thumb-wrap">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Continuation: 4 cards -->
-    <div class="grid-4">
-      <div class="video-card" *ngFor="let v of productOverviewMore3">
-        <div class="thumb-wrap">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Single Card -->
-    <div class="grid-single">
-      <div class="video-card" *ngFor="let v of productOverviewSingle">
-        <div class="thumb-wrap single-thumb">
-          <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Testimonials -->
-    <h2 class="section-title">{{ testimonialsTitle }}</h2>
-  
-    <div class="bottom-videos">
-      <div class="video-card video-card-lg" *ngFor="let v of testimonialsTop">
-        <div class="thumb-wrap thumb-lg">
-          <img class="thumb-img" [src]="v.thumb" alt="testimonial thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <div class="grid-4">
-      <div class="video-card" *ngFor="let v of testimonialsBottom">
-        <div class="thumb-wrap">
-          <img class="thumb-img" [src]="v.thumb" alt="testimonial thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
-    <!-- Study Overview -->
-    <h2 class="section-title">{{ studyTitle }}</h2>
-  
-    <div class="top-videos">
-      <div class="video-card video-card-lg" *ngFor="let v of studyVideos">
-        <div class="thumb-wrap thumb-lg">
-          <img class="thumb-img" [src]="v.thumb" alt="study thumbnail" />
-        </div>
-        <p class="video-text">{{ v.title }}</p>
-      </div>
-    </div>
-  
   </div>
-  
+
+  <!-- Middle Grid Videos -->
+  <div class="middle-grid">
+    <div class="video-card" *ngFor="let v of middleVideos" (click)="openVideo(v)">
+      <div class="thumb-wrap">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Product Overview Title -->
+  <h2 class="section-title">{{ sectionTitle }}</h2>
+
+  <!-- Bottom 3 Large Videos -->
+  <div class="bottom-videos">
+    <div class="video-card video-card-lg" *ngFor="let v of productOverviewVideos" (click)="openVideo(v)">
+      <div class="thumb-wrap thumb-lg">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Continuation: 3 cards -->
+  <div class="bottom-videos">
+    <div class="video-card video-card-lg" *ngFor="let v of productOverviewMore1" (click)="openVideo(v)">
+      <div class="thumb-wrap thumb-lg">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Continuation: 4 cards -->
+  <div class="grid-4">
+    <div class="video-card" *ngFor="let v of productOverviewMore2" (click)="openVideo(v)">
+      <div class="thumb-wrap">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Continuation: 4 cards -->
+  <div class="grid-4">
+    <div class="video-card" *ngFor="let v of productOverviewMore3" (click)="openVideo(v)">
+      <div class="thumb-wrap">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Single Card -->
+  <div class="grid-single">
+    <div class="video-card" *ngFor="let v of productOverviewSingle" (click)="openVideo(v)">
+      <div class="thumb-wrap single-thumb">
+        <img class="thumb-img" [src]="v.thumb" alt="video thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <h2 class="section-title">{{ testimonialsTitle }}</h2>
+
+  <div class="bottom-videos">
+    <div class="video-card video-card-lg" *ngFor="let v of testimonialsTop" (click)="openVideo(v)">
+      <div class="thumb-wrap thumb-lg">
+        <img class="thumb-img" [src]="v.thumb" alt="testimonial thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <div class="video-card" *ngFor="let v of testimonialsBottom" (click)="openVideo(v)">
+      <div class="thumb-wrap">
+        <img class="thumb-img" [src]="v.thumb" alt="testimonial thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+  <!-- Study Overview -->
+  <h2 class="section-title">{{ studyTitle }}</h2>
+
+  <div class="top-videos">
+    <div class="video-card video-card-lg" *ngFor="let v of studyVideos" (click)="openVideo(v)">
+      <div class="thumb-wrap thumb-lg">
+        <img class="thumb-img" [src]="v.thumb" alt="study thumbnail" />
+      </div>
+      <p class="video-text">{{ v.title }}</p>
+    </div>
+  </div>
+
+</div>
+<!-- ===================== -->
+<!-- VIDEO MODAL / POPUP   -->
+<!-- ===================== -->
+<div class="video-modal-backdrop" *ngIf="isVideoOpen" (click)="closeVideo()">
+  <div class="video-modal" (click)="$event.stopPropagation()">
+
+    <button class="video-close-btn" (click)="closeVideo()">✕</button>
+
+    <h3 class="video-modal-title">{{ selectedVideo?.title }}</h3>
+
+    <!-- If YouTube -->
+    <ng-container *ngIf="selectedVideo?.src && isYoutube(selectedVideo?.src); else normalVideo">
+      <iframe
+        class="video-frame"
+        [src]="getEmbedUrl(selectedVideo?.src)"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </ng-container>
+
+    <!-- If normal MP4 -->
+    <ng-template #normalVideo>
+      <ng-container *ngIf="selectedVideo?.src; else noVideo">
+        <video class="video-player" controls autoplay>
+          <source [src]="selectedVideo?.src" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </ng-container>
+    </ng-template>
+
+    <!-- If no src -->
+    <ng-template #noVideo>
+      <div class="no-video">
+        Video source not added yet.
+      </div>
+    </ng-template>
+
+  </div>
+</div>
