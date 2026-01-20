@@ -1,0 +1,192 @@
+<div class="contact-container">
+    <!-- Hero Section with Light Blue Background -->
+    <section class="contact-hero">
+      <div class="hero-background"></div>
+      <div class="hero-content">
+        <div class="hero-text-section">
+          <div class="hero-box">
+            <h1 class="hero-title">Let's Connect</h1>
+            <p class="hero-description">
+              Do you have any inquiries, concerns, accolades, or innovative product suggestions? 
+              We are eager to hear from you! Your feedback holds significant value, whether you 
+              wish to simply reach out or present a groundbreaking idea. Please don't hesitate 
+              to get in touch with us today.
+            </p>
+          </div>
+        </div>
+        <div class="hero-image-section">
+          <img src="/images/Contact_Us.webp" alt="Life Ionizers Product" class="hero-product-image">
+        </div>
+      </div>
+    </section>
+  
+    <!-- Main Contact Section -->
+    <section class="contact-main">
+      <div class="contact-grid">
+        <!-- Left Column: Form -->
+        <div class="contact-form-wrapper">
+          <h2 class="section-title">Let's Connect</h2>
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="contact-form">
+            
+            <!-- Name Field -->
+            <div class="form-group">
+              <label for="name" class="form-label">Name *</label>
+              <input 
+                type="text" 
+                id="name" 
+                formControlName="name"
+                class="form-input"
+                placeholder="Your Name"
+                required
+              >
+              <span class="error-message" *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched">
+                Name is required
+              </span>
+            </div>
+  
+            <!-- Email Field -->
+            <div class="form-group">
+              <label for="email" class="form-label">Email *</label>
+              <input 
+                type="email" 
+                id="email" 
+                formControlName="email"
+                class="form-input"
+                placeholder="Your Email"
+                required
+              >
+              <span class="error-message" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+                Valid email is required
+              </span>
+            </div>
+  
+            <!-- Phone Field -->
+            <div class="form-group">
+              <label for="phone" class="form-label">Phone *</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                formControlName="phone"
+                class="form-input"
+                placeholder="Your Phone Number"
+                required
+              >
+              <span class="error-message" *ngIf="contactForm.get('phone')?.invalid && contactForm.get('phone')?.touched">
+                Phone number is required
+              </span>
+            </div>
+  
+            <!-- Subject Field -->
+            <div class="form-group">
+              <label for="subject" class="form-label">Subject *</label>
+              <input 
+                type="text" 
+                id="subject" 
+                formControlName="subject"
+                class="form-input"
+                placeholder="Message Subject"
+                required
+              >
+              <span class="error-message" *ngIf="contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched">
+                Subject is required
+              </span>
+            </div>
+  
+            <!-- Message Field -->
+            <div class="form-group">
+              <label for="message" class="form-label">Message *</label>
+              <textarea 
+                id="message" 
+                formControlName="message"
+                class="form-textarea"
+                placeholder="Your Message"
+                rows="6"
+                required
+              ></textarea>
+              <span class="error-message" *ngIf="contactForm.get('message')?.invalid && contactForm.get('message')?.touched">
+                Message is required
+              </span>
+            </div>
+  
+            <!-- Consent Checkbox -->
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input 
+                  type="checkbox" 
+                  formControlName="consent"
+                  class="checkbox-input"
+                >
+                <span class="checkbox-text">I agree to receive marketing and product information from Life Ionizers</span>
+              </label>
+            </div>
+  
+            <!-- Privacy Agreement -->
+            <p class="privacy-text">
+              By clicking the button below, you agree to our 
+              <a href="/privacy" class="privacy-link">Data & Privacy Policy</a>
+            </p>
+  
+            <!-- Submit Button -->
+            <button type="submit" class="submit-button" [disabled]="!contactForm.valid">
+              Send Message
+            </button>
+  
+            <!-- Success Message -->
+            <div class="success-message" *ngIf="formSubmitted">
+              <p>Thank you for reaching out! We'll get back to you soon.</p>
+            </div>
+          </form>
+        </div>
+  
+        <!-- Right Column: Contact Info -->
+        <div class="contact-info-wrapper">
+          <!-- Customer Service -->
+          <div class="contact-info-section">
+            <h3 class="info-section-title">CUSTOMER SERVICE</h3>
+            <div class="info-content">
+              <p class="info-label">Email:</p>
+              <a href="mailto:contact@lifeionizers.com" class="info-link">
+                contact@lifeionizers.com
+              </a>
+              <p class="info-phone">Call: <a href="tel:8443352174">844-335-2174</a></p>
+            </div>
+          </div>
+  
+          <!-- Office Address -->
+          <div class="contact-info-section">
+            <h3 class="info-section-title">OFFICE ADDRESS</h3>
+            <div class="info-content">
+              <p class="info-text">
+                2330 La Mirada Dr.,<br>
+                Suite 100 Vista, CA 92081
+              </p>
+            </div>
+          </div>
+  
+          <!-- Newsletter Signup -->
+          <div class="newsletter-section">
+            <h3 class="newsletter-title">STAY CONNECTED</h3>
+            <h4 class="newsletter-subtitle">Sign up to our Newsletter</h4>
+            <p class="newsletter-description">
+              Be the first to know about new collections and exclusive offers.
+            </p>
+            <form [formGroup]="newsletterForm" (ngSubmit)="submitNewsletter()" class="newsletter-form">
+              <div class="newsletter-input-group">
+                <input 
+                  type="email" 
+                  formControlName="email"
+                  class="newsletter-input"
+                  placeholder="Enter your email"
+                  required
+                >
+                <button type="submit" class="newsletter-button">
+                  Subscribe
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  

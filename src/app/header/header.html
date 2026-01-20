@@ -110,10 +110,14 @@
    <a routerLink="/finance" class="nav-link">Finance</a>
 
 
-    <a routerLink="/aboutus">
-  About Us <i class="bx bx-chevron-down"></i>
-</a>
-
+   <div class="nav-link nav-dropdown"> 
+   <a routerLink="/aboutus"> About Us <i class="bx bx-chevron-down"></i></a>
+   <div class="dropdown-wrapper">
+    <ul class="dropdown-menu">
+      <li><a routerLink="/contact">Contact</a></li>
+    </ul>
+  </div>
+  </div>
 
   <!-- <a>Support <i class="bx bx-chevron-down"></i></a> -->
 

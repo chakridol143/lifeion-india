@@ -18,6 +18,7 @@ import { CustomerComponent } from './customers/customers';
 import { HealthcareComponent } from './healthcare/healthcare';
 import { ActorComponent } from './actors/actors';
 import { AthleteComponent } from './athletes/athletes';
+import { ContactComponent } from './contact/contact';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -30,6 +31,7 @@ export const routes: Routes = [
 
   {path:'aboutus', component:Aboutus},
   {path:'support', component:Support},
+  {path:'contact', component:ContactComponent},
 
 
   { path: 'testimonials', component: TestimonialsComponent },
