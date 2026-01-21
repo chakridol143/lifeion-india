@@ -153,6 +153,113 @@
   </div>
 </section>
 
+<!-- POPULAR PRODUCTS SECTION -->
+<section class="products-section">
+  <h2>Popular Products</h2>
+  <p class="products-subtitle">Explore the products our customers love the most</p>
+  
+  <div class="products-carousel">
+    <button class="product-carousel-btn prev" (click)="prevProduct()" aria-label="Previous product">❮</button>
+    
+    <div class="products-container">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.image" [alt]="product.name" />
+        <h3>{{ product.name }}</h3>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <span class="review-count">({{ product.reviews }})</span>
+        </div>
+        <div class="price-section">
+          <p class="price">${{ product.price }}</p>
+          <p class="emi">EMI Starts at ${{ product.emi }} / month</p>
+        </div>
+        <button class="view-product-btn">View Product</button>
+      </div>
+    </div>
+    
+    <button class="product-carousel-btn next" (click)="nextProduct()" aria-label="Next product">❯</button>
+  </div>
+</section>
+
+<section class="product-section">
+
+  <!-- floating bubbles -->
+   
+  <div class="bubbles">
+    <span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <div class="container">
+
+    <!-- LEFT -->
+    <div class="side left">
+      <div class="feature">
+        <div class="icon"><img src="/images/ChatGPT_Image_Jan_21__2026__04_14_54_PM-removebg-preview.png"></div>
+        <p><b>Boost Your Immunity</b><br>From The Inside Out</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon"><img src="/images/ChatGPT_Image_Jan_21__2026__04_14_56_PM-removebg-preview.png"></div>
+        <p><b>Hydrogen Water</b></p>
+      </div>
+    </div>
+
+    <!-- CENTER -->
+    <div class="center">
+      <img class="product" src="/images/m_1.webp">
+    </div>
+
+    <!-- RIGHT -->
+    <div class="side right">
+      <div class="feature">
+        <div class="icon"><img src="/images/s3-removebg-preview.png"></div>
+        <p><b>Free Radicals?</b><br>No Thanks.</p>
+      </div>
+
+      <div class="feature">
+        <div class="icon"><img src="/images/s2-removebg-preview.png"></div>
+        <p><b>Boost Your Energy</b><br>Fuel Your Cells</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="bottom">
+    <div class="feature">
+      <div class="icon"><img src="images/ChatGPT_Image_Jan_21__2026__04_14_58_PM-removebg-preview.png"></div>
+      <p><b>Detoxification</b></p>
+    </div>
+
+    <div class="feature">
+      <div class="icon"><img src="images/s1-removebg-preview.png"></div>
+      <p><b>Neutralize Acidity</b></p>
+    </div>
+  </div>
+
+</section>
+<!-- DISCOVER BENEFITS SECTION -->
+<section class="benefits-section">
+  <h2>Discover How You Will Benefit<br />From Live Hydrogen Water™</h2>
+  
+  <div class="benefits-carousel">
+    <button class="benefit-carousel-btn prev" (click)="prevBenefit()" aria-label="Previous benefit">❮</button>
+    
+    <div class="benefits-container">
+      <div class="benefit-card" *ngFor="let benefit of benefits">
+        <div class="benefit-icon">
+          <img [src]="benefit.icon" [alt]="benefit.title" />
+        </div>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.description }}</p>
+      </div>
+    </div>
+    
+    <button class="benefit-carousel-btn next" (click)="nextBenefit()" aria-label="Next benefit">❯</button>
+  </div>
+</section>
+
 <!-- ATHLETES & CELEBRITIES SECTION -->
 <section class="celebrities-section">
   <h2>Who Loves Life Celebrities,<br />Athletes and More!</h2>
@@ -257,105 +364,11 @@
   </div>
 </section>
 
-<!-- DISCOVER BENEFITS SECTION -->
-<section class="benefits-section">
-  <h2>Discover How You Will Benefit<br />From Live Hydrogen Water™</h2>
-  
-  <div class="benefits-carousel">
-    <button class="benefit-carousel-btn prev" (click)="prevBenefit()" aria-label="Previous benefit">❮</button>
-    
-    <div class="benefits-container">
-      <div class="benefit-card" *ngFor="let benefit of benefits">
-        <div class="benefit-icon">
-          <img [src]="benefit.icon" [alt]="benefit.title" />
-        </div>
-        <h3>{{ benefit.title }}</h3>
-        <p>{{ benefit.description }}</p>
-      </div>
-    </div>
-    
-    <button class="benefit-carousel-btn next" (click)="nextBenefit()" aria-label="Next benefit">❯</button>
-  </div>
-</section>
 
-<!-- IMMUNITY & HEALTH SECTION -->
-<section class="immunity-section">
-  <div class="immunity-grid">
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/immunity-icon.svg" alt="Immunity" />
-      </div>
-      <h4>Boost Your Immunity<br />From The Inside Out</h4>
-    </div>
-    
-    <div class="immunity-center">
-      <img src="/images/ionizer-machine.webp" alt="Ionizer Machine" />
-    </div>
-    
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/radicals-icon.svg" alt="Free Radicals" />
-      </div>
-      <h4>Free Radicals? No<br />Thanks.</h4>
-    </div>
-    
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/hydrogen-icon.svg" alt="Hydrogen Water" />
-      </div>
-      <h4>Hydrogen Water</h4>
-    </div>
-    
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/energy-icon.svg" alt="Energy" />
-      </div>
-      <h4>Boost Your Energy/Fuel<br />Your Cells</h4>
-    </div>
-    
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/detox-icon.svg" alt="Detox" />
-      </div>
-      <h4>Detoxification</h4>
-    </div>
-    
-    <div class="immunity-item">
-      <div class="immunity-icon">
-        <img src="/images/acidity-icon.svg" alt="Acidity" />
-      </div>
-      <h4>Neutralize Acidity</h4>
-    </div>
-  </div>
-</section>
 
-<!-- POPULAR PRODUCTS SECTION -->
-<section class="products-section">
-  <h2>Popular Products</h2>
-  <p class="products-subtitle">Explore the products our customers love the most</p>
-  
-  <div class="products-carousel">
-    <button class="product-carousel-btn prev" (click)="prevProduct()" aria-label="Previous product">❮</button>
-    
-    <div class="products-container">
-      <div class="product-card" *ngFor="let product of products">
-        <img [src]="product.image" [alt]="product.name" />
-        <h3>{{ product.name }}</h3>
-        <div class="rating">
-          <span class="stars">★★★★★</span>
-          <span class="review-count">({{ product.reviews }})</span>
-        </div>
-        <div class="price-section">
-          <p class="price">${{ product.price }}</p>
-          <p class="emi">EMI Starts at ${{ product.emi }} / month</p>
-        </div>
-        <button class="view-product-btn">View Product</button>
-      </div>
-    </div>
-    
-    <button class="product-carousel-btn next" (click)="nextProduct()" aria-label="Next product">❯</button>
-  </div>
-</section>
+
+
+
 
 <!-- WATER SOURCE SELECTION SECTION -->
 <section class="water-source">
@@ -449,42 +462,6 @@
   </div>
 </section>
 
-<!-- TESTIMONIALS SECTION -->
-<section class="testimonials">
-  <div class="testimonials-container">
-    <h2>600K+ People Love Life Ionizers</h2>
-
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <img src="/images/testimonial-avatar-1.webp" alt="Marisa" />
-        <p>"I can't imagine life without my Life Ionizer…"</p>
-        <h4>Marisa Zeppieri Caruna</h4>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="/images/testimonial-avatar-2.webp" alt="Rebecca" />
-        <p>"Great product for anyone wanting to improve their overall health…"</p>
-        <h4>Rebecca Stevens</h4>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="/images/testimonial-avatar-3.webp" alt="Angelica" />
-        <p>"Aprovecho hasta el agua acida para mi cara…"</p>
-        <h4>Angelica Quezada</h4>
-      </div>
-
-      <div class="testimonial-card">
-        <img src="/images/testimonial-avatar-4.webp" alt="Curtis" />
-        <p>"The Ionizer water really tastes great, we purchased the under counter unit…"</p>
-        <h4>Curtis Poirier</h4>
-      </div>
-    </div>
-
-    <div class="testimonials-footer">
-      <a href="#" class="read-more-btn">Read More Testimonials</a>
-    </div>
-  </div>
-</section>
 
 <!-- HEALTH PROOF SECTION -->
 <section class="health-proof">
@@ -650,3 +627,5 @@
     </div>
   </div>
 </section>
+
+
