@@ -18,7 +18,14 @@ import { CustomerComponent } from './customers/customers';
 import { HealthcareComponent } from './healthcare/healthcare';
 import { ActorComponent } from './actors/actors';
 import { AthleteComponent } from './athletes/athletes';
+
 import { ContactComponent } from './contact/contact';
+
+import { Certifications } from './support/certifications/certifications';
+import { OurCompany } from './support/our-company/our-company';
+import { WaterFACTS } from './support/water-facts/water-facts';
+import { BussinessOpportunities } from './support/bussiness-opportunities/bussiness-opportunities';
+
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -30,8 +37,21 @@ export const routes: Routes = [
   { path: 'finance', component: Finance },
 
   {path:'aboutus', component:Aboutus},
+
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
+
+  {
+  path: 'support',
+    component: Support,
+    children: [
+      { path: 'certifications', component: Certifications },
+      { path: 'our-company', component: OurCompany },
+      { path: 'water-facts', component: WaterFACTS },
+      { path: 'bussiness-opportunities', component: BussinessOpportunities }
+    ]
+  },
+
 
 
   { path: 'testimonials', component: TestimonialsComponent },
@@ -51,5 +71,6 @@ export const routes: Routes = [
       { path: 'free-water-report', component: FreeWaterReport },
       { path: '', redirectTo: 'studies', pathMatch: 'full' }
     ]
+    
   }
 ];

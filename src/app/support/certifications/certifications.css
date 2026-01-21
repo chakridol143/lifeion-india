@@ -1,0 +1,78 @@
+.certifications-section {
+  padding: 70px 20px;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+.description {
+  max-width: 1000px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 60px;
+}
+
+.sub-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+/* GRID */
+.certification-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 40px 30px;
+  align-items: start;
+}
+
+/* CARD */
+.cert-card {
+  text-align: center;
+}
+
+.cert-card img {
+  max-width: 110px;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.cert-card p {
+  font-size: 14px;
+  color: #222;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .certification-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .certification-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .sub-title {
+    font-size: 22px;
+  }
+}

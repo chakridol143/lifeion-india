@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-support',
-  imports: [],
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './support.html',
   styleUrl: './support.css',
 })
-export class Support {
-
-}
+export class Support {}
