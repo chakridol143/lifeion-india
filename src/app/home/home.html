@@ -101,6 +101,262 @@
   </div>
 </section>
 
+<!-- TRUSTPILOT REVIEWS SECTION -->
+<section class="reviews-section">
+  <h2>Trust Pilot Reviews</h2>
+  
+  <div class="reviews-carousel">
+    <button class="carousel-btn prev" (click)="prevReview()" aria-label="Previous review">❮</button>
+    
+    <div class="reviews-container">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="stars">
+          <span *ngFor="let star of [1,2,3,4,5]" class="star">★</span>
+        </div>
+        <h4>{{ review.title }}</h4>
+        <p>{{ review.text }}</p>
+        <p class="reviewer-name">{{ review.name }}, <span class="time-ago">{{ review.timeAgo }}</span></p>
+      </div>
+    </div>
+    
+    <button class="carousel-btn next" (click)="nextReview()" aria-label="Next review">❯</button>
+  </div>
+  
+  <div class="trustpilot-badge">
+    <p>Rated 4.4 / 5 based on 1,031 reviews. Showing our 4 & 5 star reviews.</p>
+    <img src="/images/trustpilot-logo.png" alt="Trustpilot" />
+  </div>
+</section>
+
+<!-- POPULAR CATEGORIES SECTION -->
+<section class="categories-section">
+  <h2>Popular Categories</h2>
+  
+  <div class="categories-grid">
+    <div class="category-card">
+      <img src="/images/mxl-series.webp" alt="LIFE WATER IONIZER MXL Series" />
+      <h3>LIFE WATER IONIZER MXL Series</h3>
+      <button class="view-btn">View Products</button>
+    </div>
+    
+    <div class="category-card">
+      <img src="/images/whole-home-filter.webp" alt="Life Ionizer Whole Home Water Filter Systems" />
+      <h3>Life Ionizer Whole Home Water Filter Systems</h3>
+      <button class="view-btn">View Products</button>
+    </div>
+    
+    <div class="category-card">
+      <img src="/images/combo-systems.webp" alt="Whole House Filter and Ionizer Combos" />
+      <h3>Whole House Filter and Ionizer Combos</h3>
+      <button class="view-btn">View Products</button>
+    </div>
+  </div>
+</section>
+
+<!-- ATHLETES & CELEBRITIES SECTION -->
+<section class="celebrities-section">
+  <h2>Who Loves Life Celebrities,<br />Athletes and More!</h2>
+  
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="activeTab === 'athletes'" (click)="activeTab = 'athletes'">Athletes</button>
+    <button class="tab-btn" [class.active]="activeTab === 'customers'" (click)="activeTab = 'customers'">Customers</button>
+  </div>
+  
+  <div class="celebrities-grid" *ngIf="activeTab === 'athletes'">
+    <div class="celeb-card" *ngFor="let athlete of athletes">
+      <img [src]="athlete.image" [alt]="athlete.name" />
+      <div class="play-btn">▶</div>
+      <h4>{{ athlete.name }}</h4>
+      <p>{{ athlete.title }}</p>
+    </div>
+  </div>
+  
+  <div class="celebrities-grid" *ngIf="activeTab === 'customers'">
+    <div class="celeb-card" *ngFor="let customer of customers">
+      <img [src]="customer.image" [alt]="customer.name" />
+      <div class="play-btn">▶</div>
+      <h4>{{ customer.name }}</h4>
+      <p>{{ customer.title }}</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR TESTIMONIAL SECTION -->
+<section class="doctor-testimonial">
+  <div class="testimonial-content">
+    <div class="testimonial-image">
+      <img src="/images/woman-water.webp" alt="Woman drinking water" />
+    </div>
+    
+    <div class="testimonial-quote">
+      <img src="/images/ionizer-logo.png" alt="Life Ionizer Logo" class="logo" />
+      <h3>Dr. Johnnie Ham</h3>
+      <p class="credentials">M.D.</p>
+      <p class="quote-text">
+        I am a strong believer in alkaline water. I have been using the
+        Life Ionizer 9100 for 6 months, and have seen incredible
+        benefits. My whole family uses it every day, and we swear by it
+        for a healthier lifestyle. I recommend alkaline water for all my
+        patients, since I know first-hand the many benefits.
+      </p>
+    </div>
+  </div>
+
+  <h2>The Separation of Ions: What Sets it Apart</h2>
+  <p class="separation-text">
+    Hydrogen-rich water is the future of hydration and vitality. Backed by growing
+    scientific studies on molecular hydrogen's powerful antioxidant benefits, Life Ionizers
+    provides superior water for health, energy, and cognitive focus. Plus, you get
+    naturally-generated acidic water for household sterilization and beauty—all built on
+    29 years of trusted innovation.
+  </p>
+</section>
+
+<!-- WHOLE HOUSE SOLUTIONS SECTION -->
+<section class="whole-house-section">
+  <h2>Life Ionizer Healthy Water Solutions</h2>
+  <p class="solutions-subtitle">
+    Say goodbye to chlorine, sediment, and heavy metals. Our <strong>Whole House Solutions</strong> provide the ultimate in water purification
+    and filtration, protecting your family's health, leaving your skin and hair softer, and extending the life of your appliances.
+  </p>
+  
+  <div class="solutions-container">
+    <div class="solutions-left">
+      <div class="solution-box">
+        <img src="/images/garden-icon.svg" alt="Garden" class="solution-icon" />
+        <h4>Healthier Happier Garden</h4>
+      </div>
+      <div class="solution-box">
+        <img src="/images/dishes-icon.svg" alt="Dishes" class="solution-icon" />
+        <h4>Cleaner Dishes, Safer Food</h4>
+      </div>
+      <div class="solution-box">
+        <img src="/images/filter-icon.svg" alt="Filter" class="solution-icon" />
+        <h4>Filter Every Shower And Faucet In Your Home</h4>
+      </div>
+    </div>
+    
+    <div class="solutions-center">
+      <img src="/images/filter-system.webp" alt="Filter System" class="center-image" />
+    </div>
+    
+    <div class="solutions-right">
+      <div class="solution-box">
+        <img src="/images/pet-icon.svg" alt="Pet" class="solution-icon" />
+        <h4>Pet Safe Water</h4>
+      </div>
+      <div class="solution-box">
+        <img src="/images/skin-icon.svg" alt="Skin" class="solution-icon" />
+        <h4>Improve Your Skin And Hair</h4>
+      </div>
+      <div class="solution-box">
+        <img src="/images/lead-icon.svg" alt="Lead" class="solution-icon" />
+        <h4>Lead, Arsenic, Fluoride And Chlorine Removed</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVER BENEFITS SECTION -->
+<section class="benefits-section">
+  <h2>Discover How You Will Benefit<br />From Live Hydrogen Water™</h2>
+  
+  <div class="benefits-carousel">
+    <button class="benefit-carousel-btn prev" (click)="prevBenefit()" aria-label="Previous benefit">❮</button>
+    
+    <div class="benefits-container">
+      <div class="benefit-card" *ngFor="let benefit of benefits">
+        <div class="benefit-icon">
+          <img [src]="benefit.icon" [alt]="benefit.title" />
+        </div>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.description }}</p>
+      </div>
+    </div>
+    
+    <button class="benefit-carousel-btn next" (click)="nextBenefit()" aria-label="Next benefit">❯</button>
+  </div>
+</section>
+
+<!-- IMMUNITY & HEALTH SECTION -->
+<section class="immunity-section">
+  <div class="immunity-grid">
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/immunity-icon.svg" alt="Immunity" />
+      </div>
+      <h4>Boost Your Immunity<br />From The Inside Out</h4>
+    </div>
+    
+    <div class="immunity-center">
+      <img src="/images/ionizer-machine.webp" alt="Ionizer Machine" />
+    </div>
+    
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/radicals-icon.svg" alt="Free Radicals" />
+      </div>
+      <h4>Free Radicals? No<br />Thanks.</h4>
+    </div>
+    
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/hydrogen-icon.svg" alt="Hydrogen Water" />
+      </div>
+      <h4>Hydrogen Water</h4>
+    </div>
+    
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/energy-icon.svg" alt="Energy" />
+      </div>
+      <h4>Boost Your Energy/Fuel<br />Your Cells</h4>
+    </div>
+    
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/detox-icon.svg" alt="Detox" />
+      </div>
+      <h4>Detoxification</h4>
+    </div>
+    
+    <div class="immunity-item">
+      <div class="immunity-icon">
+        <img src="/images/acidity-icon.svg" alt="Acidity" />
+      </div>
+      <h4>Neutralize Acidity</h4>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR PRODUCTS SECTION -->
+<section class="products-section">
+  <h2>Popular Products</h2>
+  <p class="products-subtitle">Explore the products our customers love the most</p>
+  
+  <div class="products-carousel">
+    <button class="product-carousel-btn prev" (click)="prevProduct()" aria-label="Previous product">❮</button>
+    
+    <div class="products-container">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.image" [alt]="product.name" />
+        <h3>{{ product.name }}</h3>
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          <span class="review-count">({{ product.reviews }})</span>
+        </div>
+        <div class="price-section">
+          <p class="price">${{ product.price }}</p>
+          <p class="emi">EMI Starts at ${{ product.emi }} / month</p>
+        </div>
+        <button class="view-product-btn">View Product</button>
+      </div>
+    </div>
+    
+    <button class="product-carousel-btn next" (click)="nextProduct()" aria-label="Next product">❯</button>
+  </div>
+</section>
+
 <!-- WATER SOURCE SELECTION SECTION -->
 <section class="water-source">
   <div class="water-source-container">

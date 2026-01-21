@@ -909,6 +909,742 @@ html, body {
   }
 }
 
+/* ==================== */
+/* TRUSTPILOT REVIEWS SECTION */
+/* ==================== */
+
+.reviews-section {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.reviews-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.reviews-carousel {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-btn {
+  background: #00b3da;
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: #0099b8;
+}
+
+.reviews-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  flex: 1;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+}
+
+.review-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  min-width: 280px;
+  flex: 0 0 280px;
+}
+
+.review-card .stars {
+  color: #17a2b8;
+  font-size: 18px;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.review-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px;
+}
+
+.review-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 15px;
+}
+
+.reviewer-name {
+  font-size: 12px;
+  color: #999 !important;
+  margin: 0 !important;
+}
+
+.time-ago {
+  color: #bbb;
+}
+
+.trustpilot-badge {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.trustpilot-badge img {
+  max-height: 40px;
+  margin-top: 10px;
+}
+
+/* ==================== */
+/* POPULAR CATEGORIES SECTION */
+/* ==================== */
+
+.categories-section {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.categories-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.categories-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.category-card {
+  background: #fff;
+  border: 3px solid #00b3da;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+}
+
+.category-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.category-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 20px;
+  line-height: 1.4;
+}
+
+.view-btn {
+  background: transparent;
+  color: #00b3da;
+  border: 2px solid #00b3da;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-btn:hover {
+  background: #00b3da;
+  color: #fff;
+}
+
+/* ==================== */
+/* CELEBRITIES SECTION */
+/* ==================== */
+
+.celebrities-section {
+  padding: 100px 24px;
+  background: #f9f9f9;
+}
+
+.celebrities-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.tab-btn {
+  padding: 12px 30px;
+  background: #fff;
+  border: 2px solid #00b3da;
+  color: #00b3da;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+  background: #00b3da;
+  color: #fff;
+}
+
+.celebrities-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.celeb-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+}
+
+.celeb-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.celeb-card:hover img {
+  transform: scale(1.05);
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: #00b3da;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.celeb-card:hover .play-btn {
+  opacity: 1;
+}
+
+.celeb-card h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 15px 0 5px;
+}
+
+.celeb-card p {
+  font-size: 13px;
+  color: #999;
+  margin: 0;
+}
+
+/* ==================== */
+/* DOCTOR TESTIMONIAL SECTION */
+/* ==================== */
+
+.doctor-testimonial {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.testimonial-content {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.testimonial-image img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-quote {
+  text-align: center;
+}
+
+.testimonial-quote .logo {
+  max-width: 80px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.testimonial-quote h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 5px;
+}
+
+.testimonial-quote .credentials {
+  color: #999;
+  font-size: 14px;
+  margin: 0 0 20px;
+}
+
+.quote-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #666;
+  font-style: italic;
+}
+
+.doctor-testimonial > h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin: 0 auto 40px;
+  max-width: 1200px;
+  color: #333;
+}
+
+.separation-text {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #666;
+  text-align: center;
+}
+
+/* ==================== */
+/* WHOLE HOUSE SOLUTIONS */
+/* ==================== */
+
+.whole-house-section {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.whole-house-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.solutions-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  max-width: 900px;
+  margin: 0 auto 80px;
+  line-height: 1.8;
+}
+
+.solutions-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.solutions-left,
+.solutions-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.solution-box {
+  background: #f9f9f9;
+  border: 2px solid #00b3da;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.solution-box:hover {
+  transform: translateY(-5px);
+}
+
+.solution-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 0 auto 15px;
+  display: block;
+}
+
+.solution-box h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.solutions-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+/* ==================== */
+/* BENEFITS CAROUSEL SECTION */
+/* ==================== */
+
+.benefits-section {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.benefits-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.benefits-carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.benefit-carousel-btn {
+  background: #00b3da;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.benefit-carousel-btn:hover {
+  background: #0099b8;
+}
+
+.benefits-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.benefit-card {
+  background: #fff;
+  border: 2px solid #00b3da;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+}
+
+.benefit-icon {
+  width: 80px;
+  height: 80px;
+  background: #e0f7ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.benefit-icon img {
+  max-width: 50px;
+}
+
+.benefit-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 15px;
+}
+
+.benefit-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ==================== */
+/* IMMUNITY SECTION */
+/* ==================== */
+
+.immunity-section {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.immunity-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.immunity-item {
+  text-align: center;
+}
+
+.immunity-icon {
+  width: 120px;
+  height: 120px;
+  background: #e0f7ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.immunity-icon img {
+  max-width: 70px;
+}
+
+.immunity-item h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.immunity-center {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.immunity-center img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ==================== */
+/* PRODUCTS SECTION */
+/* ==================== */
+
+.products-section {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.products-section h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.products-subtitle {
+  text-align: center;
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 60px;
+}
+
+.products-carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.product-carousel-btn {
+  background: #00b3da;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.product-carousel-btn:hover {
+  background: #0099b8;
+}
+
+.products-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: #fff;
+  border: 2px solid #00b3da;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.product-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px;
+  line-height: 1.4;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.rating .stars {
+  color: #00b3da;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+
+.review-count {
+  font-size: 14px;
+  color: #999;
+}
+
+.price-section {
+  margin: 20px 0;
+}
+
+.price {
+  font-size: 22px;
+  font-weight: 700;
+  color: #00b3da;
+  margin: 0 0 5px;
+}
+
+.emi {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 20px;
+}
+
+.view-product-btn {
+  background: transparent;
+  color: #00b3da;
+  border: 2px solid #00b3da;
+  padding: 10px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.view-product-btn:hover {
+  background: #00b3da;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .solutions-container {
+    grid-template-columns: 1fr;
+  }
+
+  .immunity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .immunity-center {
+    grid-row: auto;
+    grid-column: auto;
+    margin: 30px 0;
+  }
+
+  .testimonial-content {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-carousel,
+  .benefits-carousel,
+  .products-carousel {
+    flex-direction: column;
+  }
+
+  .reviews-container,
+  .benefits-container,
+  .products-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
   .hero-features {
     bottom: 20px;
