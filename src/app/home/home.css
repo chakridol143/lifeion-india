@@ -1,11 +1,17 @@
-/* REMOVE SCROLLBAR GLOBALLY */
+/* ==================== */
+/* GLOBAL STYLES */
+/* ==================== */
+
 html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
-/* HERO */
+/* ==================== */
+/* HERO SECTION */
+/* ==================== */
+
 .hero {
   position: relative;
   height: calc(100vh - 160px);
@@ -31,7 +37,7 @@ html, body {
   z-index: 1;
 }
 
-/* HERO TITLE (CENTERED EXACTLY) */
+/* HERO TITLE */
 .hero-title {
   position: absolute;
   top: 45%;
@@ -50,19 +56,20 @@ html, body {
   margin: 0;
 }
 
-/* FEATURES ROW (CENTERED GROUP) */
+/* FEATURES ROW */
 .hero-features {
   position: absolute;
   bottom: 70px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
-
   display: flex;
   gap: 70px;
   max-width: 1200px;
   width: 100%;
   justify-content: center;
+  flex-wrap: wrap;
+  padding: 0 24px;
 }
 
 /* SINGLE FEATURE */
@@ -74,7 +81,6 @@ html, body {
   min-width: 220px;
 }
 
-/* ICON */
 .feature img {
   width: 42px;
   height: 42px;
@@ -82,7 +88,6 @@ html, body {
   filter: brightness(0) invert(1);
 }
 
-/* TEXT */
 .feature-text {
   text-align: left;
 }
@@ -99,10 +104,13 @@ html, body {
   opacity: 0.9;
 }
 
+/* ==================== */
 /* TRUST SECTION */
+/* ==================== */
+
 .trust {
   background: #fff;
-  padding: 50px 0;
+  padding: 50px 24px;
 }
 
 .trust-logos {
@@ -111,13 +119,19 @@ html, body {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
 }
 
 .trust-logos img {
   max-width: 11rem;
+  height: auto;
 }
 
-/* SECTION BASE */
+/* ==================== */
+/* HEALTHY WATER SECTION */
+/* ==================== */
+
 .healthy-water {
   position: relative;
   background: #00b3da;
@@ -125,7 +139,6 @@ html, body {
   overflow: hidden;
 }
 
-/* CONTAINER */
 .healthy-container {
   position: relative;
   z-index: 2;
@@ -135,7 +148,6 @@ html, body {
   text-align: center;
 }
 
-/* HEADING */
 .healthy-container h2 {
   color: #fff;
   font-size: 52px;
@@ -144,7 +156,6 @@ html, body {
   margin-bottom: 28px;
 }
 
-/* DESCRIPTION */
 .healthy-description {
   color: #eaf9fd;
   font-size: 18px;
@@ -153,7 +164,6 @@ html, body {
   margin: 0 auto 80px;
 }
 
-/* IMAGE STACK */
 .healthy-images {
   position: relative;
   width: 100%;
@@ -163,7 +173,6 @@ html, body {
   align-items: center;
 }
 
-/* IMAGE CARDS */
 .image-card {
   position: absolute;
   background: #fff;
@@ -191,10 +200,7 @@ html, body {
   object-fit: cover;
 }
 
-/* ================= */
-/* BUBBLES (VISIBLE) */
-/* ================= */
-
+/* BUBBLES */
 .bubble-layer {
   position: absolute;
   inset: 0;
@@ -227,5 +233,725 @@ html, body {
   to {
     transform: translateY(-1200px) scale(1.5);
     opacity: 0;
+  }
+}
+
+/* ==================== */
+/* WATER SOURCE SECTION */
+/* ==================== */
+
+.water-source {
+  padding: 100px 24px;
+  background: #f9f9f9;
+}
+
+.water-source-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.water-source-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.source-card {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.source-card:hover {
+  transform: translateY(-10px);
+}
+
+.source-card img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.source-card h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* ==================== */
+/* BENEFITS SECTION */
+/* ==================== */
+
+.benefits {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.benefits-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.benefits-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 50px;
+}
+
+.benefit-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+  transform: translateY(-8px);
+}
+
+.benefit-item img {
+  width: 100%;
+  max-height: 120px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.benefit-item h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* ==================== */
+/* HYDROGEN FEATURES SECTION */
+/* ==================== */
+
+.hydrogen-features {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.hydrogen-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+}
+
+.hydrogen-feature {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.hydrogen-feature:hover {
+  transform: translateY(-8px);
+}
+
+.hydrogen-feature img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+}
+
+.hydrogen-feature h3 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #00b3da;
+  margin: 10px 0;
+}
+
+.hydrogen-feature p {
+  font-size: 16px;
+  color: #666;
+  margin: 10px 0 20px;
+}
+
+.learn-more {
+  display: inline-block;
+  color: #00b3da;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border: 2px solid #00b3da;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.learn-more:hover {
+  background: #00b3da;
+  color: #fff;
+}
+
+/* ==================== */
+/* TESTIMONIALS SECTION */
+/* ==================== */
+
+.testimonials {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.testimonials-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.testimonial-card {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.testimonial-card p {
+  font-size: 16px;
+  font-style: italic;
+  color: #555;
+  margin: 0 0 15px;
+  line-height: 1.6;
+}
+
+.testimonial-card h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #00b3da;
+  margin: 0;
+}
+
+.testimonials-footer {
+  text-align: center;
+}
+
+.read-more-btn {
+  display: inline-block;
+  background: #00b3da;
+  color: #fff;
+  padding: 12px 40px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #0099b8;
+}
+
+/* ==================== */
+/* HEALTH PROOF SECTION */
+/* ==================== */
+
+.health-proof {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.health-proof-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.health-proof-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.proof-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.proof-content img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.proof-text p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .proof-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================== */
+/* EASY STEPS SECTION */
+/* ==================== */
+
+.easy-steps {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.steps-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.steps-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.step-card {
+  background: #f9f9f9;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  border-top: 4px solid #00b3da;
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+}
+
+.step-number {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background: #00b3da;
+  color: #fff;
+  border-radius: 50%;
+  line-height: 50px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 15px;
+}
+
+.step-card p {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.steps-cta {
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: #00b3da;
+  color: #fff;
+  padding: 16px 50px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.cta-btn:hover {
+  background: #0099b8;
+}
+
+/* ==================== */
+/* QUALITY ICONS SECTION */
+/* ==================== */
+
+.quality-icons {
+  padding: 100px 24px;
+  background: #f5f5f5;
+}
+
+.quality-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.quality-container h2 {
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+}
+
+.quality-icon {
+  text-align: center;
+}
+
+.quality-icon img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: contain;
+}
+
+/* ==================== */
+/* FINANCING FORM SECTION */
+/* ==================== */
+
+.financing-form {
+  padding: 100px 24px;
+  background: #fff;
+}
+
+.financing-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.financing-container h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #333;
+}
+
+.financing-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.required {
+  color: #e74c3c;
+}
+
+.form-group select {
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #00b3da;
+  box-shadow: 0 0 0 3px rgba(0, 179, 218, 0.1);
+}
+
+.submit-btn {
+  padding: 16px 32px;
+  background: #00b3da;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background: #0099b8;
+}
+
+.submit-btn.primary {
+  background: #00b3da;
+}
+
+.submit-btn.primary:hover {
+  background: #0099b8;
+}
+
+/* ==================== */
+/* FREE REPORT SECTION */
+/* ==================== */
+
+.free-report {
+  padding: 100px 24px;
+  background: #00b3da;
+}
+
+.report-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.report-container h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+.report-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+}
+
+.form-group.checkbox {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.form-group.checkbox input {
+  margin-top: 4px;
+  cursor: pointer;
+}
+
+.form-group.checkbox label {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.form-disclaimer {
+  font-size: 12px;
+  color: #666;
+  margin: -15px 0 0;
+  line-height: 1.5;
+}
+
+.form-disclaimer a {
+  color: #00b3da;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-disclaimer a:hover {
+  text-decoration: underline;
+}
+
+.report-description {
+  text-align: center;
+  color: #fff;
+}
+
+.report-description p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ==================== */
+/* RESPONSIVE DESIGN */
+/* ==================== */
+
+@media (max-width: 768px) {
+  /* Hero Section */
+  .hero-title h1 {
+    font-size: 36px;
+  }
+
+  .hero-features {
+    bottom: 40px;
+    gap: 30px;
+  }
+
+  .feature {
+    min-width: 180px;
+    font-size: 14px;
+  }
+
+  /* Trust Section */
+  .trust-logos {
+    gap: 20px;
+  }
+
+  .trust-logos img {
+    max-width: 8rem;
+  }
+
+  /* Healthy Water */
+  .healthy-container h2 {
+    font-size: 36px;
+  }
+
+  .healthy-images {
+    height: 300px;
+  }
+
+  .image-card.left {
+    width: 200px;
+    transform: translateX(-120%);
+  }
+
+  .image-card.right {
+    width: 300px;
+    transform: translateX(-15%);
+  }
+
+  /* Water Source */
+  .water-source-container h2,
+  .benefits-container h2,
+  .testimonials-container h2,
+  .health-proof-container h2,
+  .steps-container h2,
+  .quality-container h2 {
+    font-size: 32px;
+  }
+
+  .source-grid,
+  .benefits-grid,
+  .testimonials-grid,
+  .hydrogen-container,
+  .steps-grid,
+  .icons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Buttons */
+  .submit-btn,
+  .cta-btn,
+  .read-more-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-features {
+    bottom: 20px;
+    gap: 15px;
+  }
+
+  .feature {
+    min-width: 140px;
+    gap: 8px;
+  }
+
+  .feature-text h4 {
+    font-size: 14px;
+  }
+
+  .feature-text p {
+    font-size: 12px;
+  }
+
+  .healthy-container h2 {
+    font-size: 28px;
+  }
+
+  .water-source-container h2,
+  .benefits-container h2 {
+    font-size: 24px;
+    margin-bottom: 40px;
+  }
+
+  .image-card.left,
+  .image-card.right {
+    position: relative;
+    transform: none !important;
+    left: 50%;
+    margin: 0 auto;
+  }
+
+  .image-card.left {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .image-card.right {
+    width: 100%;
   }
 }

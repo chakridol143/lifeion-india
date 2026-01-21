@@ -7,6 +7,7 @@ interface Review {
   quote: string;
   fullTestimonial: string;
   image?: string;
+  thumbnail?:string;
 }
 
 @Component({
@@ -20,6 +21,7 @@ export class CustomerComponent implements OnInit {
     {
       name: 'Rebecca Stevens',
       title: 'Satisfied Customer',
+      thumbnail:'/images/barry-zito.avif',
       quote: '"Great product for anyone wanting to improve their overall health…"',
       fullTestimonial: '"This is me with my Aussie Bailey. I\'ve been using my M7 for about a year now & love it! I\'ve noticed better recovery time with my race walking, less need for digestive supplements with meals and general wellness. I plan to begin giving to my dog also for her general health. Great product for anyone wanting to improve their overall health!"'
     },
