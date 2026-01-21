@@ -41,16 +41,18 @@ export const routes: Routes = [
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
 
-  {
+{
   path: 'support',
-    component: Support,
-    children: [
-      { path: 'certifications', component: Certifications },
-      { path: 'our-company', component: OurCompany },
-      { path: 'water-facts', component: WaterFACTS },
-      { path: 'bussiness-opportunities', component: BussinessOpportunities }
-    ]
-  },
+  component: Support,
+  children: [
+    { path: '', redirectTo: 'certifications', pathMatch: 'full' },
+    { path: 'certifications', component: Certifications },
+    { path: 'our-company', component: OurCompany },
+    { path: 'water-facts', component: WaterFACTS },
+    { path: 'business-opportunities', component: BussinessOpportunities }
+  ]
+}
+,
 
 
 
