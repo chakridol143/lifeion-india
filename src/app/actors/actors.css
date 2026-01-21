@@ -1,3 +1,6 @@
+@import "../../styles/reviews-common.css";
+
+
 .actor-container {
   width: 100%;
   padding: 40px 20px;
@@ -231,4 +234,26 @@
     padding: 20px;
     max-width: 90%;
   }
+}
+.review-image {
+  width: 100%;
+  padding: 25px 20px;
+  background: #f2f2f2;     /* same grey background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.review-image img,
+.review-src {
+  width: 100%;
+  max-width: 260px;
+  height: 180px;
+  object-fit: cover;
+
+  border-radius: 14px;
+  padding: 6px;
+  background: #fff;
+
+  display: block;
 }

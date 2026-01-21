@@ -1,3 +1,6 @@
+@import "../../styles/reviews-common.css";
+
+
 .athlete-container {
   width: 100%;
   padding: 40px 20px;
@@ -222,5 +225,123 @@
     margin: 20% auto;
     padding: 20px;
     max-width: 90%;
+  }
+}
+/* ================= ATHLETE FEATURE GRID (NEW SECTION) ================= */
+
+.athlete-feature-grid {
+  max-width: 1500px;
+  margin: 0 auto 70px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 34px;
+  padding: 10px 10px 0;
+}
+
+.athlete-feature-card {
+  text-align: center;
+}
+
+.athlete-feature-image {
+  width: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #f3f3f3;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+}
+
+.athlete-feature-image img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Name below image */
+.athlete-feature-name {
+  margin: 14px 0 6px;
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+}
+
+/* Role / Quote text */
+.athlete-feature-role {
+  margin: 0 auto;
+  max-width: 92%;
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ================= RESPONSIVE (340px → 1600px) ================= */
+
+/* Large screens */
+@media (min-width: 1400px) {
+  .athlete-feature-image img {
+    height: 290px;
+  }
+}
+
+/* Laptop / medium screens */
+@media (max-width: 1200px) {
+  .athlete-feature-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+}
+
+/* Tablets */
+@media (max-width: 900px) {
+  .athlete-feature-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px;
+  }
+
+  .athlete-feature-image img {
+    height: 240px;
+  }
+
+  .athlete-feature-name {
+    font-size: 20px;
+  }
+
+  .athlete-feature-role {
+    font-size: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .athlete-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .athlete-feature-image img {
+    height: 220px;
+  }
+
+  .athlete-feature-name {
+    font-size: 19px;
+  }
+
+  .athlete-feature-role {
+    font-size: 14px;
+  }
+}
+
+/* Very small phones (340px) */
+@media (max-width: 380px) {
+  .athlete-feature-image img {
+    height: 200px;
+  }
+
+  .athlete-feature-name {
+    font-size: 18px;
+  }
+
+  .athlete-feature-role {
+    font-size: 13.5px;
   }
 }

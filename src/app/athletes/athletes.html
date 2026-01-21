@@ -4,11 +4,86 @@
       <p class="header-subtitle">What will your Life Ionizer review and testimonial be? Discover what makes Life Ionizers the top water ionizer on the market with reviews from athletes, celebrities, doctors, customers and more. With over 20 years of experience in the water ionizer industry, you can count on benefiting from alkaline ionized water for years to come. Call now and become one of our happy reviewers today!</p>
     </div>
   
+  <!-- ✅ NEW ATHLETE IMAGE GRID SECTION (as per screenshot) -->
+  <div class="athlete-feature-grid">
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath1.avif" alt="Travis Illian">
+      </div>
+      <h3 class="athlete-feature-name">Travis Illian</h3>
+      <p class="athlete-feature-role">
+        “I like Life Ionizers because it removes the toxins from the water and can act as a natural antioxidant.”
+      </p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath2.avif" alt="Oscar Valdez">
+      </div>
+      <h3 class="athlete-feature-name">Oscar Valdez</h3>
+      <p class="athlete-feature-role">
+        A special thank you to Oscar Valdez for reaching out to us to talk about his MXL Life Ionizer – this one is en español!
+      </p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath3.avif" alt="Matt Ioannidis">
+      </div>
+      <h3 class="athlete-feature-name">Matt Ioannidis</h3>
+      <p class="athlete-feature-role">NFL Pro</p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath4.avif" alt="Ryan Kerrigan">
+      </div>
+      <h3 class="athlete-feature-name">Ryan Kerrigan</h3>
+      <p class="athlete-feature-role">NFL Pro</p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath5.avif" alt="Josh Hart">
+      </div>
+      <h3 class="athlete-feature-name">Josh Hart</h3>
+      <p class="athlete-feature-role">NBA Pro</p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath6.avif" alt="Lindsey Jacobellis">
+      </div>
+      <h3 class="athlete-feature-name">Lindsey Jacobellis</h3>
+      <p class="athlete-feature-role">
+        Multi Olympic Gold Medalist in Snowboarding, X Game Champion & More...
+      </p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath7.avif" alt="Barry Zito">
+      </div>
+      <h3 class="athlete-feature-name">Barry Zito</h3>
+      <p class="athlete-feature-role">
+        American Former Professional Baseball Pitcher
+      </p>
+    </div>
+
+    <div class="athlete-feature-card">
+      <div class="athlete-feature-image">
+        <img src="/images/ath8.avif" alt="CJ Stroud">
+      </div>
+      <h3 class="athlete-feature-name">CJ Stroud</h3>
+      <p class="athlete-feature-role">
+        "Love my Life Ionizer. It gets me game ready, hydrated and I recover faster. I could pick any water system and I picked Life Ionizers. I recommend you do too."
+      </p>
+    </div>
+
+  </div>
     <div class="reviews-grid">
       <div class="review-card" *ngFor="let review of reviews" (click)="openTestimonial(review)">
-        <div class="review-image">
-          <div class="placeholder-image"></div>
-        </div>
         <div class="review-content">
           <h3 class="review-name">{{ review.name }}</h3>
           <p class="review-profession">{{ review.profession }}</p>

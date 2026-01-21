@@ -7,7 +7,7 @@
   <div class="reviews-grid">
     <div class="review-card" *ngFor="let review of reviews" (click)="openTestimonial(review)">
       <div class="review-image">
-        <div class="placeholder-image"></div>
+        <img [src]="review.thumbnail" class="review-src" alt="">
       </div>
       <div class="review-content">
         <div class="review-label">{{ review.category }}</div>
