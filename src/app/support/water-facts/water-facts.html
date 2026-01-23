@@ -1,1 +1,15 @@
-<p>water-facts works!</p>
+<section class="water-facts-section">
+  <div class="container">
+    <h1 class="page-title">Learn More About Alkaline Water, Water Ionizers, and more...</h1>
+
+    <div class="facts-grid">
+      <div class="fact-card" *ngFor="let fact of facts">
+        <div class="fact-header">
+          <h2 class="fact-title">{{ fact.title }}</h2>
+        </div>
+        <p class="fact-description">{{ fact.description }}</p>
+        <a href="#" class="fact-link">{{ fact.link }}</a>
+      </div>
+    </div>
+  </div>
+</section>

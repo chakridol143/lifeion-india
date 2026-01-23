@@ -56,23 +56,176 @@
   line-height: 1.4;
 }
 
+/* DEFINITIONS */
+.definitions-list {
+  margin-bottom: 30px;
+}
+
+.definition-item {
+  margin-bottom: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.definition-item strong {
+  color: #222;
+}
+
+.footer-note {
+  font-size: 14px;
+  color: #888;
+  margin-top: 40px;
+}
+
 /* RESPONSIVE */
-@media (max-width: 1200px) {
+
+/* Mobile - 300px to 480px */
+@media (max-width: 480px) {
+  .certifications-section {
+    padding: 40px 15px;
+  }
+
+  .title {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .description {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .sub-title {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
   .certification-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 15px;
+  }
+
+  .cert-card img {
+    max-width: 80px;
+    margin-bottom: 10px;
+  }
+
+  .cert-card p {
+    font-size: 12px;
+  }
+
+  .definition-item {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .footer-note {
+    font-size: 12px;
+    margin-top: 30px;
   }
 }
 
-@media (max-width: 768px) {
-  .certification-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Tablet - 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .certifications-section {
+    padding: 50px 20px;
   }
 
   .title {
     font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .description {
+    font-size: 15px;
+    margin-bottom: 45px;
   }
 
   .sub-title {
-    font-size: 22px;
+    font-size: 24px;
+    margin-bottom: 35px;
+  }
+
+  .certification-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 25px;
+  }
+
+  .cert-card img {
+    max-width: 95px;
+  }
+
+  .cert-card p {
+    font-size: 13px;
+  }
+
+  .definition-item {
+    font-size: 14px;
+  }
+}
+
+/* Large Tablet / Small Desktop - 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .certifications-section {
+    padding: 60px 25px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .sub-title {
+    font-size: 26px;
+  }
+
+  .certification-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 35px 30px;
+  }
+
+  .cert-card img {
+    max-width: 105px;
+  }
+
+  .cert-card p {
+    font-size: 13px;
+  }
+}
+
+/* Desktop - 1025px to 1199px */
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .certifications-section {
+    padding: 65px 20px;
+  }
+
+  .certification-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 35px 25px;
+  }
+
+  .cert-card img {
+    max-width: 100px;
+  }
+}
+
+/* Large Desktop - 1200px and above */
+@media (min-width: 1200px) {
+  .certifications-section {
+    padding: 70px 20px;
+  }
+
+  .certification-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 40px 30px;
+  }
+
+  .cert-card img {
+    max-width: 110px;
   }
 }

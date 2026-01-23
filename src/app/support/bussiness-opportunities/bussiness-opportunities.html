@@ -1,1 +1,115 @@
-<p>bussiness-opportunities works!</p>
+<section class="business-section">
+    <div class="container">
+      <!-- HERO SECTION -->
+      <h1 class="page-title">Find Out What it Takes to Become an Official Life Ionizer Dealer!</h1>
+  
+      <div class="hero-images">
+        <div class="hero-image">
+          <img src="/images/business-professionals.webp" alt="Professional team at Life Ionizers" />
+        </div>
+        <div class="hero-image">
+          <img src="/images/business-opportunity.webp" alt="Business opportunity illustration" />
+        </div>
+      </div>
+  
+      <!-- INTRO SECTION -->
+      <div class="intro-section">
+        <h2 class="section-title">Join Our Team. Benefit From Life.</h2>
+  
+        <div class="intro-content">
+          <div class="intro-box">
+            <h3>Who is Life Ionizers</h3>
+            <p>
+              Life Ionizers™, owned and operated by Nu Tech Water, LLC, has been in business for 26 years and has
+              received more than 1,560,000 (1.56 million!) visits per year to our Life Ionizer websites! 568,348. Our
+              water ionizers have some of the highest reviews on the market.
+            </p>
+            <p>
+              At Life Ionizers™ we continuously upgrade and design the most advanced alkaline water ionizer systems.
+            </p>
+            <p>
+              Life Ionizers™ feature cutting-edge technology as the result of our never-ending quest to offer the best
+              product at the best price. Life Ionizers™ water ionizers have exclusive innovations such as custom
+              filtration and UV lamp sterilization which prevents bacteria and viruses in the water. We never stop
+              imagining newer innovations in order to remain ahead of the next curve.
+            </p>
+          </div>
+  
+          <div class="intro-box">
+            <h3>How Water Ionizers Work</h3>
+            <p>
+              Water Ionizers turn ordinary tap water into ionized, alkaline water by delivering a strong electrical
+              current to the water. This process, known as electrolysis, separates the water into two streams: alkaline
+              mineral water for drinking and acidic mineral water for the skin, and for cleaning and sanitizing. This
+              process also breaks large clusters of water molecules into "micro-clusters"(molecular hydrogen) that are
+              readily absorbed by tissues and cells, leading to better hydration at the cellular level.
+            </p>
+            <p>
+              If you believe in our products as much as we do, then we would like to invite you the LIFE Dealer™ team.
+              Not only will you be positioned to enjoy some of this growth through profit sharing, but you are also
+              helping people to live happier and healthier lives; reducing their carbon footprint, and enjoying the
+              benefits of drinking ionized water daily.
+            </p>
+          </div>
+        </div>
+      </div>
+  
+      <!-- WHY JOIN SECTION -->
+      <div class="why-join-section">
+        <h2 class="section-title">Why Join The Dealer Team</h2>
+  
+        <p class="intro-text">
+          Life Ionizers™ new program for physicians, health care practitioners, water industry experts, and others
+          interested in capitalizing on the growing field of water treatment and alkaline, ionized water for residential
+          and commercial use.
+        </p>
+  
+        <div class="reasons-list">
+          <div class="reason-item" *ngFor="let reason of reasonsList">
+            <span class="checkmark">✓</span>
+            <p>{{ reason }}</p>
+          </div>
+        </div>
+  
+        <div class="opportunity-note">
+          <p>
+            The LIFE Dealer™ reseller program offers the individual an opportunity to sell the industry-leading #1
+            alkaline water ionizer with a pre-filtration system customized for each home or commercial location based
+            on the water report from the water district servicing that location. LIFE Dealers™ earn an industry best
+            profit margin as well as having the opportunity to build a team of representatives in their local area,
+            across the country, or throughout the world.
+          </p>
+        </div>
+      </div>
+  
+      <!-- TESTIMONIALS SECTION -->
+      <div class="testimonials-section">
+        <h2 class="section-title">What Our Trusted Partners Say</h2>
+  
+        <div class="testimonial-slider">
+          <div class="testimonial-content">
+            <div class="quote-text">
+              <p>"{{ currentTestimonial.quote }}"</p>
+            </div>
+  
+            <div class="testimonial-author">
+              <img [src]="currentTestimonial.image" [alt]="currentTestimonial.author" class="author-image" />
+              <div class="author-info">
+                <h4>{{ currentTestimonial.author }}</h4>
+                <p>{{ currentTestimonial.title }}</p>
+              </div>
+            </div>
+          </div>
+  
+          <div class="slider-controls">
+            <button class="slide-btn prev" (click)="previousTestimonial()">❮</button>
+            <div class="slide-indicators">
+              <span class="indicator" *ngFor="let i of [0, 1, 2]" [class.active]="i === currentTestimonialIndex"></span>
+            </div>
+            <button class="slide-btn next" (click)="nextTestimonial()">❯</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

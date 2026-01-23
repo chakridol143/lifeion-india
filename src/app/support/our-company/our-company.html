@@ -1,1 +1,77 @@
-<p>our-company works!</p>
+<section class="our-company-section">
+  <div class="container">
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">About Life Ionizers</h1>
+        <div class="tagline">Pure Water. Pure Life.</div>
+        <p class="hero-description">
+          Since 1996, Life Ionizers has pioneered water ionization from our U.S. headquarters in Southern California. As one of the longest-standing American water ionizer companies, we've spent nearly three decades engineering systems that deliver real, measurable health benefits —backed by science, transparency, and results.
+        </p>
+        <p class="hero-description">
+          We are independent by design. No MLM schemes, no inflated pricing, no hidden commissions. Just direct engineering, rigorous quality control, and honest support from a team you can reach by phone.
+        </p>
+        <p class="hero-description">
+          Our custom-built systems are configured for your local water —tested, tuned, and optimized using your area's water report to ensure precise pH, hydrogen levels, and filtration performance.
+        </p>
+      </div>
+      <div class="hero-image">
+        <img src="/images/our-company-hero.webp" alt="Life Ionizers water system" />
+      </div>
+    </div>
+
+    <!-- TECHNOLOGY SECTION -->
+    <div class="technology-section">
+      <h2 class="section-title">Our Technology</h2>
+      <div class="tech-content">
+        <div class="tech-image">
+          <img [src]="technologyImage" alt="Life Ionizers technology" />
+        </div>
+        <div class="tech-list">
+          <div class="tech-item" *ngFor="let tech of technologies">
+            <h3 class="tech-title">{{ tech.title }}</h3>
+            <p class="tech-description">{{ tech.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUILT FOR REAL LIFE SECTION -->
+    <div class="built-section">
+      <h2 class="section-title">Built for Real Life</h2>
+      <div class="built-content">
+        <div class="built-text">
+          <p>Trusted by holistic practitioners, clinics, athletes, and families, our systems are engineered with NSF/FDA-grade materials —platinum-coated titanium plates, BPA-free tubing, and UV + activated carbon filtration.</p>
+          <p>We offer flexible installation: countertop, under-sink, or fully integrated whole-home solutions.</p>
+        </div>
+        <div class="built-image">
+          <img src="/images/built-for-real-life.webp" alt="Built for Real Life installation options" />
+        </div>
+      </div>
+    </div>
+
+    <!-- OUR PROMISE SECTION -->
+    <div class="promise-section">
+      <h2 class="section-title">Our Promise</h2>
+      <div class="promise-content">
+        <div class="promise-image">
+          <img [src]="promiseImage" alt="Our Promise" />
+        </div>
+        <div class="promise-list">
+          <div class="promise-items">
+            <div class="promise-item" *ngFor="let promise of promises">
+              <h3 class="promise-title">{{ promise.title }}</h3>
+              <p class="promise-description" *ngIf="promise.description">{{ promise.description }}</p>
+            </div>
+          </div>
+          <div class="promise-closing">
+            <p>At Life Ionizers, we don't sell "miracle water."</p>
+            <p>We deliver functional hydration —water that hydrates better, neutralizes oxidative stress, and supports your body's natural balance.</p>
+            <p><strong>Clean water isn't a luxury. It's a foundation.</strong></p>
+            <p><strong>Let us build yours.</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,223 @@
+.water-facts-section {
+  padding: 70px 20px;
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.page-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.fact-card {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+}
+
+.fact-header {
+  background: linear-gradient(135deg, #0077cc 0%, #0066cc 100%);
+  padding: 25px 20px;
+  border-radius: 8px 8px 0 0;
+}
+
+.fact-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.fact-description {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+  padding: 20px 20px 15px 20px;
+  flex-grow: 1;
+}
+
+.fact-link {
+  font-size: 14px;
+  color: #0066cc;
+  text-decoration: underline;
+  padding: 0 20px 20px 20px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  display: inline-block;
+}
+
+.fact-link:hover {
+  color: #0052a3;
+}
+
+/* RESPONSIVE */
+
+/* Mobile - 300px to 480px */
+@media (max-width: 480px) {
+  .water-facts-section {
+    padding: 40px 15px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .fact-card {
+    flex-direction: column;
+  }
+
+  .fact-header {
+    padding: 20px 15px;
+  }
+
+  .fact-title {
+    font-size: 16px;
+  }
+
+  .fact-description {
+    font-size: 14px;
+    padding: 15px 15px 12px 15px;
+    line-height: 1.5;
+  }
+
+  .fact-link {
+    font-size: 13px;
+    padding: 0 15px 15px 15px;
+  }
+}
+
+/* Tablet - 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .water-facts-section {
+    padding: 50px 20px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+
+  .facts-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  .fact-header {
+    padding: 22px 18px;
+  }
+
+  .fact-title {
+    font-size: 17px;
+  }
+
+  .fact-description {
+    font-size: 14px;
+    padding: 18px 18px 13px 18px;
+  }
+
+  .fact-link {
+    font-size: 14px;
+    padding: 0 18px 18px 18px;
+  }
+}
+
+/* Large Tablet / Small Desktop - 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .water-facts-section {
+    padding: 60px 25px;
+  }
+
+  .page-title {
+    font-size: 36px;
+    margin-bottom: 50px;
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
+
+  .fact-header {
+    padding: 24px 20px;
+  }
+
+  .fact-title {
+    font-size: 17px;
+  }
+
+  .fact-description {
+    font-size: 14px;
+    padding: 20px 20px 15px 20px;
+  }
+
+  .fact-link {
+    font-size: 14px;
+    padding: 0 20px 20px 20px;
+  }
+}
+
+/* Desktop - 1025px and above */
+@media (min-width: 1025px) {
+  .water-facts-section {
+    padding: 70px 20px;
+  }
+
+  .page-title {
+    font-size: 42px;
+    margin-bottom: 60px;
+  }
+
+  .facts-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .fact-header {
+    padding: 25px 20px;
+  }
+
+  .fact-title {
+    font-size: 18px;
+  }
+
+  .fact-description {
+    font-size: 15px;
+    padding: 20px 20px 15px 20px;
+  }
+
+  .fact-link {
+    font-size: 14px;
+    padding: 0 20px 20px 20px;
+  }
+}

@@ -54,7 +54,10 @@ export const routes: Routes = [
 }
 ,
 
-
+      { path: 'support/certifications', component: Certifications },
+      { path: 'support/our-company', component: OurCompany },
+      { path: 'support/water-facts', component: WaterFACTS },
+      { path: 'support/bussiness-opportunities', component: BussinessOpportunities },
 
   { path: 'testimonials', component: TestimonialsComponent },
   { path: 'customers', component: CustomerComponent },

@@ -1,8 +1,4 @@
-
-
-
 <!-- TOP INFO BAR -->
-
 <div class="top-bar">
   Give Your Family the Gift of Healthy Water. Call
   <strong>844-335-2174</strong>
@@ -14,10 +10,9 @@
   <div class="header-logo">
     <img class="header-logo-img" src="/images/Ionizer_Logo.png" alt="Life Ionizers" />
   </div>
-  
 
-  <!-- SEARCH -->
-  <div class="header-search">
+  <!-- SEARCH - DESKTOP ONLY -->
+  <div class="header-search desktop-only">
     <div class="search-category">
       All <i class="bx bx-chevron-down"></i>
     </div>
@@ -29,111 +24,126 @@
 
   <!-- ACTION ICONS -->
   <div class="header-actions">
+    <!-- SEARCH ICON - MOBILE ONLY -->
+    <div class="icon-circle mobile-search-icon" (click)="openSearch()">
+      <i class="bx bx-search"></i>
+    </div>
+
     <div class="icon-circle">
       <i class="bx bx-user"></i>
     </div>
 
     <div class="icon-circle cart">
       <i class="bx bx-cart"></i>
-      <!--  <span class="cart-count">1</span>  -->
+    </div>
+
+    <!-- HAMBURGER MENU - MOBILE ONLY -->
+    <div class="icon-circle mobile-menu-icon" (click)="toggleMenu()">
+      <i class="bx bx-menu" *ngIf="!menuOpen"></i>
+      <i class="bx bx-x" *ngIf="menuOpen"></i>
     </div>
   </div>
 </div>
 
-<!-- NAVIGATION -->
-<nav class="header-nav">
-  <a routerLink="/" class="active">Home</a>
-
-  <a routerLink="/water-systems">
-    Water Systems <i class="bx bx-chevron-down"></i>
-  </a>
-
-  <a routerLink="/compaison">
-    Compaison <i class="bx bx-chevron-down"></i>
-  </a>
-
-  <!-- <a>
-    Ionizer Filters <i class="bx bx-chevron-down"></i>
-  </a> -->
-
-
-<!-- LEARN DROPDOWN (CORRECT STRUCTURE) -->
-<div class="nav-link nav-dropdown">
-  <a>Learn <i class="bx bx-chevron-down"></i></a>
-
-  <div class="dropdown-wrapper">
-    <ul class="dropdown-menu">
-      <li><a routerLink="/learn/studies">Studies</a></li>
-      <li><a routerLink="/learn/videos">Videos</a></li>
-      <li><a routerLink="/learn/blog">Blog</a></li>
-      <li><a routerLink="/support">Support</a></li>
-      <li><a routerLink="/learn/free-water-report">Free Water Report</a></li>
-    </ul>
+<!-- SEARCH OVERLAY PANEL -->
+<div class="full-search" [class.active]="searchOpen">
+  <div class="search-area">
+    <i class="bx bx-search search-big-icon"></i>
+    <input
+      type="text"
+      placeholder="SEARCH FOR..."
+      [(ngModel)]="overlaySearch"
+      (keyup)="onSearch(overlaySearch)"
+      (keydown.enter)="performSearch()"
+      class="search-input"
+    />
+    <span class="close-search" (click)="closeSearch()">✕</span>
   </div>
 </div>
 
+<!-- NAVIGATION - DESKTOP ONLY -->
+<nav class="header-nav desktop-only">
+  <ng-container *ngFor="let item of navItems">
+    <!-- DROPDOWN ITEMS -->
+    <div
+      *ngIf="hasSubmenu(item)"
+      class="nav-link nav-dropdown"
+      (mouseenter)="onDropdownHover(item.label)"
+      (mouseleave)="onDropdownLeave()"
+    >
+      <a [routerLink]="item.route || 'javascript:void(0)'">
+        {{ item.label }} <i class="bx bx-chevron-down"></i>
+      </a>
 
- <!-- TESTIMONIALS DROPDOWN -->
-<a class="nav-link nav-dropdown" ><a routerLink="/testimonials">
-  Testimonials <i class="bx bx-chevron-down"></i></a>
+      <div class="dropdown-wrapper">
+        <ul class="dropdown-menu">
+          <li *ngFor="let sub of item.submenu">
+            <a [routerLink]="sub.route">{{ sub.label }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="dropdown-wrapper">
-    <ul class="dropdown-menu">
-      <li>
-        <a routerLink="/customers">
-          Satisfied Customers
-        </a>
-      </li>
-
-      <li>
-        <a routerLink="/healthcare">
-          Health Care Professionals
-        </a>
-      </li>
-
-      <li>
-        <a routerLink="/actors">
-          Actors & Musicians
-        </a>
-      </li>
-
-      <li>
-        <a routerLink="/athletes">
-          Professional Athletes
-        </a>
-      </li>
-    </ul>
-  </div>
-</a>
-
-  <!-- <a>Finance</a> -->
-   <a routerLink="/finance" class="nav-link">Finance</a>
-
-
-   <div class="nav-link nav-dropdown"> 
-   <a routerLink="/aboutus"> About Us <i class="bx bx-chevron-down"></i></a>
-   <div class="dropdown-wrapper">
-    <ul class="dropdown-menu">
-      <li><a routerLink="/contact">Contact</a></li>
-    </ul>
-  </div>
-  </div>
-
-<div class="nav-link nav-dropdown">
-  <a href="javascript:void(0)">
-    Support <i class="bx bx-chevron-down"></i>
-  </a>
-
-  <div class="dropdown-wrapper">
-    <ul class="dropdown-menu">
-      <li><a routerLink="/support/certifications">Certifications</a></li>
-      <li><a routerLink="/support/our-company">Our Company</a></li>
-      <li><a routerLink="/support/water-facts">Water FACTS</a></li>
-      <li><a routerLink="/support/business-opportunities">Business Opportunities</a></li>
-    </ul>
-  </div>
-</div>
-
- 
-
+    <!-- REGULAR NAV ITEMS -->
+    <a
+      *ngIf="!hasSubmenu(item)"
+      [routerLink]="item.route"
+      routerLinkActive="active"
+      class="nav-link"
+    >
+      {{ item.label }}
+    </a>
+  </ng-container>
 </nav>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="mobile-menu-overlay" [class.active]="menuOpen" (click)="closeMenu()"></div>
+
+<!-- MOBILE MENU PANEL -->
+<div class="mobile-menu-panel" [class.active]="menuOpen">
+  <!-- CLOSE BUTTON -->
+  <div class="mobile-menu-header">
+    <span class="close-menu-btn" (click)="closeMenu()">✕</span>
+  </div>
+
+  <!-- MOBILE NAVIGATION -->
+  <nav class="mobile-nav">
+    <ng-container *ngFor="let item of navItems">
+      <!-- DROPDOWN ITEMS -->
+      <div *ngIf="hasSubmenu(item)" class="mobile-nav-item">
+        <div class="mobile-nav-link" (click)="toggleDropdown(item.label)">
+          <span>{{ item.label }}</span>
+          <i
+            class="bx bx-chevron-down"
+            [class.rotated]="activeDropdown === item.label"
+          ></i>
+        </div>
+
+        <!-- SUBMENU -->
+        <div
+          class="mobile-submenu"
+          [class.active]="activeDropdown === item.label"
+        >
+          <a
+            *ngFor="let sub of item.submenu"
+            [routerLink]="sub.route"
+            class="mobile-submenu-link"
+            (click)="onNavClick()"
+          >
+            {{ sub.label }}
+          </a>
+        </div>
+      </div>
+
+      <!-- REGULAR NAV ITEMS -->
+      <a
+        *ngIf="!hasSubmenu(item)"
+        [routerLink]="item.route"
+        class="mobile-nav-link mobile-nav-item"
+        (click)="onNavClick()"
+      >
+        {{ item.label }}
+      </a>
+    </ng-container>
+  </nav>
+</div>
