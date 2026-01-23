@@ -78,86 +78,86 @@ export class Home implements OnInit {
     {
       name: 'Barry Zito',
       title: 'World Champion Pitcher',
-      image: '/images/barry-zito.webp'
+      image: '/images/01.webp'
     },
     {
       name: 'Lindsey Jacobellis',
       title: 'Olympic Snowboarder',
-      image: '/images/lindsey-jacobellis.webp'
+      image: '/images/04.webp'
     },
     {
       name: 'Jordan Kunaszyk',
       title: 'NFL Pro',
-      image: '/images/jordan-kunaszyk.webp'
+      image: '/images/05.webp'
     },
     {
       name: 'Cecil Fielder',
       title: 'MLB',
-      image: '/images/cecil-fielder.webp'
+      image: '/images/15.webp'
     },
     {
       name: 'Jake Voskuhl',
       title: 'NBA PLAYER',
-      image: '/images/jake-voskuhl.webp'
+      image: '/images/13.webp'
     },
     {
       name: 'Oscar Valdez',
       title: 'Professional Boxer',
-      image: '/images/oscar-valdez.webp'
+      image: '/images/14.webp'
     },
     {
       name: 'Femi Ayanbadejo',
       title: 'NFL Veteran',
-      image: '/images/femi-ayanbadejo.webp'
+      image: '/images/08_84852755-45ad-4a2f-af9c-520e0ac421ed.webp'
     },
     {
       name: 'Josh Hart',
       title: 'NBA Pro',
-      image: '/images/josh-hart.webp'
+      image: '/images/06.webp'
     }
   ];
 
   // Customers data
   customers: Celebrity[] = [
     {
-      name: 'Maria Johnson',
-      title: 'Fitness Enthusiast',
-      image: '/images/customer-1.webp'
+      name: 'Ruben',
+      title: 'Happy Customer',
+      image: '/images/10.webp'
     },
     {
-      name: 'Sarah Williams',
-      title: 'Health Coach',
-      image: '/images/customer-2.webp'
+      name: 'Marisa',
+      title: 'Happy Customer',
+      image: '/images/03.webp'
     },
     {
-      name: 'Michael Chen',
-      title: 'Business Owner',
-      image: '/images/customer-3.webp'
+      name: 'Travis Illian',
+      title: 'Happy Customer',
+      image: '/images/travis.webp'
     },
     {
-      name: 'Emma Davis',
+      name: 'Mark Wright',
       title: 'Wellness Expert',
-      image: '/images/customer-4.webp'
+      image: '/images/11_6bfbf29a-1431-49e4-bcee-6ffa21de2fe0.webp'
     },
     {
-      name: 'Robert Smith',
-      title: 'Family Man',
-      image: '/images/customer-5.webp'
+      name: 'Rob Carpenter',
+      title: 'Cancer Survivor',
+      image: '/images/rob.webp'
     },
     {
-      name: 'Lisa Anderson',
-      title: 'Nutritionist',
-      image: '/images/customer-6.webp'
+      name: 'Dr. Mike Grego',
+      title: 'Naturopathic Chiropractor',
+      image: '/images/mike.webp'
     },
     {
-      name: 'David Martinez',
-      title: 'Athlete',
-      image: '/images/customer-7.webp'
+      name: 'Debra',
+      title: 'Registered Nurse & Owner of Wellness Center',
+      image: '/images/debra.webp'
     },
     {
-      name: 'Jennifer Brown',
-      title: 'Health Advocate',
-      image: '/images/customer-8.webp'
+      name: 'Laz Alonso',
+      title: 'American Actor',
+      image: '/images/Laz.webp'
     }
   ];
 
@@ -184,21 +184,21 @@ export class Home implements OnInit {
   products: Product[] = [
     {
       name: 'Best Value Ionizer Core MXL-5™ Alkaline Water Hydrogen Machine - Counter Top',
-      image: '/images/product-mxl5.webp',
+      image: '/images/mxlseries.avif',
       price: 1697,
       emi: 39.97,
       reviews: 34
     },
     {
       name: 'Strongest Ionizer Supreme MXL-9™ Alkaline Water Hydrogen Machine - Counter Top',
-      image: '/images/product-mxl9.webp',
+      image: '/images/mxlseries.avif',
       price: 2697,
       emi: 69.36,
       reviews: 46
     },
     {
       name: "World's Most Powerful Ionizer Apex MXL-15™ Under Counter Hydrogen Water Alkaline Machine",
-      image: '/images/product-mxl15.webp',
+      image: '/images/MXL-15_Undercounter_308x208_crop_center.avif',
       price: 4697,
       emi: 111.02,
       reviews: 55

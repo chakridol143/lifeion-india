@@ -30,17 +30,9 @@
   gap: 15px;
 }
 
-.brand-logo {
-  width: 150px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-}
-
 .logo-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  width: 13rem;
+  transform: scale(1.4);
 }
 
 .brand-text {
