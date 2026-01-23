@@ -1,0 +1,53 @@
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* WAVE BACKGROUND */
+.wave {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    #e6f9ff 0%,
+    #00bfff 40%,
+    #0077a8 60%,
+    #e6f9ff 100%
+  );
+  animation: waveSlide 1.4s ease-in-out infinite;
+}
+
+/* LOADING TEXT */
+.loader-text {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #0077a8;
+  z-index: 2;
+  animation: blink 1.2s infinite;
+}
+
+/* ANIMATIONS */
+@keyframes waveSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: .4; }
+  50% { opacity: 1; }
+}
