@@ -1,43 +1,33 @@
-<!-- TOP INFO BAR -->
+<!-- =======================
+   TOP INFO BAR
+======================= -->
 <div class="top-bar">
   Give Your Family the Gift of Healthy Water. Call
   <strong>844-335-2174</strong>
 </div>
 
-<!-- MAIN HEADER -->
+<!-- =======================
+   MAIN HEADER
+======================= -->
 <div class="header-main">
-  <!-- LOGO -->
   <div class="header-logo">
-    <img class="header-logo-img" src="/images/Ionizer_Logo.png" alt="Life Ionizers" />
+    <img src="/images/Ionizer_Logo.png" alt="Life Ionizers" />
   </div>
 
-  <!-- SEARCH - DESKTOP ONLY -->
   <div class="header-search desktop-only">
     <div class="search-category">
       All <i class="bx bx-chevron-down"></i>
     </div>
-
     <input type="text" placeholder="Search for products" />
-
     <i class="bx bx-microphone"></i>
   </div>
 
-  <!-- ACTION ICONS -->
   <div class="header-actions">
-    <!-- SEARCH ICON - MOBILE ONLY -->
     <div class="icon-circle mobile-search-icon" (click)="openSearch()">
       <i class="bx bx-search"></i>
     </div>
-
-    <div class="icon-circle">
-      <i class="bx bx-user"></i>
-    </div>
-
-    <div class="icon-circle cart">
-      <i class="bx bx-cart"></i>
-    </div>
-
-    <!-- HAMBURGER MENU - MOBILE ONLY -->
+    <div class="icon-circle"><i class="bx bx-user"></i></div>
+    <div class="icon-circle cart"><i class="bx bx-cart"></i></div>
     <div class="icon-circle mobile-menu-icon" (click)="toggleMenu()">
       <i class="bx bx-menu" *ngIf="!menuOpen"></i>
       <i class="bx bx-x" *ngIf="menuOpen"></i>
@@ -45,15 +35,16 @@
   </div>
 </div>
 
-<!-- SEARCH OVERLAY PANEL -->
+<!-- =======================
+   SEARCH OVERLAY
+======================= -->
 <div class="full-search" [class.active]="searchOpen">
   <div class="search-area">
     <i class="bx bx-search search-big-icon"></i>
     <input
       type="text"
-      placeholder="SEARCH FOR..."
       [(ngModel)]="overlaySearch"
-      (keyup)="onSearch(overlaySearch)"
+      placeholder="SEARCH FOR..."
       (keydown.enter)="performSearch()"
       class="search-input"
     />
@@ -61,56 +52,118 @@
   </div>
 </div>
 
-<!-- NAVIGATION - DESKTOP ONLY -->
+<!-- =======================
+   DESKTOP NAVIGATION
+======================= -->
 <nav class="header-nav desktop-only">
-  <ng-container *ngFor="let item of navItems">
-    <!-- DROPDOWN ITEMS -->
-    <div
-      *ngIf="hasSubmenu(item)"
-      class="nav-link nav-dropdown"
-      (mouseenter)="onDropdownHover(item.label)"
-      (mouseleave)="onDropdownLeave()"
-    >
-      <a [routerLink]="item.route || 'javascript:void(0)'">
-        {{ item.label }} <i class="bx bx-chevron-down"></i>
-      </a>
 
-      <div class="dropdown-wrapper">
-        <ul class="dropdown-menu">
-          <li *ngFor="let sub of item.submenu">
-            <a [routerLink]="sub.route">{{ sub.label }}</a>
-          </li>
-        </ul>
+  <!-- ================= WATER SYSTEMS ONLY ================= -->
+  <div
+    class="nav-dropdown-wrapper"
+    (mouseenter)="onDropdownHover()"
+    (mouseleave)="onDropdownLeave()"
+  >
+    <a class="nav-link no-route">
+      Water Systems <i class="bx bx-chevron-down"></i>
+    </a>
+
+    <!-- MEGA MENU -->
+    <div class="mega-menu" *ngIf="showMegaMenu">
+      <div class="mega-left">
+        <div
+          class="mega-category"
+          *ngFor="let cat of categories"
+          (mouseenter)="onCategoryHover(cat.category_id)"
+        >
+        <img
+          [src]="'http://localhost:3000/assets/images/' + cat.image_url"/>
+          {{ cat.name }} <span>›</span>
+        </div>
+      </div>
+
+      <div class="mega-right">
+        <div
+    class="mega-product"
+    *ngFor="let p of products"
+    (click)="goToProduct(p.product_id)"
+  >
+          <img
+          [src]="'http://localhost:3000/assets/images/' + p.image_url"
+        />
+          <p>{{ p.name }}</p>
+        </div>
       </div>
     </div>
+  </div>
+  <!-- <div class="mega-right">
+  <div
+    class="mega-product"
+    *ngFor="let p of products"
+    (click)="goToProduct(p.product_id)"
+  >
+    <img [src]="'http://localhost:3000/assets/images/' + p.image_path" />
+    <p>{{ p.name }}</p>
+  </div>
+</div> -->
 
-    <!-- REGULAR NAV ITEMS -->
-    <a
-      *ngIf="!hasSubmenu(item)"
-      [routerLink]="item.route"
-      routerLinkActive="active"
-      class="nav-link"
-    >
-      {{ item.label }}
-    </a>
+
+  <!-- ================= OTHER NAV ITEMS ================= -->
+  <ng-container *ngFor="let item of navItems">
+
+    <!-- Skip Water Systems here -->
+    <ng-container *ngIf="item.label !== 'Water Systems'">
+
+      <!-- DROPDOWNS -->
+      <div *ngIf="hasSubmenu(item)" class="nav-link nav-dropdown">
+        <a href="javascript:void(0)">
+          {{ item.label }} <i class="bx bx-chevron-down"></i>
+        </a>
+
+        <div class="dropdown-wrapper">
+          <ul class="dropdown-menu">
+            <li *ngFor="let sub of item.submenu">
+              <a [routerLink]="sub.route">{{ sub.label }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NORMAL LINKS -->
+      <a
+        *ngIf="!hasSubmenu(item)"
+        [routerLink]="item.route"
+        class="nav-link"
+      >
+        {{ item.label }}
+      </a>
+
+    </ng-container>
   </ng-container>
 </nav>
 
-<!-- MOBILE MENU OVERLAY -->
-<div class="mobile-menu-overlay" [class.active]="menuOpen" (click)="closeMenu()"></div>
 
-<!-- MOBILE MENU PANEL -->
+<!-- =======================
+   MOBILE MENU OVERLAY
+======================= -->
+<div
+  class="mobile-menu-overlay"
+  [class.active]="menuOpen"
+  (click)="closeMenu()"
+></div>
+
+<!-- =======================
+   MOBILE MENU
+======================= -->
 <div class="mobile-menu-panel" [class.active]="menuOpen">
-  <!-- CLOSE BUTTON -->
   <div class="mobile-menu-header">
     <span class="close-menu-btn" (click)="closeMenu()">✕</span>
   </div>
 
-  <!-- MOBILE NAVIGATION -->
   <nav class="mobile-nav">
     <ng-container *ngFor="let item of navItems">
-      <!-- DROPDOWN ITEMS -->
-      <div *ngIf="hasSubmenu(item)" class="mobile-nav-item">
+
+      <!-- MOBILE DROPDOWN -->
+      <div *ngIf="item.submenu" class="mobile-nav-item">
         <div class="mobile-nav-link" (click)="toggleDropdown(item.label)">
           <span>{{ item.label }}</span>
           <i
@@ -119,7 +172,6 @@
           ></i>
         </div>
 
-        <!-- SUBMENU -->
         <div
           class="mobile-submenu"
           [class.active]="activeDropdown === item.label"
@@ -135,15 +187,16 @@
         </div>
       </div>
 
-      <!-- REGULAR NAV ITEMS -->
+      <!-- MOBILE NORMAL LINK -->
       <a
-        *ngIf="!hasSubmenu(item)"
+        *ngIf="!item.submenu"
         [routerLink]="item.route"
         class="mobile-nav-link mobile-nav-item"
         (click)="onNavClick()"
       >
         {{ item.label }}
       </a>
+
     </ng-container>
   </nav>
 </div>

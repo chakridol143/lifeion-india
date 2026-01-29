@@ -25,6 +25,7 @@ import { Certifications } from './support/certifications/certifications';
 import { OurCompany } from './support/our-company/our-company';
 import { WaterFACTS } from './support/water-facts/water-facts';
 import { BussinessOpportunities } from './support/bussiness-opportunities/bussiness-opportunities';
+import { ProductDetails } from './product.details/product.details';
 
 
 export const routes: Routes = [
@@ -40,6 +41,15 @@ export const routes: Routes = [
 
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
+  {
+  path: 'water-systems',
+  loadComponent: () =>
+    import('./water-systems/water-systems')
+      .then(m => m.WaterSystems),
+},
+{ path: 'product/:id', component: ProductDetails },
+ { path: '', redirectTo: '/', pathMatch: 'full' },
+
 
 {
   path: 'support',

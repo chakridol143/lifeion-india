@@ -1,0 +1,66 @@
+<div class="product-page">
+
+  <!-- LEFT -->
+ <div class="product-gallery">
+
+  <!-- MAIN IMAGE -->
+  <div class="main-image">
+    <img
+      [src]="'http://localhost:3000/assets/images/' + selectedImage"
+      alt="product image"
+    />
+
+    <div class="image-count">
+      {{ currentIndex + 1 }} / {{ images.length }}
+    </div>
+  </div>
+
+  <!-- THUMBNAILS -->
+  <div class="thumbnail-row">
+    <img
+      *ngFor="let img of images; let i = index"
+      [src]="'http://localhost:3000/assets/images/' + img"
+      (click)="selectImage(img, i)"
+      [class.active]="selectedImage === img"
+    />
+  </div>
+
+</div>
+
+
+  <!-- RIGHT -->
+  <div class="product-right">
+    <small>Life Ionizers</small>
+    <h1>{{ product.name }}</h1>
+    <h4>{{ product.sub_name }}</h4>
+
+    <p class="price">${{ product.price }}</p>
+
+    <button class="add-cart">Add to cart</button>
+
+    <p class="desc">{{ product.description }}</p>
+
+    <button class="report">Get Lab Analysis Filter Report</button>
+
+    <details>
+      <summary>Description</summary>
+      <p>{{ product.details }}</p>
+    </details>
+
+    <details>
+      <summary>Specifications</summary>
+      <p>{{ product.specifications }}</p>
+    </details>
+
+    <details>
+      <summary>Under/Over Counter Details</summary>
+      <p>{{ product.counter_details }}</p>
+    </details>
+
+    <details>
+      <summary>Warranty & Installation</summary>
+      <p>{{ product.warranty_installation }}</p>
+    </details>
+  </div>
+
+</div>
