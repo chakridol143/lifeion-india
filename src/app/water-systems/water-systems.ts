@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from  '../water-systems/category.service';
+import { CategoryService } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
 
 @Component({
@@ -14,37 +14,48 @@ export class WaterSystems implements OnInit {
 
   categories: any[] = [];
   products: any[] = [];
-   activeCategoryId: number | null = null;
-  showWaterSystems = false;
-
-  hoveredCategoryId: number | null = null;
+  activeCategoryId: number | null = null;
+  isWaterLoading = false;
 
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService
   ) {}
 
-  ngOnInit() {
-    this.categoryService.getAllCategories().subscribe(res => {
+  ngOnInit(): void {
+    this.loadWaterSystems();
+  }
+
+  loadWaterSystems(): void {
+    this.categoryService.getWaterSystemCategories().subscribe(res => {
       this.categories = res;
+
+      // auto-load first category
+      if (res.length > 0) {
+        this.onCategoryHover(res[0].category_id);
+      }
     });
   }
 
- onCategoryHover(categoryId: number): void {
-  this.activeCategoryId = categoryId;
-  this.onCategoryHover(this.categories[0].category_id);
+  onCategoryHover(categoryId: number): void {
+    if (this.activeCategoryId === categoryId) return;
 
+    this.activeCategoryId = categoryId;
+    this.isWaterLoading = true;
 
-  this.productService
-    .getProductsByCategory(categoryId)
-    .subscribe({
-      next: (res) => {
-        this.products = res.products;
-      },
-      error: (err) => {
-        console.error('Product fetch error', err);
-        this.products = [];
-      }
-    });
-}
+    this.categoryService
+      .getProductsByCategory(categoryId)
+      .subscribe({
+        next: (res) => {
+          this.products = res.products ?? [];
+          this.isWaterLoading = false;
+          console.log('Loaded products:', this.products);
+        },
+        error: (err) => {
+          console.error(err);
+          this.products = [];
+          this.isWaterLoading = false;
+        }
+      });
+  }
 }

@@ -6,7 +6,7 @@
       class="category-item"
       *ngFor="let cat of categories"
       (mouseenter)="onCategoryHover(cat.category_id)"
-      [class.active]="cat.category_id === hoveredCategoryId"
+      [class.active]="cat.category_id === activeCategoryId"
     >
       <span>{{ cat.name }}</span>
       <span class="arrow">›</span>
@@ -21,7 +21,11 @@
 
     <div class="products-grid" *ngIf="products.length">
       <div class="product-card" *ngFor="let p of products">
-        <img [src]="'/assets/images/' + p.image_url" alt="" />
+        <img
+          *ngIf="p.image_url"
+          [src]="'/assets/images/' + p.image_url"
+          alt=""
+        />
         <p>{{ p.name }}</p>
       </div>
     </div>

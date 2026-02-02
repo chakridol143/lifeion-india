@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { ProductsResponse } from './product.service';
 
 export interface Product {
   product_id: number;
@@ -38,11 +39,28 @@ export class CategoryService {
     return this.http.get<Category[]>(this.apiUrl);
   }
 
- getProductsByCategory(categoryId: number) {
-  return this.http.get<{ success: boolean; products: any[] }>(
-    `${this.apiUrl}/${categoryId}/products`
+//  getProductsByCategory(categoryId: number) {
+//   return this.http.get<{ success: boolean; products: any[] }>(
+//     `${this.apiUrl}/${categoryId}/products`
+//   );
+// }
+getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
+  return this.http.get<ProductsResponse>(
+    `http://localhost:3000/api/categories/${categoryId}/products`
   );
 }
+
+getIonizerFilterCategories() {
+  return this.http.get<any[]>(
+    'http://localhost:3000/api/categories/menu/1'
+  );
+}
+getWaterSystemCategories(): Observable<Category[]> {
+  return this.http.get<Category[]>(
+    'http://localhost:3000/api/categories/menu/2'
+  );
+}
+
 
   }
 

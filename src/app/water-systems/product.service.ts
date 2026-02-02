@@ -21,9 +21,10 @@ getAll() {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
-    return this.http.get<ProductsResponse>(
-      `${this.apiUrl}/category/${categoryId}`
-    );
-  }
+getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
+  return this.http.get<ProductsResponse>(
+    `http://localhost:3000/api/categories/${categoryId}/products`
+  );
+}
+
 }

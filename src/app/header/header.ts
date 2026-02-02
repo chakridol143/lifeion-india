@@ -20,6 +20,10 @@ export class Header implements OnInit {
     categories: Category[] = [];
  products: Product[] = [];
  activeCategoryId: number | null = null;
+ isIonizerLoading = false;
+ waterSystemCategories: Category[] = [];
+
+
 
  
   showWaterSystems = false;
@@ -98,13 +102,47 @@ onNavClick(): void {
 
 
  
-goToProduct(id: number): void {
-  console.log('Navigating to product:', id);
+// goToProduct(product: any): void {
 
-  this.showMegaMenu = false;
+//   this.showMegaMenu = false;
+//   this.showIonizerMenu = false;
 
-  this.router.navigate(['/product', id]);
+//   const menuTypeId = Number(product.menu_type_id);
+
+//   if (menuTypeId === 1) {
+//     this.router.navigate(['/product/ionizer/:id', product.product_id]);
+//     return;
+//   }
+
+  
+//   if (menuTypeId === 2) {
+//     this.router.navigate(['/product/water-system/:id', product.product_id]);
+//     return;
+//   }
+
+//   // Accessories / Others
+//   this.router.navigate(['/product', product.product_id]);
+// }
+
+goToProduct(product: any): void {
+  if (!product || !product.product_id || !product.menu_type_id) {
+    console.warn('Not a product click, ignoring:', product);
+    return;
+  }
+
+  if (product.menu_type_id === 1) {
+    this.router.navigate(['/product/ionizer', product.product_id]);
+    return;
+  }
+
+  if (product.menu_type_id === 2) {
+    this.router.navigate(['/product/water-system', product.product_id]);
+    return;
+  }
+
+  console.error('Unknown product menu type', product);
 }
+
 
 
 
@@ -130,52 +168,53 @@ ngOnInit() {
     });
   }
 
-  onDropdownHover() {
-    this.showMegaMenu = true;
+/* ===== WATER SYSTEMS ===== */
+
+
+onDropdownHover(): void {
+  this.showMegaMenu = true;
+
+  // ✅ use Water Systems specific array
+  if (this.waterSystemCategories.length === 0) {
+    this.categoryService.getWaterSystemCategories().subscribe(res => {
+      this.waterSystemCategories = res;
+      this.categories = res; // bind to U
+
+      if (res.length > 0) {
+        this.onCategoryHover(res[0].category_id);
+      }
+    });
+  } else {
+    this.categories = this.waterSystemCategories;
   }
+}
 
-  onDropdownLeave() {
-    this.showMegaMenu = false;
-    this.products = [];
-  }
-// onCategoryHover(categoryId: number): void {
 
-  
-//   if (this.activeCategoryId === categoryId) return;
+onDropdownLeave(): void {
+  this.showMegaMenu = false;
+  this.products = [];
+  this.activeCategoryId = null;
+}
 
-//   this.activeCategoryId = categoryId;
-
-//   this.productService
-//     .getProductsByCategory(categoryId)
-//     .subscribe(res => {
-//       this.products = res.products;
-//     });
-// }
-// onCategoryHover(categoryId: number): void {
-//   console.log('Hovered category:', categoryId);
-
-//   if (this.activeCategoryId === categoryId) return;
-//   this.activeCategoryId = categoryId;
-
-//   this.productService.getProductsByCategory(categoryId)
-//     .subscribe(res => {
-//       console.log('API response:', res);
-//       this.products = res.products;
-//     });
-// }
 onCategoryHover(categoryId: number): void {
-
-  // prevent repeated calls
   if (this.activeCategoryId === categoryId) return;
+
   this.activeCategoryId = categoryId;
 
   this.productService
     .getProductsByCategory(categoryId)
-    .subscribe((res: any) => {
-      console.log('API response:', res);
-      this.products = Array.isArray(res) ? res : res.products;
+    .subscribe({
+      next: (res: any) => {
+        console.log('Water Systems API response:', res);
+        this.products = res?.products ?? [];
+      },
+      error: (err) => {
+        console.error(err);
+        this.products = [];
+      }
     });
 }
+
 
 
   hasSubmenu(item: any): boolean {
@@ -188,6 +227,66 @@ onCategoryHover(categoryId: number): void {
   onWaterSystemsLeave() {
     this.showWaterSystems = false;
   }
+
+/* ===== IONIZER FILTERS ===== */
+ionizerCategories: Category[] = [];
+ionizerProducts: Product[] = [];
+activeIonizerCategoryId: number | null = null;
+showIonizerMenu = false;
+ionizerProductsMap: { [categoryId: number]: Product[] } = {};
+
+
+loadIonizerFilters(): void {
+  this.categoryService
+    .getIonizerFilterCategories()
+    .subscribe(res => {
+      this.ionizerCategories = res;
+
+      if (res.length > 0) {
+        this.onIonizerCategoryHover(res[0].category_id);
+      }
+    });
+}
+
+onIonizerEnter(): void {
+  this.showIonizerMenu = true;
+
+  if (this.ionizerCategories.length === 0) {
+    this.categoryService.getIonizerFilterCategories().subscribe(cats => {
+      this.ionizerCategories = cats;
+
+      cats.forEach(cat => {
+        this.productService
+          .getProductsByCategory(cat.category_id)
+          .subscribe(res => {
+            this.ionizerProductsMap[cat.category_id] = res.products || [];
+          });
+      });
+    });
+  }
+}
+
+
+onIonizerLeave(): void {
+  this.showIonizerMenu = false;
+  this.ionizerProducts = [];
+  this.activeIonizerCategoryId = null;
+}
+
+onIonizerCategoryHover(categoryId: number): void {
+  if (this.activeIonizerCategoryId === categoryId) return;
+
+  this.activeIonizerCategoryId = categoryId;
+  this.isIonizerLoading = true;
+
+  this.productService
+    .getProductsByCategory(categoryId)
+    .subscribe(res => {
+      this.ionizerProducts = res.products || [];
+      this.isIonizerLoading = false;
+    });
+}
+
 
 
 }

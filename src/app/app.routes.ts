@@ -26,6 +26,8 @@ import { OurCompany } from './support/our-company/our-company';
 import { WaterFACTS } from './support/water-facts/water-facts';
 import { BussinessOpportunities } from './support/bussiness-opportunities/bussiness-opportunities';
 import { ProductDetails } from './product.details/product.details';
+import { IonizerFilterDetails } from './product.details/ionizer-filter-details/ionizer-filter-details';
+import { WaterSystemDetails } from './product.details/water-system-details/water-system-details';
 
 
 export const routes: Routes = [
@@ -42,14 +44,22 @@ export const routes: Routes = [
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
   {
+    path: 'product/ionizer/:id',
+    component: IonizerFilterDetails
+  },
+  {
+    path: 'product/water-system/:id',
+    component: WaterSystemDetails
+  },
+  {
   path: 'water-systems',
   loadComponent: () =>
     import('./water-systems/water-systems')
       .then(m => m.WaterSystems),
 },
-{ path: 'product/:id', component: ProductDetails },
- { path: '', redirectTo: '/', pathMatch: 'full' },
-
+// { path: 'product/:id', component: ProductDetails },
+//  { path: '', redirectTo: '/', pathMatch: 'full' },
+// {path: 'lonizer-filters', component: IonizerFilterDetails},
 
 {
   path: 'support',

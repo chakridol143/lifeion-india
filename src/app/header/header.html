@@ -52,59 +52,123 @@
   </div>
 </div>
 
-<!-- =======================
-   DESKTOP NAVIGATION
-======================= -->
+<!-- ================= IONIZER FILTERS ================= -->
 <nav class="header-nav desktop-only">
+
+  <!-- ================= IONIZER FILTERS ================= -->
+<div
+  class="nav-dropdown-wrapper"
+  (mouseenter)="onIonizerEnter()"
+  (mouseleave)="onIonizerLeave()"
+>
+  <a class="nav-link no-route">
+    Ionizer Filters <i class="bx bx-chevron-down"></i>
+  </a>
+
+  <div class="mega-menu ionizer-layout" *ngIf="showIonizerMenu">
+
+    <div
+      class="ionizer-column"
+      *ngFor="let cat of ionizerCategories"
+    >
+      <!-- CATEGORY TITLE -->
+      <div class="ionizer-title">
+        <img
+          *ngIf="cat.image_url"
+          [src]="'http://localhost:3000/assets/images/' + cat.image_url"
+          alt=""
+        />
+        <span>{{ cat.name }}</span>
+      </div>
+
+      <!-- PRODUCTS -->
+      <ul class="ionizer-products">
+        <li
+          *ngFor="let p of ionizerProductsMap[cat.category_id]"
+         (click)="goToProduct(p)"
+
+
+        >
+          {{ p.name }}
+        </li>
+
+        <li
+          *ngIf="!ionizerProductsMap[cat.category_id]?.length"
+          class="empty-products"
+        >
+          No products
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
 
   <!-- ================= WATER SYSTEMS ONLY ================= -->
   <div
-    class="nav-dropdown-wrapper"
-    (mouseenter)="onDropdownHover()"
-    (mouseleave)="onDropdownLeave()"
-  >
-    <a class="nav-link no-route">
-      Water Systems <i class="bx bx-chevron-down"></i>
-    </a>
+  class="nav-dropdown-wrapper"
+  (mouseenter)="onDropdownHover()"
+  (mouseleave)="onDropdownLeave()"
+>
+  <a class="nav-link no-route">
+    Water Systems <i class="bx bx-chevron-down"></i>
+  </a>
 
-    <!-- MEGA MENU -->
-    <div class="mega-menu" *ngIf="showMegaMenu">
-      <div class="mega-left">
-        <div
-          class="mega-category"
-          *ngFor="let cat of categories"
-          (mouseenter)="onCategoryHover(cat.category_id)"
-        >
+  <!-- MEGA MENU -->
+  <div class="mega-menu" *ngIf="showMegaMenu">
+
+    <!-- LEFT: CATEGORIES -->
+    <div class="mega-left">
+      <div
+        class="mega-category"
+        *ngFor="let cat of categories"
+        (mouseenter)="onCategoryHover(cat.category_id)"
+        [class.active]="activeCategoryId === cat.category_id"
+      >
+        <!-- show image only if exists -->
         <img
-          [src]="'http://localhost:3000/assets/images/' + cat.image_url"/>
-          {{ cat.name }} <span>›</span>
-        </div>
-      </div>
-
-      <div class="mega-right">
-        <div
-    class="mega-product"
-    *ngFor="let p of products"
-    (click)="goToProduct(p.product_id)"
-  >
-          <img
-          [src]="'http://localhost:3000/assets/images/' + p.image_url"
+          *ngIf="cat.image_url"
+          [src]="'http://localhost:3000/assets/images/' + cat.image_url"
+          alt=""
         />
-          <p>{{ p.name }}</p>
-        </div>
+
+        <span>{{ cat.name }}</span>
+        <span class="arrow">›</span>
       </div>
     </div>
+
+    <!-- RIGHT: PRODUCTS -->
+    <div class="mega-right">
+
+      <!-- PRODUCTS -->
+      <div
+        class="mega-product"
+        *ngFor="let p of products"
+        (click)="goToProduct(p)"
+
+      >
+        <img
+          *ngIf="p.image_url"
+          [src]="'http://localhost:3000/assets/images/' + p.image_url"
+          alt=""
+        />
+        <p>{{ p.name }}</p>
+      </div>
+
+      <!-- EMPTY STATE -->
+      <div
+        class="empty-products"
+        *ngIf="products.length === 0"
+      >
+        No products available
+      </div>
+
+    </div>
+
   </div>
-  <!-- <div class="mega-right">
-  <div
-    class="mega-product"
-    *ngFor="let p of products"
-    (click)="goToProduct(p.product_id)"
-  >
-    <img [src]="'http://localhost:3000/assets/images/' + p.image_path" />
-    <p>{{ p.name }}</p>
-  </div>
-</div> -->
+</div>
 
 
   <!-- ================= OTHER NAV ITEMS ================= -->
