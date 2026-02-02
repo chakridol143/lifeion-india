@@ -78,3 +78,103 @@
     </p>
   </div>
 </div>
+
+<section class="why-section">
+  <h2 class="section-title">
+    Why Replacing Your Life Ionizer Filters is Important
+  </h2>
+
+  <div class="cards-row">
+    <div class="card card-purity">
+      <h3>Maintain Water Purity</h3>
+      <p>
+        Removes chlorine, heavy metals, bacteria, and other harmful contaminants.
+      </p>
+    </div>
+
+    <div class="card card-ionization">
+      <h3>Enhance Ionization Efficiency</h3>
+      <p>
+        Ensures proper pH balancing and antioxidant potential.
+      </p>
+    </div>
+
+    <div class="card card-taste">
+      <h3>Improve Taste & Odor</h3>
+      <p>
+        Keeps your water fresh, crisp, and free from unpleasant smells.
+      </p>
+    </div>
+
+    <div class="card card-health">
+      <h3>Protect Your Health</h3>
+      <p>
+        Prevents buildup of contaminants that can affect overall well-being.
+      </p>
+    </div>
+
+    <div class="card card-life">
+      <h3>Extend the Lifespan</h3>
+      <p>
+        Helps keep internal components clean and functioning properly.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="image-wrapper">
+  <img src="images/Types_of_Life_Ionizer_Replacement_Filters_2.webp" alt="Filters" />
+
+  <ng-container *ngFor="let h of hotspots">
+
+    <div
+      class="hotspot"
+      [style.top.%]="h.top"
+      [style.left.%]="h.left"
+    >
+      <!-- PLUS / CLOSE BUTTON -->
+      <div
+        class="plus"
+        [class.active]="activeId === h.id"
+        (click)="toggle(h.id)"
+      >
+        {{ activeId === h.id ? '×' : '+' }}
+      </div>
+
+      <!-- INFO CARD -->
+      <div
+        class="info-card"
+        *ngIf="activeId === h.id"
+      >
+        <h4>{{ h.title }}</h4>
+        <p>{{ h.desc }}</p>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>
+
+
+<section class="why-section">
+  <!-- <h2>Why Choose Genuine Life Ionizer Filters?</h2> -->
+
+  <div class="image-card">
+  <img src="images/1s.png" alt="Perfect Fit" />
+</div>
+
+<div class="image-card">
+  <img src="images/2s.png" alt="Perfect Fit" />
+</div>
+
+<div class="image-card">
+  <img src="images/3s.png" alt="Perfect Fit" />
+</div>
+
+<div class="image-card">
+  <img src="images/4s.png" alt="Perfect Fit" />
+</div>
+
+ 
+</section>
