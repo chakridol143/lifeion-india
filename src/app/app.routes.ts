@@ -44,12 +44,16 @@ export const routes: Routes = [
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
   {
-    path: 'product/ionizer/:id',
-    component: IonizerFilterDetails
+  path: 'product/ionizer/:id',
+    loadComponent: () =>
+      import('./product.details/ionizer-filter-details/ionizer-filter-details')
+        .then(m => m.IonizerFilterDetails)
   },
   {
     path: 'product/water-system/:id',
-    component: WaterSystemDetails
+    loadComponent: () =>
+      import('./product.details/water-system-details/water-system-details')
+        .then(m => m.WaterSystemDetails)
   },
   {
   path: 'water-systems',

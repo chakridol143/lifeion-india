@@ -1,15 +1,80 @@
-<div *ngIf="loading">Loading...</div>
+<div class="product-page" *ngIf="product">
 
-<div *ngIf="product && !loading">
-  <h1>{{ product.name }}</h1>
+  <!-- LEFT: PRODUCT IMAGE -->
+  <div class="product-image">
+    <img
+      *ngIf="product.image_url"
+      [src]="'http://localhost:3000/assets/images/' + product.image_url"
+      alt="{{ product.name }}"
+    />
+  </div>
 
-  <img
-    *ngIf="product.image_url"
-    [src]="'http://localhost:3000/assets/images/' + product.image_url"
-    alt=""
-  />
+  <!-- RIGHT: PRODUCT INFO -->
+  <div class="product-info">
 
-  <p>{{ product.description }}</p>
+    <!-- Small text (sub name) -->
+    <span class="sub-name">{{ product.sub_name }}</span>
 
-  <h3>₹ {{ product.price }}</h3>
+    <!-- Product title -->
+    <h1 class="product-title">{{ product.name }}</h1>
+
+    <!-- Price -->
+    <h2 class="price">₹{{ product.price }}</h2>
+
+    <!-- Short description -->
+    <p class="short-desc">
+      {{ product.description }}
+    </p>
+
+    <!-- Stock (optional) -->
+    <p class="stock" *ngIf="product.stock_quantity > 0">
+      In stock ({{ product.stock_quantity }})
+    </p>
+
+    <!-- Buttons (UI only) -->
+    <button class="add-cart">Add to cart</button>
+
+    <!-- Long description -->
+    <div
+      class="details"
+      *ngIf="product.details"
+      [innerHTML]="product.details"
+    ></div>
+
+  </div>
+</div>
+
+
+<div class="info-section">
+  <!-- LEFT IMAGE -->
+  <div class="info-image">
+   
+       <img src="/images/Life_Ionizer_LC-11_Alkaline_Water_Ionizer_01.webp" alt="Life Ionizer Filters" class="solution-icon" />
+    
+  </div>
+
+  <!-- RIGHT CONTENT -->
+  <div class="info-content">
+    <h2>
+      Ensure Superior Water Quality with Genuine Life Ionizer Filters
+    </h2>
+
+    <p>
+      Your Life Ionizer is an advanced water purification system designed to
+      provide clean, healthy, and ionized water for your home. To maintain its
+      peak performance and ensure the highest water quality, it is essential to
+      use high-quality replacement filters.
+    </p>
+
+    <p>
+      These filters are specifically engineered to effectively remove harmful
+      contaminants such as chlorine, heavy metals, and other impurities that
+      can affect both the taste and safety of your drinking water.
+    </p>
+
+    <p>
+      By regularly replacing your ionizer’s filters, you can enjoy consistently
+      pure and refreshing water with enhanced ionization efficiency.
+    </p>
+  </div>
 </div>

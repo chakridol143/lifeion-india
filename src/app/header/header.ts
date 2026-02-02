@@ -125,7 +125,7 @@ onNavClick(): void {
 // }
 
 goToProduct(product: any): void {
-  if (!product || !product.product_id || !product.menu_type_id) {
+  if (!product?.product_id || !product?.menu_type_id) {
     console.warn('Not a product click, ignoring:', product);
     return;
   }
@@ -142,6 +142,7 @@ goToProduct(product: any): void {
 
   console.error('Unknown product menu type', product);
 }
+
 
 
 
