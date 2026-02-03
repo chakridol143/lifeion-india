@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { CategoryService, Category, Product } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
-import { ASSETS_BASE_URL } from '../config/api.config';
+import { ASSETS_BASE_URL, resolveAssetUrl } from '../config/api.config';
 
 @Component({
   selector: 'app-header',
@@ -102,8 +102,6 @@ onNavClick(): void {
 }
 
 
-
- 
 // goToProduct(product: any): void {
 
 //   this.showMegaMenu = false;
@@ -295,6 +293,10 @@ onIonizerLeave(): void {
       return 'accessories';
     }
     return 'mxl';
+  }
+
+  resolveImageUrl(imageUrl?: string): string {
+    return resolveAssetUrl(imageUrl);
   }
 
 onIonizerCategoryHover(categoryId: number): void {

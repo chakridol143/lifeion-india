@@ -23,7 +23,7 @@
       <div class="product-card" *ngFor="let p of products">
         <img
           *ngIf="p.image_url"
-          [src]="'/assets/images/' + p.image_url"
+          [src]="resolveImageUrl(p.image_url)"
           alt=""
         />
         <p>{{ p.name }}</p>

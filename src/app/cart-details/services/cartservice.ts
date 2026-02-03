@@ -2,6 +2,7 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { API_BASE_URL } from "../../config/api.config";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CartService {
   private cartSubject = new BehaviorSubject<any[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  private apiUrl = 'http://lifeion-backend-production.up.railway.app/assets/images/';
+  private apiUrl = `${API_BASE_URL}/api/cart`;
 
   private readonly RECENT_KEY = 'recently_viewed_products';
   private readonly MAX_ITEMS = 8;

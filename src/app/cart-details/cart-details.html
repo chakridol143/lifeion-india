@@ -6,7 +6,7 @@
 
   <ul *ngIf="items.length > 0" class="items-list">
     <li *ngFor="let item of items; let i = index" class="cart-item">
-      <img [src]="'http://lifeion-backend-production.up.railway.app/assets/images/' + item.image_url">
+      <img [src]="resolveImageUrl(item.image_url)" alt="" />
 
       <div class="info">
         <div class="name">{{ item.name }}</div>

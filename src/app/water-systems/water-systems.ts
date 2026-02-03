@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
+import { resolveAssetUrl } from '../config/api.config';
 
 @Component({
   selector: 'app-water-systems',
@@ -16,6 +17,7 @@ export class WaterSystems implements OnInit {
   products: any[] = [];
   activeCategoryId: number | null = null;
   isWaterLoading = false;
+  resolveImageUrl = resolveAssetUrl;
 
   constructor(
     private categoryService: CategoryService,
