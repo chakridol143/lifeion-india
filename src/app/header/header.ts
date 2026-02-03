@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { CategoryService, Category, Product } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
+import { ASSETS_BASE_URL } from '../config/api.config';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header implements OnInit {
+  assetsBaseUrl = ASSETS_BASE_URL;
 
   /* ===== MEGA MENU DATA ===== */
   showMegaMenu = false;
@@ -47,7 +49,7 @@ navItems = [
 
  {
   label: 'Water Systems',
-  route: null,
+  route: "/water-systems",
   submenu: null, 
 },
 
@@ -231,10 +233,11 @@ onCategoryHover(categoryId: number): void {
 
 /* ===== IONIZER FILTERS ===== */
 ionizerCategories: Category[] = [];
-ionizerProducts: Product[] = [];
-activeIonizerCategoryId: number | null = null;
-showIonizerMenu = false;
-ionizerProductsMap: { [categoryId: number]: Product[] } = {};
+  ionizerProducts: Product[] = [];
+  activeIonizerCategoryId: number | null = null;
+  showIonizerMenu = false;
+  ionizerProductsMap: { [categoryId: number]: Product[] } = {};
+  private ionizerCloseTimeout: ReturnType<typeof setTimeout> | null = null;
 
 
 loadIonizerFilters(): void {
@@ -249,12 +252,16 @@ loadIonizerFilters(): void {
     });
 }
 
-onIonizerEnter(): void {
-  this.showIonizerMenu = true;
+  onIonizerEnter(): void {
+    if (this.ionizerCloseTimeout) {
+      clearTimeout(this.ionizerCloseTimeout);
+      this.ionizerCloseTimeout = null;
+    }
+    this.showIonizerMenu = true;
 
-  if (this.ionizerCategories.length === 0) {
-    this.categoryService.getIonizerFilterCategories().subscribe(cats => {
-      this.ionizerCategories = cats;
+    if (this.ionizerCategories.length === 0) {
+      this.categoryService.getIonizerFilterCategories().subscribe(cats => {
+        this.ionizerCategories = cats;
 
       cats.forEach(cat => {
         this.productService
@@ -264,15 +271,31 @@ onIonizerEnter(): void {
           });
       });
     });
+    }
   }
-}
 
 
 onIonizerLeave(): void {
-  this.showIonizerMenu = false;
-  this.ionizerProducts = [];
-  this.activeIonizerCategoryId = null;
+  this.ionizerCloseTimeout = setTimeout(() => {
+    this.showIonizerMenu = false;
+    this.ionizerProducts = [];
+    this.activeIonizerCategoryId = null;
+  }, 150);
 }
+
+  getIonizerCollectionSlug(name: string | undefined): string {
+    const normalized = (name ?? '').toLowerCase();
+    if (normalized.includes('7500') || normalized.includes('7600') || normalized.includes('8000')) {
+      return 'series-7500-7600-8000';
+    }
+    if (normalized.includes('7700') || normalized.includes('9000') || normalized.includes('next')) {
+      return 'series-7700-9000-next-gen';
+    }
+    if (normalized.includes('access')) {
+      return 'accessories';
+    }
+    return 'mxl';
+  }
 
 onIonizerCategoryHover(categoryId: number): void {
   if (this.activeIonizerCategoryId === categoryId) return;

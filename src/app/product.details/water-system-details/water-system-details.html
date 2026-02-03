@@ -6,7 +6,7 @@
   <!-- MAIN IMAGE -->
   <div class="main-image">
     <img
-      [src]="'http://localhost:3000/assets/images/' + selectedImage"
+      [src]="assetsBaseUrl + '/' + selectedImage"
       alt="product image"
     />
 
@@ -19,7 +19,7 @@
   <div class="thumbnail-row">
     <img
       *ngFor="let img of images; let i = index"
-      [src]="'http://localhost:3000/assets/images/' + img"
+      [src]="assetsBaseUrl + '/' + img"
       (click)="selectImage(img, i)"
       [class.active]="selectedImage === img"
     />

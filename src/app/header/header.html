@@ -65,7 +65,12 @@
     Ionizer Filters <i class="bx bx-chevron-down"></i>
   </a>
 
-  <div class="mega-menu ionizer-layout" *ngIf="showIonizerMenu">
+  <div
+    class="mega-menu ionizer-layout"
+    *ngIf="showIonizerMenu"
+    (mouseenter)="onIonizerEnter()"
+    (mouseleave)="onIonizerLeave()"
+  >
 
     <div
       class="ionizer-column"
@@ -75,10 +80,15 @@
       <div class="ionizer-title">
         <img
           *ngIf="cat.image_url"
-          [src]="'http://localhost:3000/assets/images/' + cat.image_url"
+          [src]="assetsBaseUrl + '/' + cat.image_url"
           alt=""
         />
-        <span>{{ cat.name }}</span>
+        <a
+          [routerLink]="['/product-details']"
+          [queryParams]="{ collection: getIonizerCollectionSlug(cat.name) }"
+        >
+          <span>{{ cat.name }}</span>
+        </a>
       </div>
 
       <!-- PRODUCTS -->
@@ -130,7 +140,7 @@
         <!-- show image only if exists -->
         <img
           *ngIf="cat.image_url"
-          [src]="'http://localhost:3000/assets/images/' + cat.image_url"
+          [src]="assetsBaseUrl + '/' + cat.image_url"
           alt=""
         />
 
@@ -151,7 +161,7 @@
       >
         <img
           *ngIf="p.image_url"
-          [src]="'http://localhost:3000/assets/images/' + p.image_url"
+          [src]="assetsBaseUrl + '/' + p.image_url"
           alt=""
         />
         <p>{{ p.name }}</p>

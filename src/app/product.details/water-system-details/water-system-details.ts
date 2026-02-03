@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../water-systems/product.service';
+import { ASSETS_BASE_URL } from '../../config/api.config';
 
 @Component({
   selector: 'app-water-system-details',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './water-system-details.html',
   styleUrl: './water-system-details.css',
 })
@@ -13,6 +16,7 @@ export class WaterSystemDetails implements OnInit {
   product: any;
   images: string[] = [];
   selectedImage = '';
+  assetsBaseUrl = ASSETS_BASE_URL;
   
   currentIndex = 0;
 

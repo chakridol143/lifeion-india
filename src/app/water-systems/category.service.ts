@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+
 import { ProductsResponse } from './product.service';
+import { API_BASE_URL } from '../config/api.config';
 
 export interface Product {
   product_id: number;
@@ -19,12 +21,10 @@ export interface Category {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-
-  // ✅ FIXED: http (NOT https)
-  private apiUrl = 'http://localhost:3000/api/categories';
+  private apiUrl = `${API_BASE_URL}/api/categories`;
 
   private categorySubject = new Subject<number>();
   categorySelected$ = this.categorySubject.asObservable();
@@ -39,28 +39,17 @@ export class CategoryService {
     return this.http.get<Category[]>(this.apiUrl);
   }
 
-//  getProductsByCategory(categoryId: number) {
-//   return this.http.get<{ success: boolean; products: any[] }>(
-//     `${this.apiUrl}/${categoryId}/products`
-//   );
-// }
-getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
-  return this.http.get<ProductsResponse>(
-    `http://localhost:3000/api/categories/${categoryId}/products`
-  );
-}
-
-getIonizerFilterCategories() {
-  return this.http.get<any[]>(
-    'http://localhost:3000/api/categories/menu/1'
-  );
-}
-getWaterSystemCategories(): Observable<Category[]> {
-  return this.http.get<Category[]>(
-    'http://localhost:3000/api/categories/menu/2'
-  );
-}
-
-
+  getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `${API_BASE_URL}/api/categories/${categoryId}/products`
+    );
   }
 
+  getIonizerFilterCategories() {
+    return this.http.get<any[]>(`${API_BASE_URL}/api/categories/menu/1`);
+  }
+
+  getWaterSystemCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${API_BASE_URL}/api/categories/menu/2`);
+  }
+}

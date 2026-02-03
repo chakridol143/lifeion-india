@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { API_BASE_URL } from '../config/api.config';
+
 export interface ProductsResponse {
   success: boolean;
   products: any[];
@@ -9,26 +11,21 @@ export interface ProductsResponse {
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-
-  private apiUrl = 'http://localhost:3000/api/products';
+  private apiUrl = `${API_BASE_URL}/api/products`;
 
   constructor(private http: HttpClient) {}
-getAll() {
+
+  getAll() {
     return this.http.get(this.apiUrl);
   }
 
-  // getById(id: number): Observable<any> {
-  //   return this.http.get(`${this.apiUrl}/${id}`);
-  // }
   getById(id: number): Observable<any> {
-  return this.http.get(`http://localhost:3000/api/products/${id}`);
-}
+    return this.http.get(`${API_BASE_URL}/api/products/${id}`);
+  }
 
-
-getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
-  return this.http.get<ProductsResponse>(
-    `http://localhost:3000/api/categories/${categoryId}/products`
-  );
-}
-
+  getProductsByCategory(categoryId: number): Observable<ProductsResponse> {
+    return this.http.get<ProductsResponse>(
+      `${API_BASE_URL}/api/categories/${categoryId}/products`
+    );
+  }
 }

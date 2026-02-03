@@ -1,0 +1,97 @@
+<div class="collection-page">
+  <!-- HERO -->
+  <section class="collection-hero">
+    <div class="hero-text">
+      <h1>{{ hero.title }}</h1>
+      <p class="hero-subtitle">{{ hero.subtitle }}</p>
+      <p class="hero-description">{{ hero.description }}</p>
+    </div>
+  </section>
+
+  <!-- TOOLBAR -->
+  <section class="collection-toolbar">
+    <div class="toolbar-left">
+      <button class="toolbar-btn">Filter</button>
+      <span class="toolbar-label">Filter & Sort</span>
+    </div>
+
+    <div class="toolbar-center">
+      <span class="toolbar-count">{{ products.length }} products</span>
+    </div>
+
+    <div class="toolbar-right">
+      <label for="sortSelect">Sort by</label>
+      <select id="sortSelect" class="toolbar-select">
+        <option *ngFor="let option of toolbar.sortOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+  </section>
+
+  <!-- PRODUCT GRID -->
+  <section class="product-grid">
+    <article class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.image" [alt]="product.name" />
+        <span *ngIf="product.badge" class="product-badge">{{ product.badge }}</span>
+      </div>
+
+      <div class="product-info">
+        <h3>{{ product.name }}</h3>
+        <p class="product-price">${{ product.price }}</p>
+        <button class="add-btn">Add to cart</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- IMAGE + TEXT SECTION -->
+  <section class="split-section">
+    <div class="split-image">
+      <img [src]="qualitySection.image" alt="Life Ionizer Filters" />
+    </div>
+    <div class="split-text">
+      <h2>{{ qualitySection.title }}</h2>
+      <p>{{ qualitySection.description }}</p>
+      <p>{{ qualitySection.detail }}</p>
+    </div>
+  </section>
+
+  <!-- CENTERED WHY SECTION -->
+  <section class="why-center">
+    <h2>{{ whySection.title }}</h2>
+    <p>{{ whySection.description }}</p>
+    <p class="why-note">{{ whySection.note }}</p>
+  </section>
+
+  <!-- RANGE CARDS -->
+  <section class="range-section">
+    <h2>Check Out Our Range of Life Ionizer Filters</h2>
+    <div class="range-grid">
+      <article class="range-card" *ngFor="let card of rangeCards">
+        <img [src]="card.image" [alt]="card.title" />
+        <h3>{{ card.title }}</h3>
+        <button class="outline-btn">{{ card.button }}</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="split-section reverse">
+    <div class="split-text">
+      <h2>{{ processSection.title }}</h2>
+      <p>{{ processSection.description }}</p>
+      <h3>{{ processSection.subTitle }}</h3>
+      <p>{{ processSection.subDescription }}</p>
+    </div>
+    <div class="split-image">
+      <img [src]="processSection.image" alt="Filters in use" />
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-dark">
+    <h2>{{ ctaSection.title }}</h2>
+    <p>{{ ctaSection.description }}</p>
+  </section>
+</div>

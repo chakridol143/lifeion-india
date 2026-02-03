@@ -33,6 +33,7 @@ import { WaterSystemDetails } from './product.details/water-system-details/water
 export const routes: Routes = [
   { path: '', component: Home },
 
+  { path: 'product-details', component: ProductDetails },
  
   { path: 'water-systems', component: WaterSystems },
   
@@ -62,6 +63,11 @@ export const routes: Routes = [
       .then(m => m.WaterSystems),
 },
 // { path: 'product/:id', component: ProductDetails },
+  {
+    path: 'product-details',
+    loadComponent: () =>
+      import('./product.details/product.details').then(m => m.ProductDetails),
+  },
 //  { path: '', redirectTo: '/', pathMatch: 'full' },
 // {path: 'lonizer-filters', component: IonizerFilterDetails},
 
