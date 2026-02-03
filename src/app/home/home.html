@@ -102,7 +102,7 @@
 </section>
 
 <!-- POPULAR CATEGORIES SECTION -->
-<section class="categories-section">
+<!-- <section class="categories-section">
   <h2>Popular Categories</h2>
   
   <div class="categories-grid">
@@ -124,7 +124,7 @@
       <button class="view-btn">View Products</button>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- POPULAR PRODUCTS SECTION -->
 <section class="products-section">
@@ -146,7 +146,14 @@
           <p class="price">${{ product.price }}</p>
           <p class="emi">EMI Starts at ${{ product.emi }} / month</p>
         </div>
-        <button class="view-product-btn">View Product</button>
+        
+         <button
+  class="view-product-btn"
+  (click)="viewProduct(product)"
+>
+  Button sudu thambi
+</button>
+
       </div>
     </div>
     

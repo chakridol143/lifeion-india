@@ -433,21 +433,35 @@ html, body {
 }
 
 .view-product-btn {
+  display: inline-block;
   width: 100%;
-  padding: 10px;
-  background: #00b3da;
-  color: #fff;
+  padding: 12px 16px;
+
+  background-color: #00b3da;
+  color: #ffffff;
+
   border: none;
   border-radius: 6px;
+
+  font-size: 14px;
   font-weight: 600;
-  font-size: 12px;
+  text-align: center;
+
   cursor: pointer;
-  transition: background 0.3s ease;
+  user-select: none;
+
+  position: relative;
+  z-index: 1;
 }
 
 .view-product-btn:hover {
-  background: #0099b8;
+  background-color: #0099b8;
 }
+
+.view-product-btn:active {
+  transform: scale(0.98);
+}
+
 
 /* ==================== */
 /* BENEFITS SHOWCASE SECTION */

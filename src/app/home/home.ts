@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../water-systems/product.service';
+import { Router } from '@angular/router';
 
 interface Review {
   title: string;
@@ -38,7 +40,81 @@ interface Product {
 })
 export class Home implements OnInit {
   activeTab: 'athletes' | 'customers' = 'athletes';
+products: any[] = [];
+currentIndex = 0;
 
+
+constructor(
+  private productService: ProductService,
+  private router: Router
+) {}
+
+
+viewProduct(product: any) {
+  console.log('BUTTON CLICKED', product);
+
+  if (product.menuTypeId === 1) {
+    // Ionizer Filter details page
+    this.router.navigate(['/product/ionizer', product.id]);
+  }
+  else if (product.menuTypeId === 2) {
+    // Water System details page
+    this.router.navigate(['/product/water-system', product.id]);
+  }
+  else {
+    console.warn('Unknown menuTypeId:', product.menuTypeId);
+  }
+}
+
+
+
+ngOnInit(): void {
+  this.productService.getAll().subscribe((res: any) => {
+    console.log('API RESPONSE 👉', res);
+
+    const productsArray = Array.isArray(res)
+      ? res
+      : res.products;
+
+    if (!Array.isArray(productsArray)) {
+      console.error('Products is not an array:', res);
+      return;
+    }
+
+    this.products = productsArray.map((p: any) => ({
+      id: p.product_id,
+      name: p.name,
+      price: p.price,
+      menuTypeId: p.menu_type_id,
+      image: p.image_url
+        ? 'http://localhost:3000/assets/images/' + p.image_url
+        : 'assets/images/placeholder.png'
+    }));
+  });
+}
+
+
+   nextProduct() {
+    this.currentIndex++;
+    this.scrollToIndex();
+  }
+
+  prevProduct() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.scrollToIndex();
+    }
+  }
+
+  scrollToIndex() {
+    const container = document.querySelector('.products-container');
+    if (container) {
+      container.scrollTo({
+        left: this.currentIndex * 300,
+        behavior: 'smooth'
+      });
+    }
+  }
   // Reviews data
   reviews: Review[] = [
     {
@@ -181,29 +257,7 @@ export class Home implements OnInit {
   ];
 
   // Products data
-  products: Product[] = [
-    {
-      name: 'Best Value Ionizer Core MXL-5™ Alkaline Water Hydrogen Machine - Counter Top',
-      image: '/images/mxlseries.avif',
-      price: 1697,
-      emi: 39.97,
-      reviews: 34
-    },
-    {
-      name: 'Strongest Ionizer Supreme MXL-9™ Alkaline Water Hydrogen Machine - Counter Top',
-      image: '/images/mxlseries.avif',
-      price: 2697,
-      emi: 69.36,
-      reviews: 46
-    },
-    {
-      name: "World's Most Powerful Ionizer Apex MXL-15™ Under Counter Hydrogen Water Alkaline Machine",
-      image: '/images/MXL-15_Undercounter_308x208_crop_center.avif',
-      price: 4697,
-      emi: 111.02,
-      reviews: 55
-    }
-  ];
+
 
   // Form data for financing
   financingForm = {
@@ -233,9 +287,9 @@ export class Home implements OnInit {
     { value: 'both', label: 'Both' },
   ];
 
-  ngOnInit(): void {
-    console.log('[v0] Home component initialized with all sections');
-  }
+  // ngOnInit(): void {
+  //   console.log('[v0] Home component initialized with all sections');
+  // }
 
   // Review carousel navigation
   prevReview(): void {
@@ -256,13 +310,7 @@ export class Home implements OnInit {
   }
 
   // Product carousel navigation
-  prevProduct(): void {
-    this.products.push(this.products.shift()!);
-  }
 
-  nextProduct(): void {
-    this.products.unshift(this.products.pop()!);
-  }
 
   // Handle financing form submission
   onFinancingSubmit(): void {
