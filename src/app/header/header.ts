@@ -273,13 +273,23 @@ loadIonizerFilters(): void {
   }
 
 
-onIonizerLeave(): void {
+  onIonizerLeave(): void {
   this.ionizerCloseTimeout = setTimeout(() => {
     this.showIonizerMenu = false;
     this.ionizerProducts = [];
     this.activeIonizerCategoryId = null;
   }, 150);
 }
+
+  closeIonizerMenu(): void {
+    if (this.ionizerCloseTimeout) {
+      clearTimeout(this.ionizerCloseTimeout);
+      this.ionizerCloseTimeout = null;
+    }
+    this.showIonizerMenu = false;
+    this.ionizerProducts = [];
+    this.activeIonizerCategoryId = null;
+  }
 
   getIonizerCollectionSlug(name: string | undefined): string {
     const normalized = (name ?? '').toLowerCase();

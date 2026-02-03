@@ -86,6 +86,7 @@
         <a
           [routerLink]="['/product-details']"
           [queryParams]="{ collection: getIonizerCollectionSlug(cat.name) }"
+          (click)="closeIonizerMenu()"
         >
           <span>{{ cat.name }}</span>
         </a>
