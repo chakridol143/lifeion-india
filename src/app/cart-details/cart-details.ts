@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from './services/cartservice';
+import { resolveAssetUrl } from '../config/api.config';
 
 @Component({
   selector: 'app-cart-details',
@@ -19,6 +20,7 @@ export class CartDetails {
   @Output() close = new EventEmitter<void>();
   @Output() clear = new EventEmitter<void>();
   @Output() remove = new EventEmitter<number>();
+  resolveImageUrl = resolveAssetUrl;
 
   constructor(private router: Router,private cart : CartService) {}
 

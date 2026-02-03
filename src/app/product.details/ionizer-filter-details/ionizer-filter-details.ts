@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProductService } from '../../water-systems/product.service';
 import { CartService } from '../../cart-details/services/cartservice';
-import { ASSETS_BASE_URL } from '../../config/api.config';
+import { resolveAssetUrl } from '../../config/api.config';
 
 @Component({
   selector: 'app-ionizer-filter-details',
@@ -19,7 +19,7 @@ export class IonizerFilterDetails implements OnInit {
   startIndex = 0;
   visibleCount = 4;
   activeId: number | null = null;
-  assetsBaseUrl = ASSETS_BASE_URL;
+  resolveImageUrl = resolveAssetUrl;
 
   constructor(
     private route: ActivatedRoute,

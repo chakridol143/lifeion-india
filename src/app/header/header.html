@@ -80,7 +80,7 @@
       <div class="ionizer-title">
         <img
           *ngIf="cat.image_url"
-          [src]="assetsBaseUrl + '/' + cat.image_url"
+          [src]="resolveImageUrl(cat.image_url)"
           alt=""
         />
         <a
@@ -110,7 +110,6 @@
         </li>
       </ul>
     </div>
-
   </div>
 </div>
 
@@ -140,7 +139,7 @@
         <!-- show image only if exists -->
         <img
           *ngIf="cat.image_url"
-          [src]="assetsBaseUrl + '/' + cat.image_url"
+          [src]="resolveImageUrl(cat.image_url)"
           alt=""
         />
 
@@ -161,7 +160,7 @@
       >
         <img
           *ngIf="p.image_url"
-          [src]="assetsBaseUrl + '/' + p.image_url"
+          [src]="resolveImageUrl(p.image_url)"
           alt=""
         />
         <p>{{ p.name }}</p>
