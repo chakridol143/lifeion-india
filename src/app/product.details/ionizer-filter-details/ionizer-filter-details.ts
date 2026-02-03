@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../../water-systems/product.service';
+import { CartService } from '../../cart-details/services/cartservice';
 
 @Component({
   selector: 'app-ionizer-filter-details',
@@ -19,7 +20,8 @@ export class IonizerFilterDetails implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +81,18 @@ export class IonizerFilterDetails implements OnInit {
 
   toggle(id: number) {
     this.activeId = this.activeId === id ? null : id;
+  }
+
+    addToCart() {
+    if (!this.product) return;
+
+    this.cartService.addToCart({
+      product_id: this.product.product_id,
+      name: this.product.name,
+      price: this.product.price,
+      image_url: this.product.image_url,
+      quantity: this.quantity
+    });
   }
 }
 
