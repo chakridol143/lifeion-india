@@ -29,11 +29,18 @@ import { ProductDetails } from './product.details/product.details';
 import { IonizerFilterDetails } from './product.details/ionizer-filter-details/ionizer-filter-details';
 import { WaterSystemDetails } from './product.details/water-system-details/water-system-details';
 
+import { Logout } from './logout/logout';
+import { Register } from './register/register';
+import { login } from './login/login';
+
 
 export const routes: Routes = [
   { path: '', component: Home },
 
   { path: 'product-details', component: ProductDetails },
+  { path: 'login', component: login },
+   { path: 'logout', component: Logout },
+    { path: 'register', component: Register },
  
   { path: 'water-systems', component: WaterSystems },
   
@@ -104,7 +111,7 @@ export const routes: Routes = [
       { path: 'blog/:slug', component: BlogDetailComponent },
       { path: 'support', component: Support },
       { path: 'free-water-report', component: FreeWaterReport },
-      { path: '', redirectTo: 'studies', pathMatch: 'full' }
+      { path: '', redirectTo: 'studies', pathMatch: 'full' },
     ]
     
   }

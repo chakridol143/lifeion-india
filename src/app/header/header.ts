@@ -9,6 +9,7 @@ import { ASSETS_BASE_URL, resolveAssetUrl } from '../config/api.config';
 // import { ASSETS_BASE_URL } from '../config/api.config';
 import { CartService } from '../cart-details/services/cartservice';
 import { CartDetails } from '../cart-details/cart-details';
+import { LoginService } from '../login/services/loginservices';
 
 @Component({
   selector: 'app-header',
@@ -27,6 +28,7 @@ export class Header implements OnInit {
  activeCategoryId: number | null = null;
  isIonizerLoading = false;
  waterSystemCategories: Category[] = [];
+user: any = null;
 
 
 
@@ -45,7 +47,8 @@ export class Header implements OnInit {
     private categoryService: CategoryService,
     private productService: ProductService,
     private router: Router,
-    private cart: CartService
+    private cart: CartService,
+    private auth: LoginService
     
   ) {}
 navItems = [
@@ -181,6 +184,10 @@ ngOnInit() {
 
   this.categoryService.getAllCategories().subscribe(res => {
     this.categories = res;
+  });
+
+  this.auth.userState$.subscribe(user => {
+    this.user = user;
   });
 }
 /* ===== WATER SYSTEMS ===== */
@@ -367,6 +374,15 @@ showCartPopup = false;
     this.cart.clearCart();
   }
     
+goToLogin(): void {
+  this.router.navigate(['/login']);
+}
+
+logoutUser(): void {
+  this.auth.logout();
+  this.user = null;
+  this.router.navigate(['/']);
+}
 
   
 }

@@ -26,7 +26,22 @@
     <div class="icon-circle mobile-search-icon" (click)="openSearch()">
       <i class="bx bx-search"></i>
     </div>
-    <div class="icon-circle"><i class="bx bx-user"></i></div>
+    <!-- <div class="icon-circle"><i class="bx bx-user"></i></div> -->
+
+    <!-- LOGIN ICON -->
+<ng-container *ngIf="!user">
+  <div class="icon-circle" (click)="goToLogin()">
+    <i class="bx bx-user"></i>
+  </div>
+</ng-container>
+
+<!-- LOGOUT -->
+<ng-container *ngIf="user">
+  <div class="icon-circle logout" (click)="logoutUser()">
+    <i class="bx bx-log-out"></i>
+  </div>
+</ng-container>
+
     <!-- <div class="icon-circle cart"><i class="bx bx-cart"></i></div> -->
  <div class="icon-circle cart" (click)="toggleCartDetails()"><i class="bx bx-cart"></i>
     
