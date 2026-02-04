@@ -24,9 +24,23 @@ export class CartDetails {
 
   constructor(private router: Router,private cart : CartService) {}
 
-   getTotal(): number {
-    return this.items.reduce((sum, it) => sum + (Number(it.price || 0) * (it.quantity || 1)), 0);
-  }
+  getItemPrice(price: any): number {
+  if (!price) return 0;
+  return Number(String(price).replace(/,/g, ''));
+}
+
+getTotal(): number {
+  return this.items.reduce((sum, item) => {
+    const price = this.getItemPrice(item.price);
+    const qty = item.quantity ?? 1;
+    return sum + price * qty;
+  }, 0);
+}
+
+
+  //  getTotal(): number {
+  //   return this.items.reduce((sum, it) => sum + (Number(it.price || 0) * (it.quantity || 1)), 0);
+  // }
 
   onRemove(index: number) {
     this.remove.emit(index);
@@ -45,21 +59,21 @@ export class CartDetails {
     this.
     close.emit();
   }
-  incQty(index: number) {
+  
+ incQty(index: number) {
   const item = this.items[index];
-  if (item) {
-    item.quantity = (item.quantity || 1) + 1;
-    this.cart.updateQuantity(item.cart_item_id, item.quantity);
+  if (!item) return;
 
-  }
+  item.quantity = (item.quantity ?? 1) + 1;
+  this.cart.updateQuantity(item.cart_item_id, item.quantity);
 }
 
 decQty(index: number) {
   const item = this.items[index];
-  if (item && item.quantity > 1) {
-    item.quantity--;
-    this.cart.updateQuantity(item.cart_item_id, item.quantity);
+  if (!item || item.quantity <= 1) return;
 
-  }
+  item.quantity -= 1;
+  this.cart.updateQuantity(item.cart_item_id, item.quantity);
 }
+
 }

@@ -36,7 +36,9 @@
 
     <p class="price">${{ product.price }}</p>
 
-    <button class="add-cart">Add to cart</button>
+    <!-- <button class="add-cart">Add to cart</button> -->
+     <button class="add-cart" (click)="addToCart()">Add to cart</button>
+
 
     <p class="desc">{{ product.description }}</p>
 
