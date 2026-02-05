@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -6,11 +6,15 @@ import { FormsModule } from '@angular/forms';
 import { CategoryService, Category, Product } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
 import { ASSETS_BASE_URL, resolveAssetUrl } from '../config/api.config';
+// import { ASSETS_BASE_URL } from '../config/api.config';
+import { CartService } from '../cart-details/services/cartservice';
+import { CartDetails } from '../cart-details/cart-details';
+import { LoginService } from '../login/services/loginservices';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule, CartDetails],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
@@ -24,6 +28,7 @@ export class Header implements OnInit {
  activeCategoryId: number | null = null;
  isIonizerLoading = false;
  waterSystemCategories: Category[] = [];
+user: any = null;
 
 
 
@@ -41,7 +46,9 @@ export class Header implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private cart: CartService,
+    private auth: LoginService
     
   ) {}
 navItems = [
@@ -163,12 +170,26 @@ goToProduct(product: any): void {
     this.closeSearch();
   }
 }
-ngOnInit() {
-    this.categoryService.getAllCategories().subscribe(res => {
-      this.categories = res;
-    });
-  }
+// ngOnInit() {
+//     this.categoryService.getAllCategories().subscribe(res => {
+//       this.categories = res;
+//     });
+//   }
 
+ngOnInit() {
+  this.cart.cart$.subscribe(items => {
+    this.items = items;
+    this.cartCount = items.length;
+  });
+
+  this.categoryService.getAllCategories().subscribe(res => {
+    this.categories = res;
+  });
+
+  this.auth.userState$.subscribe(user => {
+    this.user = user;
+  });
+}
 /* ===== WATER SYSTEMS ===== */
 
 
@@ -323,6 +344,45 @@ onIonizerCategoryHover(categoryId: number): void {
     });
 }
 
+@Input() cartCount: number = 0;
+   @Input() items: any[] = [];
+showCartPopup = false;
 
+ toggleCartDetails() {
+    this.showCartPopup = !this.showCartPopup;
+  }
 
+   closeDetails() {
+    this.showCartPopup = false;
+  }
+
+  // cartItemRemove(index: number) {
+  //   const token = sessionStorage.getItem('token') ?? undefined;
+  //   const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+  //   const user_Id = user.user_id || user.id;
+  //   this.cart.removeFromCart(index, user_Id, token);
+  // }
+
+  cartItemRemove(index: number) {
+    const token = sessionStorage.getItem('token') ?? undefined;
+    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    const user_Id = user.user_id || user.id;
+    this.cart.removeFromCart(index, user_Id, token);
+  }
+  
+   handleClear() {
+    this.cart.clearCart();
+  }
+    
+goToLogin(): void {
+  this.router.navigate(['/login']);
+}
+
+logoutUser(): void {
+  this.auth.logout();
+  this.user = null;
+  this.router.navigate(['/']);
+}
+
+  
 }

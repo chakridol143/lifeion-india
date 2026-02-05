@@ -11,9 +11,9 @@
   top: 0;
   right: 0;
   width: 420px;
-  height: 100vh;
+  height: 95vh;
   background: #ffffff;
-  z-index: 999;
+  z-index: 9999;
   margin-top: 3%;
   padding: 28px 26px;
   display: flex;

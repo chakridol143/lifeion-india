@@ -87,15 +87,26 @@ export class IonizerFilterDetails implements OnInit {
     this.activeId = this.activeId === id ? null : id;
   }
 
-  addToCart() {
-    if (!this.product) return;
+  // addToCart() {
+  //   if (!this.product) return;
 
-    this.cartService.addToCart({
-      product_id: this.product.product_id,
-      name: this.product.name,
-      price: this.product.price,
-      image_url: this.product.image_url,
-      quantity: this.quantity,
-    });
-  }
+  //   this.cartService.addToCart({
+  //     product_id: this.product.product_id,
+  //     name: this.product.name,
+  //     price: this.product.price,
+  //     image_url: this.product.image_url,
+  //     quantity: this.quantity,
+  //   });
+  // }
+
+  addToCart() {
+  this.cartService.addToCart({
+    product_id: this.product.product_id,
+    name: this.product.name,
+    price: this.product.price,
+    image_url: this.product.image_url,
+    quantity: this.quantity
+  });
+}
+
 }
