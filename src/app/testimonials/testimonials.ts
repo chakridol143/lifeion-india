@@ -14,7 +14,7 @@ interface Testimonial {
 @Component({
   selector: 'app-testimonials',
   standalone: true,
-  imports: [CommonModule,RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './testimonials.html',
   styleUrls: ['./testimonials.css']
 })

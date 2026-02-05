@@ -1,4 +1,3 @@
-
 .cart-overlay {
   position: fixed;
   inset: 0;
@@ -6,22 +5,376 @@
   z-index: 998;
 }
 
+/* Base Cart Page (Desktop Default - Side by Side) */
 .cart-page {
   position: fixed;
   top: 0;
   right: 0;
-  width: 420px;
-  height: 95vh;
+  width: 900px;
+  /* Wide drawer for Side-by-Side */
+  max-width: 90vw;
+  height: 100vh;
   background: #ffffff;
   z-index: 9999;
-  margin-top: 3%;
-  padding: 28px 26px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
-
+  /* Main container column, internal grid/flex */
   box-shadow: -10px 0 35px rgba(0, 0, 0, 0.18);
-
   animation: cartSlideIn 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-content-wrapper {
+  /* Virtual wrapper logic via CSS or if I added HTML, but sticking to CSS Grid on .cart-page might be tricky if I don't change HTML structure. 
+                           HTML is: h2, close-btn, empty, ul, footer. 
+                           I'll use Grid on .cart-page to place them. */
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 30px;
+  height: 100%;
+}
+
+/* Re-targeting HTML elements for Grid Layout (Desktop) */
+/* 
+   Structure:
+   .cart-page
+     > h2
+     > .close-btn
+     > .empty
+     > .items-list
+     > .footer
+*/
+
+/* Desktop Grid Layout Application */
+@media (min-width: 901px) {
+  .cart-page {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    /* Items | Summary */
+    grid-template-rows: auto 1fr;
+    /* Header | Content */
+    grid-template-areas:
+      "header header"
+      "items summary";
+    gap: 0 40px;
+    align-items: start;
+  }
+
+  .cart-page h2 {
+    grid-area: header;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
+  .items-list {
+    grid-area: items;
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 20px;
+    border-right: 1px solid #eee;
+  }
+
+  .footer {
+    grid-area: summary;
+    border-top: none;
+    padding-top: 0;
+    align-self: start;
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+  }
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-controls button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-controls button:hover {
+  background: #f0f0f0;
+  color: #000;
+}
+
+.quantity-controls span {
+  min-width: 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #222;
+}
+
+@keyframes cartSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0.7;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.cart-page h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-item {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #f9f9f9;
+  padding: 5px;
+}
+
+.info {
+  flex: 1;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00b4c6;
+  margin-bottom: 12px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 13px;
+  color: #999;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-left: auto;
+  /* Push to right in flex */
+  align-self: flex-start;
+}
+
+.remove-btn:hover {
+  color: #ff4d4f;
+}
+
+.empty {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  margin-top: 100px;
+  grid-column: 1 / -1;
+}
+
+
+
+.total {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 16px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.clear-btn,
+.checkout-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-btn {
+  border: 1px solid #ddd;
+  background: white;
+  color: #666;
+}
+
+.clear-btn:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.checkout-btn {
+  background: #00b4c6;
+  color: white;
+  border: 1px solid #00b4c6;
+  box-shadow: 0 4px 12px rgba(0, 180, 198, 0.3);
+}
+
+.checkout-btn:hover {
+  background: #0099a8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 180, 198, 0.4);
+}
+
+/* =======================================
+   RESPONSIVE DESIGN (Mobile & Tablet)
+   ======================================= */
+
+/* Tablet & Mobile (< 900px) - Stacked View */
+@media (max-width: 900px) {
+  .cart-page {
+    width: 500px;
+    /* Standard sidebar width */
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    padding-bottom: 0;
+    /* Let footer stick to bottom */
+  }
+
+  .cart-page h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .close-btn {
+    top: 24px;
+    right: 24px;
+  }
+
+  .items-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 20px;
+    border-right: none;
+  }
+
+  .cart-item {
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+  }
+
+  .footer {
+    border-top: 1px solid #eee;
+    padding: 20px 0;
+    padding-bottom: 30px;
+    background: white;
+    /* Sticky footer effect */
+    margin-top: auto;
+  }
+
+  .total {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+}
+
+/* Mobile (< 600px) */
+@media (max-width: 600px) {
+  .cart-page {
+    width: 100%;
+    /* Full screen on mobile */
+    padding: 20px 16px;
+  }
+
+  .cart-item {
+    gap: 12px;
+  }
+
+  .cart-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .name {
+    font-size: 14px;
+  }
+
+  .price {
+    font-size: 14px;
+  }
+
+  .quantity-controls button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .actions {
+    flex-direction: column;
+    /* Stack buttons on small screens */
+  }
 }
 
 .quantity-controls {
@@ -30,6 +383,7 @@
   gap: 10px;
   margin-top: 10px;
 }
+
 .quantity-controls button {
   width: 35px;
   height: 35px;
@@ -60,6 +414,7 @@
     transform: translateX(100%);
     opacity: 0.7;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
@@ -183,12 +538,13 @@
 
 @media (min-width: 360px) and (max-width: 600px) {
 
- 
+
   .cart-overlay {
     background: rgba(0, 0, 0, 0.35);
   }
+
   .cart-page {
-    width:90%;
+    width: 90%;
     height: 100vh;
     top: 0;
     right: 0;
@@ -201,7 +557,7 @@
   }
 
   .cart-page h2 {
-    font-size:20px;
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: 0.5px;
     line-height: 1.3;
@@ -229,14 +585,14 @@
     flex: 1;
     overflow-y: auto;
     padding: 20px 0 150px;
-     scrollbar-width: none;        
-    -ms-overflow-style: none;       
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+    overscroll-behavior: contain;
   }
 
-   .items-list::-webkit-scrollbar {
-    display: none;                
+  .items-list::-webkit-scrollbar {
+    display: none;
   }
 
 
@@ -257,22 +613,24 @@
     border-radius: 0;
     object-fit: cover;
   }
-.info {
-  grid-column: 2;
-  max-width: 100%;
-  overflow: hidden;
-}
-.name {
-  font-size: 10px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  line-height: 1.4;
-  margin-bottom: 6px;
 
-  white-space: nowrap;  
-  overflow: hidden;     
-  text-overflow: clip;   
-}
+  .info {
+    grid-column: 2;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .name {
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: 6px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+  }
 
 
   .price {
@@ -287,7 +645,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 4px;
-   
+
   }
 
   .quantity-controls button {
@@ -307,20 +665,20 @@
   .remove-btn {
     grid-column: 3;
     grid-row: span 2;
-    align-self:center;
+    align-self: center;
     font-size: 12px;
     background: none;
     border: none;
     text-decoration: underline;
     color: #555;
-    margin-right:50px;
+    margin-right: 50px;
   }
 
   .footer {
-    position:absolute;
+    position: absolute;
     bottom: 0;
     left: 0;
-    width:100%;
+    width: 100%;
     background: #fff;
     padding: 14px 16px 20px;
     border-top: 1px solid #eaeaea;

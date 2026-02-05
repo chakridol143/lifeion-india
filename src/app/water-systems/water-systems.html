@@ -1,11 +1,21 @@
 <div class="hover-layout">
 
-  <!-- LEFT CATEGORIES -->
-  <aside class="category-list">
+  <!-- MOBILE FILTER TOGGLE -->
+  <button class="filter-toggle-btn" (click)="toggleMobileFilters()">
+    <i class="bx bx-filter"></i> Filters
+  </button>
+
+  <!-- LEFT CATEGORIES (SIDEBAR) -->
+  <aside class="category-list" [class.mobile-open]="mobileFiltersOpen">
+    <div class="sidebar-header mobile-only">
+      <h3>Filters</h3>
+      <span class="close-sidebar" (click)="closeMobileFilters()">✕</span>
+    </div>
+
     <div
       class="category-item"
       *ngFor="let cat of categories"
-      (mouseenter)="onCategoryHover(cat.category_id)"
+      (click)="onCategoryHover(cat.category_id); closeMobileFilters()" 
       [class.active]="cat.category_id === activeCategoryId"
     >
       <span>{{ cat.name }}</span>
@@ -13,10 +23,13 @@
     </div>
   </aside>
 
+  <!-- OVERLAY BACKDROP -->
+  <div class="sidebar-overlay" *ngIf="mobileFiltersOpen" (click)="closeMobileFilters()"></div>
+
   <!-- RIGHT PRODUCTS -->
   <section class="products-area">
     <div *ngIf="products.length === 0" class="empty">
-      Hover a category to see products
+      Select a category to see products
     </div>
 
     <div class="products-grid" *ngIf="products.length">

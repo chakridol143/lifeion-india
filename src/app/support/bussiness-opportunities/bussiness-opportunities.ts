@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-business-opportunities',
   standalone: true,
-  imports: [CommonModule,RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './bussiness-opportunities.html',
   styleUrl: './bussiness-opportunities.css'
 })
