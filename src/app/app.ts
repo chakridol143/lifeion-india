@@ -12,4 +12,5 @@ import { Whatsapp } from './whatsapp/whatsapp';
 })
 export class App {
   protected readonly title = signal('li-india');
+  
 }

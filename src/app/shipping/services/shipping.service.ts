@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ShippingService {
 
-  private apiUrl = 'http://localhost:3000/api/shipping';
+  private apiUrl =
+    'https://lifeion-backend-production.up.railway.app/api/shipping';
 
   constructor(private http: HttpClient) {}
 
@@ -19,3 +20,4 @@ export class ShippingService {
     return this.http.get(`${this.apiUrl}/user/${userId}`);
   }
 }
+
