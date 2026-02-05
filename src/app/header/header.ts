@@ -196,11 +196,10 @@ ngOnInit() {
 onDropdownHover(): void {
   this.showMegaMenu = true;
 
-  // ✅ use Water Systems specific array
   if (this.waterSystemCategories.length === 0) {
     this.categoryService.getWaterSystemCategories().subscribe(res => {
       this.waterSystemCategories = res;
-      this.categories = res; // bind to U
+      this.categories = res;
 
       if (res.length > 0) {
         this.onCategoryHover(res[0].category_id);
@@ -212,11 +211,30 @@ onDropdownHover(): void {
 }
 
 
+
 onDropdownLeave(): void {
   this.showMegaMenu = false;
   this.products = [];
   this.activeCategoryId = null;
 }
+// onCategoryHover(categoryId: number): void {
+//   if (this.activeCategoryId === categoryId) return;
+
+//   this.activeCategoryId = categoryId;
+
+//   this.productService
+//     .getProductsByCategory(categoryId)
+//     .subscribe({
+//       next: (res: any) => {
+//         console.log('Water Systems API response:', res);
+//         this.products = res?.products ?? [];
+//       },
+//       error: (err) => {
+//         console.error(err);
+//         this.products = [];
+//       }
+//     });
+// }
 
 onCategoryHover(categoryId: number): void {
   if (this.activeCategoryId === categoryId) return;
@@ -225,15 +243,8 @@ onCategoryHover(categoryId: number): void {
 
   this.productService
     .getProductsByCategory(categoryId)
-    .subscribe({
-      next: (res: any) => {
-        console.log('Water Systems API response:', res);
-        this.products = res?.products ?? [];
-      },
-      error: (err) => {
-        console.error(err);
-        this.products = [];
-      }
+    .subscribe(res => {
+      this.products = res?.products ?? [];
     });
 }
 
@@ -271,6 +282,33 @@ loadIonizerFilters(): void {
     });
 }
 
+onIonizerHover(): void {
+  this.showIonizerMenu = true;
+
+  // Load once
+  if (this.ionizerCategories.length === 0) {
+    this.categoryService.getIonizerFilterCategories().subscribe(cats => {
+      this.ionizerCategories = cats;
+
+      cats.forEach(cat => {
+        this.productService
+          .getProductsByCategory(cat.category_id)
+          .subscribe(res => {
+            this.ionizerProductsMap[cat.category_id] = res.products || [];
+          });
+      });
+    });
+  }
+}
+
+onIonizerLeave(): void {
+  this.showIonizerMenu = false;
+}
+
+closeIonizerMenu(): void {
+  this.showIonizerMenu = false;
+}
+
   onIonizerEnter(): void {
     if (this.ionizerCloseTimeout) {
       clearTimeout(this.ionizerCloseTimeout);
@@ -294,23 +332,23 @@ loadIonizerFilters(): void {
   }
 
 
-  onIonizerLeave(): void {
-  this.ionizerCloseTimeout = setTimeout(() => {
-    this.showIonizerMenu = false;
-    this.ionizerProducts = [];
-    this.activeIonizerCategoryId = null;
-  }, 150);
-}
+//   onIonizerLeave(): void {
+//   this.ionizerCloseTimeout = setTimeout(() => {
+//     this.showIonizerMenu = false;
+//     this.ionizerProducts = [];            
+//     this.activeIonizerCategoryId = null;
+//   }, 150);
+// }
 
-  closeIonizerMenu(): void {
-    if (this.ionizerCloseTimeout) {
-      clearTimeout(this.ionizerCloseTimeout);
-      this.ionizerCloseTimeout = null;
-    }
-    this.showIonizerMenu = false;
-    this.ionizerProducts = [];
-    this.activeIonizerCategoryId = null;
-  }
+//   closeIonizerMenu(): void {
+//     if (this.ionizerCloseTimeout) {
+//       clearTimeout(this.ionizerCloseTimeout);
+//       this.ionizerCloseTimeout = null;
+//     }
+//     this.showIonizerMenu = false;
+//     this.ionizerProducts = [];
+//     this.activeIonizerCategoryId = null;
+//   }
 
   getIonizerCollectionSlug(name: string | undefined): string {
     const normalized = (name ?? '').toLowerCase();

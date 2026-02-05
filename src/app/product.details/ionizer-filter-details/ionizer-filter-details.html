@@ -33,7 +33,26 @@
     <button class="add-cart" (click)="addToCart()">Add to cart</button>
 
     <!-- Long description -->
-    <div class="details" *ngIf="product.details" [innerHTML]="product.details"></div>
+    <!-- <div class="details" *ngIf="product.details" [innerHTML]="product.details"></div> -->
+     <details>
+      <summary>Description</summary>
+      <p>{{ product.details }}</p>
+    </details>
+
+    <details>
+      <summary>Specifications</summary>
+      <p>{{ product.specifications }}</p>
+    </details>
+
+    <details>
+      <summary>Under/Over Counter Details</summary>
+      <p>{{ product.counter_details }}</p>
+    </details>
+
+    <details>
+      <summary>Warranty & Installation</summary>
+      <p>{{ product.warranty_installation }}</p>
+    </details>
   </div>
 </div>
 

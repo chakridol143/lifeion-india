@@ -84,7 +84,7 @@
 <nav class="header-nav desktop-only">
 
   <!-- ================= IONIZER FILTERS ================= -->
-<div
+<!-- <div
   class="nav-dropdown-wrapper"
   (mouseenter)="onIonizerEnter()"
   (mouseleave)="onIonizerLeave()"
@@ -104,7 +104,7 @@
       class="ionizer-column"
       *ngFor="let cat of ionizerCategories"
     >
-      <!-- CATEGORY TITLE -->
+     
       <div class="ionizer-title">
         <img
           *ngIf="cat.image_url"
@@ -120,7 +120,7 @@
         </a>
       </div>
 
-      <!-- PRODUCTS -->
+ 
       <ul class="ionizer-products">
         <li
           *ngFor="let p of ionizerProductsMap[cat.category_id]"
@@ -140,12 +140,60 @@
       </ul>
     </div>
   </div>
+</div> -->
+
+<div
+  class="nav-dropdown-wrapper"
+  (mouseenter)="onIonizerHover()"
+  (mouseleave)="onIonizerLeave()"
+>
+  <a class="nav-link no-route">
+    Ionizer Filters <i class="bx bx-chevron-down"></i>
+  </a>
+
+  <div class="mega-menu ionizer-layout" *ngIf="showIonizerMenu">
+    <div
+      class="ionizer-column"
+      *ngFor="let cat of ionizerCategories"
+    >
+      <!-- CATEGORY TITLE -->
+      <div class="ionizer-title">
+        <img
+          *ngIf="cat.image_url"
+          [src]="resolveImageUrl(cat.image_url)"
+        />
+        <a
+          [routerLink]="['/product-details']"
+          [queryParams]="{ collection: getIonizerCollectionSlug(cat.name) }"
+          (click)="closeIonizerMenu()"
+        >
+          {{ cat.name }}
+        </a>
+      </div>
+
+      <!-- PRODUCTS -->
+      <ul class="ionizer-products">
+        <li
+          *ngFor="let p of ionizerProductsMap[cat.category_id]"
+          (click)="goToProduct(p)"
+        >
+          {{ p.name }}
+        </li>
+
+        <li
+          *ngIf="!ionizerProductsMap[cat.category_id]?.length"
+          class="empty-products"
+        >
+          No products
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 
 
-
   <!-- ================= WATER SYSTEMS ONLY ================= -->
-  <div
+<div
   class="nav-dropdown-wrapper"
   (mouseenter)="onDropdownHover()"
   (mouseleave)="onDropdownLeave()"
@@ -155,7 +203,7 @@
   </a>
 
   <!-- MEGA MENU -->
-  <div class="mega-menu" *ngIf="showMegaMenu">
+  <div class="mega-menu water-systems-menu" *ngIf="showMegaMenu">
 
     <!-- LEFT: CATEGORIES -->
     <div class="mega-left">
@@ -165,48 +213,42 @@
         (mouseenter)="onCategoryHover(cat.category_id)"
         [class.active]="activeCategoryId === cat.category_id"
       >
-        <!-- show image only if exists -->
-        <img
-          *ngIf="cat.image_url"
-          [src]="resolveImageUrl(cat.image_url)"
-          alt=""
-        />
-
-        <span>{{ cat.name }}</span>
+        <div class="category-left">
+          <img
+            *ngIf="cat.image_url"
+            [src]="resolveImageUrl(cat.image_url)"
+          />
+          <span>{{ cat.name }}</span>
+        </div>
         <span class="arrow">›</span>
       </div>
     </div>
 
     <!-- RIGHT: PRODUCTS -->
     <div class="mega-right">
-
-      <!-- PRODUCTS -->
       <div
         class="mega-product"
         *ngFor="let p of products"
         (click)="goToProduct(p)"
-
       >
         <img
           *ngIf="p.image_url"
           [src]="resolveImageUrl(p.image_url)"
-          alt=""
         />
         <p>{{ p.name }}</p>
       </div>
 
-      <!-- EMPTY STATE -->
       <div
         class="empty-products"
         *ngIf="products.length === 0"
       >
         No products available
       </div>
-
     </div>
 
   </div>
 </div>
+
 
 
   <!-- ================= OTHER NAV ITEMS ================= -->

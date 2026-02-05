@@ -32,6 +32,7 @@ import { WaterSystemDetails } from './product.details/water-system-details/water
 import { Logout } from './logout/logout';
 import { Register } from './register/register';
 import { login } from './login/login';
+import { Checkout } from './checkout/checkout';
 
 
 export const routes: Routes = [
@@ -48,7 +49,7 @@ export const routes: Routes = [
   { path: 'finance', component: Finance },
 
   {path:'aboutus', component:Aboutus},
-
+  { path: 'checkout', component: Checkout },
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
   {

@@ -52,21 +52,63 @@
 }
 
 .add-cart {
-  margin: 20px 0;
-  padding: 14px 40px;
-  background: #f26b5b;
+  width: 100%;
+  background: #f2614b;
+  color: #fff;
   border: none;
-  border-radius: 30px;
-  color: white;
+  padding: 14px;
   font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
   cursor: pointer;
+  margin-bottom: 18px;
 }
 
-.details {
-  margin-top: 30px;
-  border-top: 1px solid #ddd;
-  padding-top: 20px;
+.add-cart:hover {
+  background: #e5523d;
 }
+
+
+
+.desc {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.report {
+  background: #f2614b;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 25px;
+}
+
+
+/* Accordion (details) */
+details {
+  border-top: 1px solid #e5e5e5;
+  padding: 14px 0;
+}
+
+summary {
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+details p {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
 
 
 /* Section 2 */
