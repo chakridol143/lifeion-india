@@ -32,7 +32,14 @@ import { WaterSystemDetails } from './product.details/water-system-details/water
 import { Logout } from './logout/logout';
 import { Register } from './register/register';
 import { login } from './login/login';
+
 import { Checkout } from './checkout/checkout';
+import { AuthGuard } from './authguard/auth.guard';
+import { Shipping } from './shipping/shipping';
+
+import { ShippingService } from './shipping/services/shipping.service';
+
+
 
 
 export const routes: Routes = [
@@ -44,6 +51,12 @@ export const routes: Routes = [
     { path: 'register', component: Register },
  
   { path: 'water-systems', component: WaterSystems },
+       {
+    path: 'checkout',
+    component: Shipping,
+    canActivate: [AuthGuard] 
+  },
+  { path: '', redirectTo: 'checkout', pathMatch: 'full' },
   
   { path:'compaison', component: Compaison },
   { path: 'finance', component: Finance },

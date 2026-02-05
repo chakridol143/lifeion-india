@@ -87,7 +87,7 @@ ngOnInit(): void {
       price: p.price,
       menuTypeId: p.menu_type_id,
       image: p.image_url
-        ? 'http://localhost:3000/assets/images/' + p.image_url
+        ? 'https://lifeion-backend-production.up.railway.app/assets/images/' + p.image_url
         : 'assets/images/placeholder.png'
     }));
   });
