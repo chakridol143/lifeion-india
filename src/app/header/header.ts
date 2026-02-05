@@ -108,29 +108,6 @@ onNavClick(): void {
   this.closeMenu();
 }
 
-
-// goToProduct(product: any): void {
-
-//   this.showMegaMenu = false;
-//   this.showIonizerMenu = false;
-
-//   const menuTypeId = Number(product.menu_type_id);
-
-//   if (menuTypeId === 1) {
-//     this.router.navigate(['/product/ionizer/:id', product.product_id]);
-//     return;
-//   }
-
-  
-//   if (menuTypeId === 2) {
-//     this.router.navigate(['/product/water-system/:id', product.product_id]);
-//     return;
-//   }
-
-//   // Accessories / Others
-//   this.router.navigate(['/product', product.product_id]);
-// }
-
 goToProduct(product: any): void {
   if (!product?.product_id || !product?.menu_type_id) {
     console.warn('Not a product click, ignoring:', product);
@@ -237,8 +214,6 @@ onCategoryHover(categoryId: number): void {
     });
 }
 
-
-
   hasSubmenu(item: any): boolean {
     return Array.isArray(item.submenu) && item.submenu.length > 0;
   }
@@ -250,7 +225,8 @@ onCategoryHover(categoryId: number): void {
     this.showWaterSystems = false;
   }
 
-/* ===== IONIZER FILTERS ===== */
+
+/* IONIZER FILTERS */
 ionizerCategories: Category[] = [];
   ionizerProducts: Product[] = [];
   activeIonizerCategoryId: number | null = null;
@@ -384,5 +360,4 @@ logoutUser(): void {
   this.router.navigate(['/']);
 }
 
-  
 }

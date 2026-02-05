@@ -44,6 +44,9 @@ input {
 .password-wrapper {
   position: relative;
 }
+.password-wrapper input {
+  padding-right: 44px;
+}
 .toggle-eye {
   position: absolute;
   right: 12px;

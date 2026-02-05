@@ -6,6 +6,21 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Hide built-in password reveal icons to avoid double-eye UI */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button,
+input[type="password"]::-webkit-contacts-auto-fill-button {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+}
+
 /* Fix invisible full-page anchor bug */
 a {
   position: relative;
