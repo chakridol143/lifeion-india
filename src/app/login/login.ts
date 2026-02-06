@@ -104,8 +104,9 @@ onLogin() {
     password: this.password
   }).subscribe({
     next: (res: LoginResponse) => {
-      sessionStorage.setItem('token', res.token);
-      sessionStorage.setItem('user', JSON.stringify(res.user));
+      // sessionStorage.setItem('token', res.token);
+      // sessionStorage.setItem('user', JSON.stringify(res.user));
+            this.loginService.saveSession(res.token, res.user);
 
       const userId = res.user.user_id;
 
