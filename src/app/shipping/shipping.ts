@@ -13,9 +13,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class Shipping implements OnInit {
 
-  // TEMP user id (later from auth)
-  userId = 1;
-
   // Cart / summary data
   items: any[] = [];
   totalAmount = 0;
@@ -43,11 +40,16 @@ export class Shipping implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this.loginService.isLoggedIn()) {
+      alert('Please login first');
+      return;
+    }
+
     this.loadCart();
     this.calculateTotals();
   }
 
-  // 🔹 Load cart items (example – adapt to your cart service)
+  // 🔹 Load cart items
   loadCart() {
     const cart = localStorage.getItem('cart');
     this.items = cart ? JSON.parse(cart) : [];
@@ -60,11 +62,11 @@ export class Shipping implements OnInit {
       0
     );
 
-    this.gstAmount = this.totalAmount * 0.18; // 18% GST
+    this.gstAmount = this.totalAmount * 0.18;
     this.grandTotal = this.totalAmount + this.gstAmount;
   }
 
-  // 🔥 BUY NOW = SAVE SHIPPING (checkout step 1)
+  // 🔥 BUY NOW = SAVE SHIPPING
   buyNow() {
     if (
       !this.shipping.firstName ||
@@ -77,8 +79,8 @@ export class Shipping implements OnInit {
       return;
     }
 
+    // ✅ NO user_id here
     const payload = {
-      user_id: this.userId,
       address: `${this.shipping.firstName} ${this.shipping.lastName}, ${this.shipping.address}, ${this.shipping.apartment}`,
       city: this.shipping.city,
       state: this.shipping.state,
@@ -88,9 +90,8 @@ export class Shipping implements OnInit {
     };
 
     this.shippingService.addShipping(payload).subscribe({
-      next: (res) => {
-        console.log('Shipping saved:', res);
-        this.showDialog = true; // temporary success (later replace with payment)
+      next: () => {
+        this.showDialog = true;
       },
       error: (err) => {
         console.error('Shipping save failed', err);
@@ -106,13 +107,12 @@ export class Shipping implements OnInit {
     this.calculateTotals();
   }
 
-  // 🔹 Dialog handlers
   closeDialog() {
     this.showDialog = false;
   }
 
   confirmPurchase() {
     this.showDialog = false;
-    // later → redirect to payment / order confirmation
+    // next → payment / order confirmation
   }
 }

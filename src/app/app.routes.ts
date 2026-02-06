@@ -51,7 +51,8 @@ export const routes: Routes = [
  
   { path: 'water-systems', component: WaterSystems },
        {
-    path: 'shipping',
+
+    path:'shipping',
     component: Shipping,
     canActivate: [AuthGuard] 
   },

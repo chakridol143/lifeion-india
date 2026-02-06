@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LoginService } from './services/loginservices';
 import { CartService } from '../cart-details/services/cartservice';
+import { LoginResponse } from '../../../lifeion-backend/src/models/login-response.model';
 
 
 declare const google: any;
@@ -107,29 +108,31 @@ export class login implements AfterViewInit {
     }
   }
 
-  onLogin() {
-    this.loginService.login(this.email, this.password).subscribe({
-      next: (res) => {
-        this.loginService.saveSession(res.token, res.user);
-        this.showDialog = true;
+onLogin() {
+  this.loginService.login({
+    email: this.email,
+    password: this.password
+  }).subscribe({
+    next: (res: LoginResponse) => {
+      sessionStorage.setItem('token', res.token);
+      sessionStorage.setItem('user', JSON.stringify(res.user));
 
-        const userId = res.user?.user_id;
-        const token = res.token;
+      const userId = res.user.user_id;
 
-        if (!userId) return;
+      sessionStorage.setItem('userId', userId.toString());
 
-        localStorage.setItem("userId", userId.toString());
-        localStorage.setItem("token", token);
+      this.cartServices.mergeCartAfterLogin(userId, res.token);
 
-        this.cartServices.mergeCartAfterLogin(userId, token);
+      this.showDialog = true;
+      this.close.emit();
+    },
+    error: (err) => {
+      console.error('Login failed:', err);
+    }
+  });
+}
 
-        this.close.emit();
-      },
-      error: (err) => {
-        console.error("Login failed:", err);
-      }
-    });
-  }
+
 
   adminLogin() {
     if (!this.email.trim() || !this.password.trim()) {

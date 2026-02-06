@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { CartService } from '../../cart-details/services/cartservice';
 import {API_BASE_URL} from '../../config/api.config';
+import {LoginResponse} from '../../../../lifeion-backend/src/models/login-response.model';
 
 
 @Injectable({
@@ -23,8 +24,14 @@ export class LoginService {
     private cartService: CartService
   ) {}
 
-  login(email: string, password: string) {
-    return this.http.post<any>(`${this.BASE_URL}/login`, { email, password });
+  // login(email: string, password: string) {
+  //   return this.http.post<any>(`${this.BASE_URL}/login`, { email, password });
+  // }
+login(data: { email: string; password: string }) {
+    return this.http.post<LoginResponse>(
+      `${this.BASE_URL}/login`,
+      data
+    );
   }
 
   register(data: any) {
@@ -91,4 +98,8 @@ export class LoginService {
     const user = JSON.parse(sessionStorage.getItem('user') || '{}');
     return user.user_id || user.id || null;
   }
+  getToken(): string | null {
+  return sessionStorage.getItem('token');
+}
+
 }
