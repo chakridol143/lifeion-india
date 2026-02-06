@@ -369,7 +369,7 @@ showCartPopup = false;
    closeDetails() {
     this.showCartPopup = false;
   }
-
+ 
   // cartItemRemove(index: number) {
   //   const token = sessionStorage.getItem('token') ?? undefined;
   //   const user = JSON.parse(sessionStorage.getItem('user') || '{}');
