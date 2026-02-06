@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { CartService } from '../../cart-details/services/cartservice';
 import {API_BASE_URL} from '../../config/api.config';
-import {LoginResponse} from '../../../../lifeion-backend/src/models/login-response.model';
+import {LoginResponse} from '../../models.ts/login-response.model';
 
 
 @Injectable({

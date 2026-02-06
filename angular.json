@@ -16,8 +16,13 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "public"
+                
+              },
               "src/assets"
+              
             ],
             "styles": [
               "src/styles.css",
@@ -68,8 +73,13 @@
           "options": {
             "tsConfig": "tsconfig.spec.json",
              "assets": [
-              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "public"
+                
+              },
               "src/assets"
+              
             ],
             "styles": [
               "src/styles.css"
