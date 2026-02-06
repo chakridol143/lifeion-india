@@ -52,7 +52,7 @@ export const routes: Routes = [
  
   { path: 'water-systems', component: WaterSystems },
        {
-    path: 'checkout',
+    path: 'shipping',
     component: Shipping,
     canActivate: [AuthGuard] 
   },

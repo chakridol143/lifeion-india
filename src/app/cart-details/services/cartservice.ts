@@ -167,22 +167,55 @@ export class CartService {
     this.http.put(`${this.apiUrl}/${cartItemId}`, { quantity }, { headers }).subscribe();
   }
 
-  loadCartForUser(userId: number, token: string) {
-    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+  // loadCartForUser(userId: number, token: string) {
+  //   const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
 
-    this.http.get<any[]>(`${this.apiUrl}/user/${userId}`, { headers }).subscribe(rows => {     
-      this.items = rows.map(row => ({
-        cart_item_id: row.cart_item_id,
-        product_id: row.product_id,
-        name: row.name,
-        price: row.price,
-        image_url: row.image_url,
-        quantity: row.quantity
-      }));
+  //   this.http.get<any[]>(`${this.apiUrl}/user/${userId}`, { headers }).subscribe(rows => {     
+  //     this.items = rows.map(row => ({
+  //       cart_item_id: row.cart_item_id,
+  //       product_id: row.product_id,
+  //       name: row.name,
+  //       price: row.price,
+  //       image_url: row.image_url,
+  //       quantity: row.quantity
+  //     }));
+  //     this.saveItems();
+  //   });
+  // }
+
+  loadCartForUser(userId: number, token: string) {
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+
+  this.http
+    .get<any[]>(`${this.apiUrl}/user/${userId}`, { headers })
+    .subscribe(rows => {
+      this.items = rows.map(row => {
+        let images: string[] = [];
+
+        try {
+          images = JSON.parse(row.images || '[]');
+        } catch {
+          images = [];
+        }
+
+        return {
+          cart_item_id: row.cart_item_id,
+          product_id: row.product_id,
+          name: row.name,
+          price: row.price,
+          quantity: row.quantity,
+
+          // ✅ normalize for UI
+          image_url: images[0] || null,
+          images
+        };
+      });
+
       this.saveItems();
     });
-  }
+}
 
+  
   private saveItems() {
     localStorage.setItem(this.key, JSON.stringify(this.items));
     this.cartSubject.next(this.items);
