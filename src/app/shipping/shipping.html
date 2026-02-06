@@ -1,0 +1,150 @@
+<div class="checkout-page">
+
+  <div class="checkout-top">
+    <div class="brand">
+      <img src="../../../assets/images/checkout logo.png" class="checkout-logo">
+      <span class="checkout-text">CHECKOUT</span>
+    </div>
+
+    <div class="login-box">
+      <span>Have An Account?</span>
+      <button class="login-btn" *ngIf="!loginService.isLoggedIn()">
+        LOGIN
+      </button>
+    </div>
+  </div>
+
+  <div class="checkout-content">
+
+    <!-- LEFT : SHIPPING -->
+    <div class="left">
+
+      <h3 class="section">SHIPPING</h3>
+      <label class="sub-title">SHIPPING ADDRESS</label>
+
+      <div class="form-row">
+        <input
+          placeholder="First Name *"
+          [(ngModel)]="shipping.firstName"
+          name="firstName">
+
+        <input
+          placeholder="Last Name *"
+          [(ngModel)]="shipping.lastName"
+          name="lastName">
+      </div>
+
+      <input
+        class="full"
+        placeholder="Street Address *"
+        [(ngModel)]="shipping.address"
+        name="address">
+
+      <input
+        class="full"
+        placeholder="Apt / Suite / Unit (Optional)"
+        [(ngModel)]="shipping.apartment"
+        name="apartment">
+
+      <div class="form-row">
+        <input
+          placeholder="City *"
+          [(ngModel)]="shipping.city"
+          name="city">
+
+       <input
+  placeholder="State / Province *"
+  [(ngModel)]="shipping.state"
+  name="state">
+
+      </div>
+
+      <input
+        placeholder="Postal Code *"
+        class="postal"
+        [(ngModel)]="shipping.postal_code"
+        name="postal_code">
+
+      <div class="continue-wrapper">
+        <button class="continue-btn" (click)="buyNow()">
+          Buy Now
+        </button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT : ORDER SUMMARY -->
+    <div class="right">
+
+      <h3 class="section">ORDER SUMMARY</h3>
+
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>₹{{ totalAmount }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxes</span>
+        <span>₹{{ gstAmount }}</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Shipping ({{ items.length }} items)</span>
+        <span>—</span>
+      </div>
+
+      <div class="summary-total">
+        <span>TOTAL</span>
+        <span>₹{{ grandTotal }}</span>
+      </div>
+
+      <h4 class="bag-title">
+        BAG SUMMARY
+        <span class="bag-count">{{ items.length }}</span>
+      </h4>
+
+      <div
+        class="bag-item"
+        *ngFor="let item of items; let i = index">
+
+        <img
+          class="bag-img"
+          [src]="item.image_url"
+          alt="product">
+
+        <div class="bag-details">
+          <p class="bag-name">{{ item.name }}</p>
+
+          <p class="bag-price-row">
+            <span class="new-price">₹{{ item.price }}</span>
+            <span class="qty">x {{ item.quantity }}</span>
+          </p>
+
+          <div class="bag-actions">
+            <span class="remove" (click)="removeItem(i)">
+              Remove
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <p class="policy">
+        <a href="#">Privacy Policy</a> |
+        <a href="#">Terms & Conditions</a>
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- SUCCESS DIALOG -->
+<div class="modal-overlay" *ngIf="showDialog" (click)="closeDialog()"></div>
+
+<div class="dialog-box" *ngIf="showDialog">
+  <h2>Shipping Saved</h2>
+  <p>
+    Your shipping details have been saved successfully.
+  </p>
+  <button class="ok-btn" (click)="confirmPurchase()">OK</button>
+</div>

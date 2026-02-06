@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -24,16 +24,35 @@ export class IonizerFilterDetails implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+     private cdr: ChangeDetectorRef 
   ) {}
 
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  // ngOnInit(): void {
+  //   const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.productService.getById(id).subscribe(res => {
-      this.product = res;
-    });
-  }
+  //   this.productService.getById(id).subscribe(res => {
+  //     this.product = res;
+  //   });
+  // }
+
+ngOnInit(): void {
+  this.route.paramMap.subscribe(params => {
+    const id = Number(params.get('id'));
+
+    if (id) {
+      this.product = null; // reset so UI updates
+      this.productService.getById(id).subscribe(res => {
+        this.product = res;
+
+        this.cdr.detectChanges(); 
+      });
+      console.log('Ionizer product ID:', id);
+
+    }
+  });
+}
+
 
   increaseQty() {
     this.quantity++;
@@ -100,6 +119,8 @@ export class IonizerFilterDetails implements OnInit {
   // }
 
   addToCart() {
+     if (!this.product) return;
+     
   this.cartService.addToCart({
     product_id: this.product.product_id,
     name: this.product.name,

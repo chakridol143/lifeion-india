@@ -19,10 +19,20 @@ export class WaterSystems implements OnInit {
   isWaterLoading = false;
   resolveImageUrl = resolveAssetUrl;
 
+  mobileFiltersOpen = false;
+
+  toggleMobileFilters(): void {
+    this.mobileFiltersOpen = !this.mobileFiltersOpen;
+  }
+
+  closeMobileFilters(): void {
+    this.mobileFiltersOpen = false;
+  }
+
   constructor(
     private categoryService: CategoryService,
     private productService: ProductService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadWaterSystems();

@@ -15,10 +15,9 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getAll() {
-    return this.http.get(this.apiUrl);
-  }
-
+getAll() {
+  return this.http.get<any[]>(this.apiUrl);
+}
   getById(id: number): Observable<any> {
     return this.http.get(`${API_BASE_URL}/api/products/${id}`);
   }
@@ -29,3 +28,4 @@ export class ProductService {
     );
   }
 }
+//hello

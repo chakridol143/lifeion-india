@@ -55,7 +55,7 @@ getTotal(): number {
   }
 
   onCheck() {
-    this.router.navigate(['/checkout']);
+    this.router.navigate(['/shipping']);
     this.
     close.emit();
   }
@@ -75,5 +75,4 @@ decQty(index: number) {
   item.quantity -= 1;
   this.cart.updateQuantity(item.cart_item_id, item.quantity);
 }
-
 }

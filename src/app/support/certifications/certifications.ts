@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-Certifications',
   standalone: true,
-  imports: [CommonModule,RouterOutlet],
+  imports: [CommonModule],
   templateUrl: './certifications.html',
   styleUrl: './certifications.css'
 })

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../water-systems/product.service';
 import { resolveAssetUrl } from '../../config/api.config';
 import { CartService } from '../../cart-details/services/cartservice';
+
 
 @Component({
   selector: 'app-water-system-details',
@@ -24,7 +25,8 @@ export class WaterSystemDetails implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+     private cdr: ChangeDetectorRef
   ) {}
 zoomStyle = 'scale(1)';
 
@@ -42,22 +44,54 @@ resetZoom() {
   this.zoomStyle = 'scale(1)';
 }
 
-  ngOnInit(): void {
-  const id = Number(this.route.snapshot.paramMap.get('id'));
+//   ngOnInit(): void {
+//   const id = Number(this.route.snapshot.paramMap.get('id'));
 
-  this.productService.getById(id).subscribe((res: any) => {
-    this.product = res;
+//   this.productService.getById(id).subscribe((res: any) => {
+//     this.product = res;
 
-    // collect all images from backend
-    this.images = Object.keys(res)
-      .filter(key => key.startsWith('image_url'))
-      .map(key => res[key])
-      .filter(img => img && img.trim() !== '');
+//     // collect all images from backend
+//     this.images = Object.keys(res)
+//       .filter(key => key.startsWith('image_url'))
+//       .map(key => res[key])
+//       .filter(img => img && img.trim() !== '');
 
-    this.selectedImage = this.images[0];
-    this.currentIndex = 0;
+//     this.selectedImage = this.images[0];
+//     this.currentIndex = 0;
+//   });
+// }
+
+ngOnInit(): void {
+  this.route.paramMap.subscribe(params => {
+    const id = Number(params.get('id'));
+
+    if (id) {
+      // reset state
+      this.product = null;
+      this.images = [];
+      this.selectedImage = '';
+      this.currentIndex = 0;
+
+      this.productService.getById(id).subscribe((res: any) => {
+        this.product = res;
+
+        // collect all images from backend
+        this.images = Object.keys(res)
+          .filter(key => key.startsWith('image_url'))
+          .map(key => res[key])
+          .filter(img => img && img.trim() !== '');
+
+        this.selectedImage = this.images[0];
+        this.currentIndex = 0;
+
+        this.cdr.detectChanges(); 
+      });
+    }
+    console.log('Water system product ID:', id);
+
   });
 }
+
 
 selectImage(img: string, index: number) {
   this.selectedImage = img;

@@ -4,6 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  font-family: 'Poppins', sans-serif; /* Ensuring a good font default if not set */
 }
 
 /* Hide built-in password reveal icons to avoid double-eye UI */
@@ -45,3 +46,39 @@ nav a::after {
   position: relative;
   z-index: 10;
 }
+
+/* --- Global Responsive Resets --- */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Removes bottom spacing */
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Mobile-first touch targets */
+@media (max-width: 600px) {
+  button, 
+  a.btn, 
+  input[type="submit"], 
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* --- Breakpoints Variables (CSS Custom Properties for reference) --- */
+:root {
+  --bp-mobile-max: 400px;
+  --bp-large-phone-min: 401px;
+  --bp-large-phone-max: 600px;
+  --bp-tablet-min: 601px;
+  --bp-tablet-max: 900px;
+  --bp-laptop-min: 901px;
+  --bp-laptop-max: 1200px;
+  --bp-desktop-min: 1201px;
+  --bp-desktop-max: 1600px;
+}
+
