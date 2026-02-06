@@ -126,11 +126,8 @@ onLogin() {
 
   closeDialog() {
     this.showDialog = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
     this.close.emit();
-  }
-
-  onClose() {
-    this.router.navigate(['/app']);
+    window.location.reload();
   }
 }

@@ -31,15 +31,37 @@
 
   <!-- PRODUCT GRID -->
   <section class="product-grid">
-    <article class="product-card" *ngFor="let product of products">
-      <div class="product-image">
-        <img [src]="product.image" [alt]="product.name" />
+    <article class="product-card clickable" *ngFor="let product of products">
+      <div
+        class="product-image"
+        (click)="goToProduct(product)"
+        role="button"
+        tabindex="0"
+        (keydown.enter)="goToProduct(product)"
+      >
+        <img
+          [src]="product.image"
+          [alt]="product.name"
+          (error)="handleImageError(product)"
+        />
         <span *ngIf="product.badge" class="product-badge">{{ product.badge }}</span>
       </div>
 
       <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p class="product-price">${{ product.price }}</p>
+        <h3
+          (click)="goToProduct(product)"
+          role="button"
+          tabindex="0"
+          (keydown.enter)="goToProduct(product)"
+        >
+          {{ product.name }}
+        </h3>
+        <p class="product-price" *ngIf="product.price !== null; else priceMissing">
+          {{ product.price | currency:'USD':'symbol':'1.2-2' }}
+        </p>
+        <ng-template #priceMissing>
+          <p class="product-price product-price--na">Price on request</p>
+        </ng-template>
         <button class="add-btn">Add to cart</button>
       </div>
     </article>
