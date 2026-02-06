@@ -97,16 +97,6 @@ export class login implements AfterViewInit {
     this.router.navigate(['/app']);
   }
 
-  submitLogin() {
-    const adminEmail = "nallaravikishore@gmail.com";
-    const adminPassword = "Ravi_@123";
-
-    if (this.email === adminEmail && this.password === adminPassword) {
-      this.adminLogin();
-    } else {
-      this.onLogin();
-    }
-  }
 
 onLogin() {
   this.loginService.login({
@@ -132,27 +122,6 @@ onLogin() {
   });
 }
 
-
-
-  adminLogin() {
-    if (!this.email.trim() || !this.password.trim()) {
-      this.error = "Email and Password are required";
-      return;
-    }
-
-    this.loginService.adminLogin(this.email, this.password).subscribe({
-      next: (res) => {
-        this.loginService.saveAdminSession(res.token);
-        sessionStorage.setItem("admin", JSON.stringify({ email: this.email }));
-        this.error = "";
-        this.router.navigate(['/admin']);
-      },
-      error: (err) => {
-        console.error("Admin Login Failed:", err);
-        this.error = "Invalid Email or Password";
-      }
-    });
-  }
 
   closeDialog() {
     this.showDialog = false;
