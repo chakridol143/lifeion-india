@@ -1,0 +1,131 @@
+<div class="ro-page">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Life Ionizers</p>
+      <h1>{{ hero.title }}</h1>
+      <p class="subtitle">{{ hero.subtitle || (products.length + ' products') }}</p>
+      <p class="description">{{ hero.description }}</p>
+      <div class="hero-actions">
+        <button class="primary">Order now</button>
+        <button class="ghost">Talk to a specialist</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="/images/water_filter.avif" alt="Reverse Osmosis System" />
+    </div>
+  </section>
+
+  <!-- WHAT IS RO -->
+  <section class="what-ro">
+    <div class="what-image">
+      <img src="/images/reverseosmosis.webp" alt="What is Reverse Osmosis" />
+    </div>
+    <div class="what-text">
+      <h2>What is Reverse Osmosis?</h2>
+      <p>
+        Reverse osmosis pushes water through a specialized semi‑permeable membrane to strip impurities,
+        toxins, and harmful contaminants. Only pure water passes through; everything else is flushed out.
+      </p>
+      <h3>Discover the Benefits of Reverse Osmosis Systems</h3>
+      <p>
+        Clean, pure, and mineral-rich water is essential for a healthy life. RO systems ensure your water is
+        free from contaminants while optional stages—alkalizing, mineralizing, or UV protection—boost taste
+        and wellness benefits.
+      </p>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <div class="toolbar-left">
+      <button class="chip">Filter</button>
+      <span class="muted">Filter & Sort</span>
+    </div>
+    <div class="toolbar-center">
+      <span class="count">{{ products.length }} products</span>
+    </div>
+    <div class="toolbar-right">
+      <label for="roSort">Sort by</label>
+      <select id="roSort">
+        <option *ngFor="let option of toolbar.sortOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="card" *ngFor="let product of products">
+      <div class="card-image">
+        <img [src]="resolveImage(product.image)" [alt]="product.name" />
+      </div>
+      <p class="brand">Life Ionizers</p>
+      <h3>{{ product.name }}</h3>
+      <p class="price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</p>
+      <button class="add-btn" (click)="addToCart(product)">Add to cart</button>
+    </article>
+  </section>
+
+  <section class="info">
+    <div class="info-text">
+      <h2>Why Reverse Osmosis</h2>
+      <p>
+        Multi-stage RO strips nearly all dissolved solids, heavy metals, chlorine, and taste/odor compounds.
+        Add remineralization to bring back a crisp, balanced mouthfeel that bottled water tries to mimic.
+      </p>
+      <p>
+        Choose 3, 5, or 6 stage stacks with options like mineral post filters or UV to match your incoming
+        water quality and household demand.
+      </p>
+    </div>
+    <div class="info-image">
+      <img src="/images/Types_of_Life_Ionizer_Replacement_Filters_2.webp" alt="RO filters" />
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Key Features of Reverse Osmosis Systems</h2>
+    <div class="feature-grid colorful">
+      <div class="feature feature-black" *ngFor="let f of features; let i = index" [class.feature-blue]="i % 2 === 1" [class.feature-cyan]="i === 2" [class.feature-deepblue]="i === 3">
+        <div class="feature-icon" *ngIf="f.icon">
+          <img [src]="f.icon" [alt]="f.title" />
+        </div>
+        <h4>{{ f.title }}</h4>
+        <p>{{ f.desc }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alkaline">
+    <div class="alkaline-text">
+      <h2>The Alkaline Advantage</h2>
+      <p>
+        Traditional RO removes impurities and can strip minerals. Add advanced mineral cartridges to replenish
+        calcium, magnesium, and essential nutrients—creating alkaline water known to improve hydration, support
+        bone health, and reduce acid reflux.
+      </p>
+      <h3>Who Can Benefit?</h3>
+      <ul>
+        <li *ngFor="let item of audience">{{ item }}</li>
+      </ul>
+    </div>
+    <div class="alkaline-image">
+      <img src="/images/water_filter.avif" alt="Alkaline advantage" />
+    </div>
+  </section>
+
+  <section class="steps">
+    <h2>How Does a Reverse Osmosis System Work?</h2>
+    <p class="steps-intro">
+      Reverse osmosis uses a multi-stage filtration process to deliver pure, clean water. Here’s the breakdown:
+    </p>
+    <div class="step-grid colorful">
+      <div class="step feature-black" *ngFor="let s of steps; let i = index" [class.feature-blue]="i === 1" [class.feature-cyan]="i === 2" [class.feature-deepblue]="i === 3">
+        <div class="step-number">{{ i + 1 }}</div>
+        <div>
+          <h4>{{ s.title }}</h4>
+          <p>{{ s.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

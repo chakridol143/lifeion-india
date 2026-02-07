@@ -62,7 +62,7 @@
         <ng-template #priceMissing>
           <p class="product-price product-price--na">Price on request</p>
         </ng-template>
-        <button class="add-btn">Add to cart</button>
+        <button class="add-btn" (click)="addToCart(product)">Add to cart</button>
       </div>
     </article>
   </section>

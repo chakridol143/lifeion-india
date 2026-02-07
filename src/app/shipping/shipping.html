@@ -1,5 +1,4 @@
 <div class="checkout-page">
-
   <div class="checkout-top">
     <div class="brand">
       <img src="../../../assets/images/checkout.png" class="checkout-logo">
@@ -52,10 +51,10 @@
           [(ngModel)]="shipping.city"
           name="city">
 
-       <input
-  placeholder="State / Province *"
-  [(ngModel)]="shipping.state"
-  name="state">
+        <input
+          placeholder="State / Province *"
+          [(ngModel)]="shipping.state"
+          name="state">
 
       </div>
 
@@ -80,27 +79,27 @@
 
       <div class="summary-row">
         <span>Subtotal</span>
-        <span>₹{{ totalAmount }}</span>
+        <span>&#8377;{{ totalAmount.toFixed(2) }}</span>
       </div>
 
       <div class="summary-row">
         <span>Taxes</span>
-        <span>₹{{ gstAmount }}</span>
+        <span>&#8377;{{ gstAmount.toFixed(2) }}</span>
       </div>
 
       <div class="summary-row">
-        <span>Shipping ({{ items.length }} items)</span>
-        <span>—</span>
+        <span>Shipping ({{ totalItems }} items)</span>
+        <span>&mdash;</span>
       </div>
 
       <div class="summary-total">
         <span>TOTAL</span>
-        <span>₹{{ grandTotal }}</span>
+        <span>&#8377;{{ grandTotal.toFixed(2) }}</span>
       </div>
 
       <h4 class="bag-title">
         BAG SUMMARY
-        <span class="bag-count">{{ items.length }}</span>
+        <span class="bag-count">{{ totalItems }}</span>
       </h4>
 
       <div
@@ -109,15 +108,15 @@
 
         <img
           class="bag-img"
-          [src]="item.image_url"
+          [src]="resolveImageUrl(item.image_url)"
           alt="product">
 
         <div class="bag-details">
           <p class="bag-name">{{ item.name }}</p>
 
           <p class="bag-price-row">
-            <span class="new-price">₹{{ item.price }}</span>
-            <span class="qty">x {{ item.quantity }}</span>
+            <span class="new-price">&#8377;{{ item.price }}</span>
+            <span class="qty">x {{ item.quantity || 1 }}</span>
           </p>
 
           <div class="bag-actions">
@@ -138,13 +137,14 @@
   </div>
 </div>
 
-<!-- SUCCESS DIALOG -->
 <div class="modal-overlay" *ngIf="showDialog" (click)="closeDialog()"></div>
 
 <div class="dialog-box" *ngIf="showDialog">
-  <h2>Shipping Saved</h2>
+  <h2>Purchase Successful</h2>
   <p>
-    Your shipping details have been saved successfully.
+    Thank you for your purchase!<br />
+    Your total payment is
+    <strong>&#8377;{{ grandTotal.toFixed(2) }}</strong>.
   </p>
   <button class="ok-btn" (click)="confirmPurchase()">OK</button>
 </div>

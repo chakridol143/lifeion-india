@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { login } from '../login/login';
 import { LoginService } from '../login/services/loginservices';
 import { CartService } from '../cart-details/services/cartservice';
+import { resolveAssetUrl } from '../config/api.config';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,11 +21,19 @@ export class Checkout {
   totalAmount : number = 0;
   gstAmount : number = 0;
   grandTotal : number = 0;
+  totalItems: number = 0;
   showDialog: boolean = false;
+  resolveImageUrl = resolveAssetUrl;
+  private cartSub?: Subscription;
   
   constructor(private cartService : CartService, private router:Router, public loginService: LoginService) {}
 
   ngOnInit():void{
+    this.cartSub = this.cartService.cart$.subscribe(items => {
+      this.items = items;
+      this.calculateTotals();
+    });
+    // also initialize once in case cart$ has current value
     this.items = this.cartService.getItems();
     this.calculateTotals();
   }
@@ -41,6 +51,11 @@ export class Checkout {
     this.totalAmount = this.cartService.getTotal();
     this.gstAmount = this.totalAmount * 0.18;
     this.grandTotal = this.totalAmount + this.gstAmount; 
+    this.totalItems = this.cartService.getItemCount();
+   }
+
+   ngOnDestroy(): void {
+    this.cartSub?.unsubscribe();
    }
 
    buyNow() {

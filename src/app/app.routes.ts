@@ -66,6 +66,11 @@ export const routes: Routes = [
   {path:'support', component:Support},
   {path:'contact', component:ContactComponent},
   {
+    path: 'reverse-osmosis',
+    loadComponent: () =>
+      import('./reverse-osmosis/reverse-osmosis').then(m => m.ReverseOsmosisComponent)
+  },
+  {
   path: 'product/ionizer/:id',
     loadComponent: () =>
       import('./product.details/ionizer-filter-details/ionizer-filter-details')

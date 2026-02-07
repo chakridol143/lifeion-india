@@ -14,40 +14,28 @@ export class ShippingService {
 
   constructor(
     private http: HttpClient,
-    private loginService: LoginService   
+    private loginService: LoginService
   ) {}
 
-  // ✅ ADD SHIPPING (JWT protected)
+  // ADD SHIPPING (no auth needed on backend; user_id passed in body)
   addShipping(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data, {
-      headers: this.getAuthHeaders()
+      headers: this.buildAuthHeaders()
     });
   }
 
-  // ✅ GET MY SHIPPING (JWT protected)
+  // GET MY SHIPPING (unused)
   getMyShipping(): Observable<any> {
     return this.http.get(`${this.apiUrl}/my`, {
-      headers: this.getAuthHeaders()
+      headers: this.buildAuthHeaders()
     });
   }
 
-  // 🔐 Common auth header
-  // private getAuthHeaders(): HttpHeaders {
-  //   const token = this.loginService.getToken();
-  //   return new HttpHeaders({
-  //     Authorization: `Bearer ${token}`
-  //   });
-  // }
-  private getAuthHeaders(): HttpHeaders {
-  const token = this.loginService.getToken();
-
-  if (!token) {
-    throw new Error('JWT token missing – user not logged in');
+  private buildAuthHeaders(): HttpHeaders {
+    const token = this.loginService.getToken();
+    if (!token) return new HttpHeaders();
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
   }
-
-  return new HttpHeaders({
-    Authorization: `Bearer ${token}`
-  });
-}
-
 }

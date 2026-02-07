@@ -337,6 +337,9 @@ closeIonizerMenu(): void {
     if (normalized.includes('access')) {
       return 'accessories';
     }
+    if (normalized.includes('osmosis') || normalized.includes('ro')) {
+      return 'reverse-osmosis';
+    }
     return 'mxl';
   }
 

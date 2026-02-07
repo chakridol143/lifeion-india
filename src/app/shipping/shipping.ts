@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ShippingService } from './services/shipping.service';
 import { LoginService } from '../login/services/loginservices';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../cart-details/services/cartservice';
+import { resolveAssetUrl } from '../config/api.config';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shipping',
@@ -11,15 +15,15 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './shipping.html',
   styleUrl: './shipping.css',
 })
-export class Shipping implements OnInit {
-
-  // Cart / summary data
+export class Shipping implements OnInit, OnDestroy {
   items: any[] = [];
   totalAmount = 0;
   gstAmount = 0;
   grandTotal = 0;
+  totalItems = 0;
+  resolveImageUrl = resolveAssetUrl;
+  private cartSub?: Subscription;
 
-  // Shipping form model
   shipping = {
     firstName: '',
     lastName: '',
@@ -36,37 +40,29 @@ export class Shipping implements OnInit {
 
   constructor(
     private shippingService: ShippingService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (!this.loginService.isLoggedIn()) {
-      alert('Please login first');
-      return;
-    }
+    this.cartSub = this.cartService.cart$.subscribe(items => {
+      this.items = items;
+      this.calculateTotals();
+    });
 
-    this.loadCart();
+    // initial load
+    this.items = this.cartService.getItems();
     this.calculateTotals();
   }
 
-  // 🔹 Load cart items
-  loadCart() {
-    const cart = localStorage.getItem('cart');
-    this.items = cart ? JSON.parse(cart) : [];
-  }
-
-  // 🔹 Calculate totals
   calculateTotals() {
-    this.totalAmount = this.items.reduce(
-      (sum, item) => sum + (item.price * (item.quantity || 1)),
-      0
-    );
-
+    this.totalAmount = this.cartService.getTotal();
+    this.totalItems = this.cartService.getItemCount();
     this.gstAmount = this.totalAmount * 0.18;
     this.grandTotal = this.totalAmount + this.gstAmount;
   }
 
-  // 🔥 BUY NOW = SAVE SHIPPING
   buyNow() {
     if (
       !this.shipping.firstName ||
@@ -79,8 +75,14 @@ export class Shipping implements OnInit {
       return;
     }
 
-    // ✅ NO user_id here
+    const userId = this.loginService.getUserId();
+    if (!userId) {
+      alert('Please login before placing the order.');
+      return;
+    }
+
     const payload = {
+      user_id: userId,
       address: `${this.shipping.firstName} ${this.shipping.lastName}, ${this.shipping.address}, ${this.shipping.apartment}`,
       city: this.shipping.city,
       state: this.shipping.state,
@@ -95,16 +97,19 @@ export class Shipping implements OnInit {
       },
       error: (err) => {
         console.error('Shipping save failed', err);
+        if (err?.status === 401) {
+          alert('Your session token is invalid for shipping. Please login again.');
+          this.loginService.logout();
+          this.router.navigate(['/login']);
+          return;
+        }
         alert('Failed to save shipping address');
       }
     });
   }
 
-  // 🔹 Remove item from cart
   removeItem(index: number) {
-    this.items.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(this.items));
-    this.calculateTotals();
+    this.cartService.removeFromCart(index);
   }
 
   closeDialog() {
@@ -113,6 +118,9 @@ export class Shipping implements OnInit {
 
   confirmPurchase() {
     this.showDialog = false;
-    // next → payment / order confirmation
+  }
+
+  ngOnDestroy(): void {
+    this.cartSub?.unsubscribe();
   }
 }

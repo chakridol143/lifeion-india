@@ -25,6 +25,13 @@ export class CartService {
       this.items = JSON.parse(stored);
       this.cartSubject.next(this.items);
     }
+
+    // If user already logged in (page refresh), hydrate cart from backend
+    const sessionToken = sessionStorage.getItem('token');
+    const sessionUserId = sessionStorage.getItem('userId') || this.getUserIdFromSession();
+    if (sessionToken && sessionUserId) {
+      this.loadCartForUser(Number(sessionUserId), sessionToken);
+    }
   }
   mergeCartAfterLogin(user_Id: number, token: string) {
   const items = this.getItems();
@@ -89,8 +96,8 @@ export class CartService {
   addToCart(item: any) {
     if (!item?.product_id) return;
 
-    const userIdStr = localStorage.getItem("userId");
-    const token = localStorage.getItem("token");
+    const userIdStr = sessionStorage.getItem('userId') || this.getUserIdFromSession();
+    const token = sessionStorage.getItem('token');
     const isLoggedIn = !!userIdStr && !!token;
 
     const qty = item.quantity > 0 ? item.quantity : 1;
@@ -102,7 +109,7 @@ export class CartService {
       this.saveItems();
 
       if (isLoggedIn && existing.cart_item_id) {
-        this.updateQuantity(existing.cart_item_id, existing.quantity);
+        this.updateQuantity(existing.cart_item_id, existing.quantity, token);
       }
       return;
     }
@@ -131,35 +138,37 @@ export class CartService {
     });
   }
 
-   removeFromCart(index: number, user_Id?: number, token?: string): void {
-  if (index >= 0 && index < this.items.length) {
-    const removedItem = this.items[index];
-    this.items.splice(index, 1);
-    this.saveItems();
+  removeFromCart(index: number, user_Id?: number, token?: string): void {
+    if (index >= 0 && index < this.items.length) {
+      const removedItem = this.items[index];
+      this.items.splice(index, 1);
+      this.saveItems();
 
-    
-    if (user_Id && removedItem && removedItem.product_id && token) {
-      const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+      const resolvedUserId = user_Id ?? Number(sessionStorage.getItem('userId') || this.getUserIdFromSession());
+      const resolvedToken = token ?? sessionStorage.getItem('token');
 
-      this.http
-        .delete(`${this.apiUrl}/${user_Id}/${removedItem.product_id}`, { headers })
-        .subscribe({
-          next: (res) => console.log('Cart item removed from backend:', res),
-          error: (err) => console.error('Error removing from backend:', err),
-        });
+      if (resolvedUserId && removedItem?.product_id && resolvedToken) {
+        const headers = new HttpHeaders({ Authorization: `Bearer ${resolvedToken}` });
+
+        this.http
+          .delete(`${this.apiUrl}/${resolvedUserId}/${removedItem.product_id}`, { headers })
+          .subscribe({
+            next: res => console.log('Cart item removed from backend:', res),
+            error: err => console.error('Error removing from backend:', err),
+          });
+      }
+      this.cartSubject.next(this.items);
     }
-    this.cartSubject.next(this.items);
   }
-}
 
-  updateQuantity(cartItemId: number, quantity: number) {
+  updateQuantity(cartItemId: number, quantity: number, tokenOverride?: string) {
     const item = this.items.find(i => i.cart_item_id === cartItemId);
     if (item) {
       item.quantity = quantity;
       this.saveItems();
     }
 
-    const token = localStorage.getItem("token");
+    const token = tokenOverride || sessionStorage.getItem("token");
     if (!token) return;
 
     const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
@@ -225,12 +234,36 @@ export class CartService {
     return this.items;
   }
   getTotal(): number {
-    return this.items.reduce((sum, it) => sum + Number(it.price || 0), 0);
+    return this.items.reduce((sum, it) => {
+      const price = parseFloat((it?.price ?? 0).toString());
+      const qty = Number(it?.quantity ?? 1) || 1;
+      return sum + (Number.isFinite(price) ? price * qty : 0);
+    }, 0);
+  }
+
+  getItemCount(): number {
+    return this.items.reduce((sum, it) => sum + (Number(it?.quantity) || 1), 0);
   }
     clearCart(localOnly = false): void {
     this.items = [];
     localStorage.removeItem(this.key);
     this.cartSubject.next([])
     if (localOnly) return;
+  }
+
+  private getUserIdFromSession(): string | null {
+    const userRaw = sessionStorage.getItem('user');
+    if (!userRaw) return null;
+    try {
+      const user = JSON.parse(userRaw);
+      const id = user?.user_id || user?.id;
+      if (id) {
+        sessionStorage.setItem('userId', String(id));
+        return String(id);
+      }
+    } catch {
+      return null;
+    }
+    return null;
   }
 }

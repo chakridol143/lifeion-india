@@ -163,8 +163,8 @@
           [src]="resolveImageUrl(cat.image_url)"
         />
         <a
-          [routerLink]="['/product-details']"
-          [queryParams]="{ collection: getIonizerCollectionSlug(cat.name) }"
+          [routerLink]="getIonizerCollectionSlug(cat.name) === 'reverse-osmosis' ? ['/reverse-osmosis'] : ['/product-details']"
+          [queryParams]="getIonizerCollectionSlug(cat.name) === 'reverse-osmosis' ? null : { collection: getIonizerCollectionSlug(cat.name) }"
           (click)="closeIonizerMenu()"
         >
           {{ cat.name }}

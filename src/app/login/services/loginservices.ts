@@ -48,6 +48,9 @@ login(data: { email: string; password: string }) {
   saveSession(token: string, user: any) {
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('user', JSON.stringify(user));
+    if (user?.user_id || user?.id) {
+      sessionStorage.setItem('userId', String(user.user_id || user.id));
+    }
     this.userState.next(user);
 
     this.cartService.clearCart(true);

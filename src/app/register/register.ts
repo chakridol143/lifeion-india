@@ -93,9 +93,22 @@ export class Register implements AfterViewInit, OnInit, OnDestroy {
     };
 
     this.auth.register(payload).subscribe({
-      next: (res: any) => {
-        this.auth.saveSession(res.token, res.user);
-        this.router.navigate(['/']);
+      next: () => {
+        // Register token is rejected by shipping API in production.
+        // Immediately log in to obtain the canonical auth token.
+        this.auth.login({
+          email: this.email,
+          password: this.password
+        }).subscribe({
+          next: (loginRes: any) => {
+            this.auth.saveSession(loginRes.token, loginRes.user);
+            this.router.navigate(['/']);
+          },
+          error: () => {
+            alert('Registration done, but login failed. Please login manually.');
+            this.router.navigate(['/login']);
+          }
+        });
       },
       error: () => alert('Registration failed')
     });
