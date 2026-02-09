@@ -16,7 +16,6 @@ export class ShippingService {
     private loginService: LoginService
   ) {}
 
-  // ADD SHIPPING (no auth needed on backend; user_id passed in body)
   addShipping(data: any): Observable<any> {
     return this.http.post(this.apiUrl, data, {
       headers: this.buildAuthHeaders()
