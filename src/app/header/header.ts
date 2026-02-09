@@ -380,15 +380,19 @@ showCartPopup = false;
   //   this.cart.removeFromCart(index, user_Id, token);
   // }
 
-  cartItemRemove(index: number) {
-    const token = sessionStorage.getItem('token') ?? undefined;
-    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
-    const user_Id = user.user_id || user.id;
-    this.cart.removeFromCart(index, user_Id, token);
+ cartItemRemove(index: number) {
+  const item = this.cart.getItems()[index];
+  if (!item) return;
+
+  // ✅ only cart_item_id is needed
+  if (item.cart_item_id) {
+    this.cart.removeFromCart(item.cart_item_id);
   }
+}
+
   
    handleClear() {
-    this.cart.clearCart();
+    this.cart.clearLocalCart();
   }
     
 goToLogin(): void {

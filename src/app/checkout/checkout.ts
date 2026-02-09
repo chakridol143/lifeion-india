@@ -42,17 +42,19 @@ export class Checkout {
     this.items = this.cartService.getItems();
     this.calculateTotals();
   }
-  clearCart(){
-    this.cartService.clearCart();
-    this.items = [];
-    this.calculateTotals();
-  }
-  calculateTotals(){
-    this.totalAmount = this.cartService.getTotal();
-    this.gstAmount = this.totalAmount * 0.18;
-    this.grandTotal = this.totalAmount + this.gstAmount; 
-    this.totalItems = this.cartService.getItemCount();
-   }
+ clearCart() {
+  this.cartService.clearLocalCart(); // ✅ correct method
+  this.items = [];
+  this.calculateTotals();
+}
+
+calculateTotals() {
+  this.totalAmount = this.cartService.getTotal();
+  this.gstAmount = this.totalAmount * 0.18;
+  this.grandTotal = this.totalAmount + this.gstAmount;
+  this.totalItems = this.cartService.getCount(); // ✅ correct method
+}
+
 
    ngOnDestroy(): void {
     this.cartSub?.unsubscribe();

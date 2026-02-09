@@ -59,7 +59,7 @@ export class Shipping implements OnInit, OnDestroy {
 
   calculateTotals() {
     this.totalAmount = this.cartService.getTotal();
-    this.totalItems = this.cartService.getItemCount();
+    this.totalItems = this.cartService.getCount();
     this.gstAmount = this.totalAmount * 0.18;
     this.grandTotal = this.totalAmount + this.gstAmount;
   }

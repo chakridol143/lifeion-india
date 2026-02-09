@@ -11,7 +11,7 @@ import {LoginResponse} from '../../models.ts/login-response.model';
 })
 export class LoginService {
 
-   private BASE_URL = `${API_BASE_URL}/api/auth`;
+   private BASE_URL = `https://lifeion-backend-production.up.railway.app/api/auth`;
 
   private userState = new BehaviorSubject<any>(this.getUser());
   userState$ = this.userState.asObservable();
@@ -45,29 +45,51 @@ login(data: { email: string; password: string }) {
     );
   }
 
+  // saveSession(token: string, user: any) {
+  //   sessionStorage.setItem('token', token);
+  //   sessionStorage.setItem('user', JSON.stringify(user));
+  //   if (user?.user_id || user?.id) {
+  //     sessionStorage.setItem('userId', String(user.user_id || user.id));
+  //   }
+  //   this.userState.next(user);
+
+  //   this.cartService.clearCart(true);
+
+  //   const userId = this.getUserId();
+  //   if (userId) {
+  //     this.cartService.loadCartForUser(userId, token);
+  //   }
+  // }
   saveSession(token: string, user: any) {
-    sessionStorage.setItem('token', token);
-    sessionStorage.setItem('user', JSON.stringify(user));
-    if (user?.user_id || user?.id) {
-      sessionStorage.setItem('userId', String(user.user_id || user.id));
-    }
-    this.userState.next(user);
+  sessionStorage.setItem('token', token);
+  sessionStorage.setItem('user', JSON.stringify(user));
 
-    this.cartService.clearCart(true);
-
-    const userId = this.getUserId();
-    if (userId) {
-      this.cartService.loadCartForUser(userId, token);
-    }
+  if (user?.user_id || user?.id) {
+    sessionStorage.setItem('userId', String(user.user_id || user.id));
   }
 
+  this.userState.next(user);
+
+  // ✅ NEW CART FLOW
+  this.cartService.mergeCartAfterLogin(token);
+  this.cartService.loadCartFromBackend(token);
+}
+
+
+  // logout() {
+  //   sessionStorage.clear();
+  //   localStorage.removeItem('userId');
+  //   localStorage.removeItem('token');
+  //   this.cartService.clearCart(true);
+  //   this.userState.next(null);
+  // }
   logout() {
-    sessionStorage.clear();
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    this.cartService.clearCart(true);
-    this.userState.next(null);
-  }
+  sessionStorage.clear();
+  localStorage.removeItem('guest_cart'); // 👈 important
+  this.cartService.clearLocalCart();     // 👈 new method
+  this.userState.next(null);
+}
+
 
   isLoggedIn(): boolean {
     const token = sessionStorage.getItem('token');
