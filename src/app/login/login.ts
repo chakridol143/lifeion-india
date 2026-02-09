@@ -124,11 +124,22 @@ export class login implements AfterViewInit {
     this.router.navigate(['/']);
   }
 
+
+
+
   closeDialog() {
     this.showDialog = false;
     this.detectChangesSafe();
     this.close.emit();
     this.router.navigate(['/']);
+
+    // Navigate back to the previous page or home
+    const previousUrl = this.router.parseUrl(this.router.routerState.root.component?.toString() || '');
+    if (document.referrer && !document.referrer.includes('/login')) {
+      window.history.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   private detectChangesSafe(): void {

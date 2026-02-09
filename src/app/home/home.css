@@ -414,6 +414,20 @@ body {
   background: #0099b8;
 }
 
+/* Hide scrollbar but keep scroll functionality */
+.products-container,
+.benefits-container,
+.reviews-container {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE & Edge */
+}
+
+.products-container::-webkit-scrollbar,
+.benefits-container::-webkit-scrollbar,
+.reviews-container::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari */
+}
+
 .products-container {
   display: flex;
   gap: 16px;
