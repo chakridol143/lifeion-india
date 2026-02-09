@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, AfterViewInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Output, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -30,7 +30,8 @@ export class login implements AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private loginService: LoginService,
-    private cartServices: CartService
+    private cartServices: CartService,
+    private cdr: ChangeDetectorRef
   ) {}
 
 
@@ -81,6 +82,7 @@ export class login implements AfterViewInit {
           this.cartServices.mergeCartAfterLogin(userId, token);
         }
         this.showDialog = false;
+        this.detectChangesSafe();
 
         this.close.emit();
 
@@ -94,7 +96,7 @@ export class login implements AfterViewInit {
   }
 
   onBackgroundClick() {
-    this.router.navigate(['/app']);
+    this.router.navigate(['/']);
   }
 
 
@@ -115,7 +117,7 @@ onLogin() {
       this.cartServices.mergeCartAfterLogin(userId, res.token);
 
       this.showDialog = true;
-      this.close.emit();
+      this.detectChangesSafe();
     },
     error: (err) => {
       console.error('Login failed:', err);
@@ -126,8 +128,17 @@ onLogin() {
 
   closeDialog() {
     this.showDialog = false;
-    this.router.navigate(['/home']);
+    this.detectChangesSafe();
+    this.router.navigate(['/']);
     this.close.emit();
     window.location.reload();
+  }
+
+  private detectChangesSafe(): void {
+    try {
+      this.cdr.detectChanges();
+    } catch {
+      // no-op if view already destroyed
+    }
   }
 }

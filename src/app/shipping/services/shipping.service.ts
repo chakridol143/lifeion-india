@@ -9,8 +9,7 @@ import { LoginService } from '../../login/services/loginservices';
 export class ShippingService {
 
   private apiUrl =
-    'https://lifeion-backend-production.up.railway.app/api/shipping';
-    // 'http://localhost:3000/api/shipping';
+     'https://lifeion-backend-production.up.railway.app/api/shipping';
 
   constructor(
     private http: HttpClient,

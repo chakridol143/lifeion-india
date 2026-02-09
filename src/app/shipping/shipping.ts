@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ShippingService } from './services/shipping.service';
 import { LoginService } from '../login/services/loginservices';
 import { CommonModule } from '@angular/common';
@@ -42,7 +42,8 @@ export class Shipping implements OnInit, OnDestroy {
     private shippingService: ShippingService,
     public loginService: LoginService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -94,6 +95,7 @@ export class Shipping implements OnInit, OnDestroy {
     this.shippingService.addShipping(payload).subscribe({
       next: () => {
         this.showDialog = true;
+        this.detectChangesSafe();
       },
       error: (err) => {
         console.error('Shipping save failed', err);
@@ -114,13 +116,23 @@ export class Shipping implements OnInit, OnDestroy {
 
   closeDialog() {
     this.showDialog = false;
+    this.detectChangesSafe();
   }
 
   confirmPurchase() {
     this.showDialog = false;
+    this.detectChangesSafe();
   }
 
   ngOnDestroy(): void {
     this.cartSub?.unsubscribe();
+  }
+
+  private detectChangesSafe(): void {
+    try {
+      this.cdr.detectChanges();
+    } catch {
+      // no-op if view already destroyed
+    }
   }
 }

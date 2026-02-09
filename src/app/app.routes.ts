@@ -43,6 +43,7 @@ import { ShippingService } from './shipping/services/shipping.service';
 
 export const routes: Routes = [
   { path: '', component: Home },
+  { path: 'home', component: Home },
 
   { path: 'product-details', component: ProductDetails },
   { path: 'login', component: login },
@@ -58,7 +59,8 @@ export const routes: Routes = [
   },
   { path: '', redirectTo: 'checkout', pathMatch: 'full' },
   
-  { path:'compaison', component: Compaison },
+  { path: 'comparison', component: Compaison },
+  { path: 'compaison', redirectTo: 'comparison', pathMatch: 'full' },
   { path: 'finance', component: Finance },
 
   {path:'aboutus', component:Aboutus},
@@ -113,6 +115,7 @@ export const routes: Routes = [
       { path: 'support/certifications', component: Certifications },
       { path: 'support/our-company', component: OurCompany },
       { path: 'support/water-facts', component: WaterFACTS },
+      { path: 'support/business-opportunities', component: BussinessOpportunities },
       { path: 'support/bussiness-opportunities', component: BussinessOpportunities },
 
   { path: 'testimonials', component: TestimonialsComponent },
