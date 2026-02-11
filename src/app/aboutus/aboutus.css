@@ -40,6 +40,25 @@
   .mission-text {
     font-size: 16px;
   }
+
+  /* Tablet Portrait and Below */
+@media (max-width: 768px) {
+
+  .mission-section {
+    padding: 60px 20px;
+  }
+
+  .mission-container {
+    padding: 0 10px;
+  }
+
+  .mission-image img {
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
 }
 
 
@@ -100,6 +119,10 @@
 
   .science-text {
     font-size: 16px;
+  }
+
+  .mission-image img {
+    width: 65%;
   }
 }
 
@@ -962,5 +985,42 @@
   .footer-container {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .mission-image img {
+    width: 65%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+  .mission-image img {
+    width: 55%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1919px) {
+
+  .mission-image img {
+    width: 45%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (min-width: 1920px) {
+
+  .mission-image img {
+    width: 35%;
+    margin: 0 auto;
+    display: block;
   }
 }

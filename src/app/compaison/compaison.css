@@ -507,6 +507,12 @@
     scroll-behavior: smooth;
   }
 
+   .compare-wrapper1 {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
   .row {
     grid-template-columns: 130px repeat(6, 150px);
   }
@@ -631,6 +637,12 @@
   }
 
   .compare-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  .compare-wrapper1 {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -897,6 +909,36 @@
 .compare-wrapper::-webkit-scrollbar-thumb:hover {
   background: #0099aa;
 }
+
+.compare-wrapper1 {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  border-bottom: 2px solid #e5e5e5;
+  border-top: 2px solid #e5e5e5;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  display: block;
+}
+
+.compare-wrapper1::-webkit-scrollbar {
+  height: 8px;
+}
+
+.compare-wrapper1::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+.compare-wrapper1::-webkit-scrollbar-thumb {
+  background: #00b4c6;
+  border-radius: 4px;
+}
+
+.compare-wrapper1::-webkit-scrollbar-thumb:hover {
+  background: #0099aa;
+}
+
 
 .compare-table {
   display: table;
@@ -1548,4 +1590,9 @@
   .compare-wrapper {
     overflow: visible;
   }
+
+   .compare-wrapper1 {
+    overflow: visible;
+  }
 }
+
