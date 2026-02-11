@@ -1,7 +1,8 @@
 <div class="cart-page">
 
   <h2>Your Cart ({{ items.length }})</h2>
-  <span class="close-btn" (click)="closeCart()">✕</span>
+  <span class="close-btn" (click)="closeCart()">X</span>
+  <div class="gst-note" *ngIf="items.length">Prices exclude GST. +18% GST applies.</div>
   <div *ngIf="items.length === 0" class="empty">Your cart is empty</div>
 
   <ul *ngIf="items.length > 0" class="items-list">
@@ -10,7 +11,7 @@
 
       <div class="info">
         <div class="name">{{ item.name }}</div>
-        <div class="price">₹{{ item.price }}</div>
+        <div class="price">{{ item.price | currencyDisplay }} <small class="price-note">+18% GST</small></div>
       </div>
       <div class="quantity-controls">
   <button (click)="decQty(i)">-</button>
@@ -22,7 +23,9 @@
   </ul>
 
   <div *ngIf="items.length > 0" class="footer">
-    <div class="total">Total: ₹{{ getTotal() }}</div>
+    <div class="total-line">Subtotal: {{ subtotal | currencyDisplay }}</div>
+    <div class="total-line">GST (18%): {{ gst | currencyDisplay }}</div>
+    <div class="total strong">Total (incl. GST): {{ grandTotal | currencyDisplay }}</div>
 
     <div class="actions">
       <button class="clear-btn" (click)="onClear()">Clear</button>
@@ -30,3 +33,10 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+
+

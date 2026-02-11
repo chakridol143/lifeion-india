@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,8 @@ import { CartService } from '../cart-details/services/cartservice';
 import { CartDetails } from '../cart-details/cart-details';
 import { LoginService } from '../login/services/loginservices';
 
+type MobileScreen = 'root' | 'water' | 'ionizer' | 'learn' | 'testimonials' | 'support';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -20,15 +22,15 @@ import { LoginService } from '../login/services/loginservices';
 })
 export class Header implements OnInit {
   assetsBaseUrl = ASSETS_BASE_URL;
+  mobileScreen: MobileScreen = 'root';
 
   /* ===== MEGA MENU DATA ===== */
   showMegaMenu = false;
-    categories: Category[] = [];
- products: Product[] = [];
- activeCategoryId: number | null = null;
- isIonizerLoading = false;
- waterSystemCategories: Category[] = [];
-user: any = null;
+  categories: Category[] = [];
+  products: Product[] = [];
+  activeCategoryId: number | null = null;
+  isIonizerLoading = false;
+  user: any = null;
 
 
 
@@ -42,6 +44,10 @@ user: any = null;
   /* ===== MOBILE MENU ===== */
   menuOpen = false;
   activeDropdown: string | null = null;
+  expandedWaterCategoryId: number | null = null;
+  waterProductsMap: Record<number, Product[]> = {};
+  expandedIonizerCategoryId: number | null = null;
+  @ViewChild('mobilePanel') mobilePanel?: ElementRef<HTMLDivElement>;
 
   constructor(
     private categoryService: CategoryService,
@@ -76,7 +82,7 @@ navItems = [
 
   {
     label: 'Testimonials',
-    route: null,
+    route: '/testimonials',
     submenu: [
       { label: 'Satisfied Customers', route: '/customers' },
       { label: 'Health Care Professionals', route: '/healthcare' },
@@ -89,13 +95,13 @@ navItems = [
 
   {
     label: 'About Us',
-    route: null,
+    route: '/aboutus',
     submenu: [{ label: 'Contact', route: '/contact' }],
   },
 
   {
     label: 'Support',
-    route: null,
+    route: '/support',
     submenu: [
       { label: 'Certifications', route: '/support/certifications' },
       { label: 'Our Company', route: '/support/our-company' },
@@ -103,6 +109,27 @@ navItems = [
       { label: 'Business Opportunities', route: '/support/business-opportunities' },
     ],
   },
+];
+learnItems = [
+  { label: 'Studies', route: '/learn/studies' },
+  { label: 'Videos', route: '/learn/videos' },
+  { label: 'Blog', route: '/learn/blog' },
+  { label: 'Support', route: '/support' },
+  { label: 'Free Water Report', route: '/learn/free-water-report' },
+];
+
+testimonialsItems = [
+  { label: 'Satisfied Customers', route: '/customers' },
+  { label: 'Health Care Professionals', route: '/healthcare' },
+  { label: 'Actors & Musicians', route: '/actors' },
+  { label: 'Professional Athletes', route: '/athletes' },
+];
+
+supportItems = [
+  { label: 'Certifications', route: '/support/certifications' },
+  { label: 'Our Company', route: '/support/our-company' },
+  { label: 'Water FACTS', route: '/support/water-facts' },
+  { label: 'Business Opportunities', route: '/support/business-opportunities' },
 ];
 onNavClick(): void {
   this.closeMenu();
@@ -132,12 +159,30 @@ goToProduct(product: any): void {
 
 
   /* ===== SEARCH ===== */
-  openSearch() { this.searchOpen = true; }
+  openSearch() { this.searchOpen = true; this.menuOpen = false; }
   closeSearch() { this.searchOpen = false; this.overlaySearch = ''; }
 
   /* ===== MOBILE ===== */
-  toggleMenu() { this.menuOpen = !this.menuOpen; }
-  closeMenu() { this.menuOpen = false; this.activeDropdown = null; }
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    this.searchOpen = false;
+    this.closeIonizerMenu();
+    this.showMegaMenu = false;
+    this.mobileScreen = 'root';
+    this.expandedIonizerCategoryId = null;
+    this.handleBodyScroll();
+    this.focusPanelSoon();
+  }
+  closeMenu() {
+    this.menuOpen = false;
+    this.activeDropdown = null;
+    this.closeIonizerMenu();
+    this.showMegaMenu = false;
+    this.mobileScreen = 'root';
+    this.expandedWaterCategoryId = null;
+    this.expandedIonizerCategoryId = null;
+    this.handleBodyScroll();
+  }
   toggleDropdown(label: string) {
     this.activeDropdown = this.activeDropdown === label ? null : label;
   }
@@ -147,11 +192,6 @@ goToProduct(product: any): void {
     this.closeSearch();
   }
 }
-// ngOnInit() {
-//     this.categoryService.getAllCategories().subscribe(res => {
-//       this.categories = res;
-//     });
-//   }
 
 ngOnInit() {
   this.cart.cart$.subscribe(items => {
@@ -165,6 +205,10 @@ ngOnInit() {
 
   this.auth.userState$.subscribe(user => {
     this.user = user;
+  });
+
+  this.categoryService.getWaterSystemCategories().subscribe(res => {
+    this.waterSystemCategories = res;
   });
 }
 /* ===== WATER SYSTEMS ===== */
@@ -194,24 +238,6 @@ onDropdownLeave(): void {
   this.products = [];
   this.activeCategoryId = null;
 }
-// onCategoryHover(categoryId: number): void {
-//   if (this.activeCategoryId === categoryId) return;
-
-//   this.activeCategoryId = categoryId;
-
-//   this.productService
-//     .getProductsByCategory(categoryId)
-//     .subscribe({
-//       next: (res: any) => {
-//         console.log('Water Systems API response:', res);
-//         this.products = res?.products ?? [];
-//       },
-//       error: (err) => {
-//         console.error(err);
-//         this.products = [];
-//       }
-//     });
-// }
 
 onCategoryHover(categoryId: number): void {
   if (this.activeCategoryId === categoryId) return;
@@ -238,12 +264,13 @@ onCategoryHover(categoryId: number): void {
 
 
 /* ==IONIZER FILTERS== */
-ionizerCategories: Category[] = [];
+  ionizerCategories: Category[] = [];
   ionizerProducts: Product[] = [];
   activeIonizerCategoryId: number | null = null;
   showIonizerMenu = false;
   ionizerProductsMap: { [categoryId: number]: Product[] } = {};
   private ionizerCloseTimeout: ReturnType<typeof setTimeout> | null = null;
+  waterSystemCategories: Category[] = [];
 
 
 loadIonizerFilters(): void {
@@ -285,6 +312,84 @@ closeIonizerMenu(): void {
   this.showIonizerMenu = false;
 }
 
+  openWaterScreen(): void {
+    this.mobileScreen = 'water';
+    this.expandedWaterCategoryId = null;
+    if (!this.waterSystemCategories.length) {
+      this.categoryService.getWaterSystemCategories().subscribe(res => {
+        this.waterSystemCategories = res;
+      });
+    }
+  }
+
+  openIonizerScreen(): void {
+    this.mobileScreen = 'ionizer';
+    this.expandedIonizerCategoryId = null;
+    if (!this.ionizerCategories.length) {
+      this.loadIonizerFilters();
+    }
+  }
+
+  openSimpleScreen(screen: MobileScreen): void {
+    this.mobileScreen = screen;
+  }
+
+  backToRoot(): void {
+    this.mobileScreen = 'root';
+    this.expandedWaterCategoryId = null;
+    this.expandedIonizerCategoryId = null;
+  }
+
+  toggleWaterCategory(cat: Category): void {
+    const id = cat.category_id;
+    this.expandedWaterCategoryId = this.expandedWaterCategoryId === id ? null : id;
+    if (this.expandedWaterCategoryId === null) return;
+
+    if (!this.waterProductsMap[id]) {
+      this.productService.getProductsByCategory(id).subscribe(res => {
+        this.waterProductsMap[id] = res?.products ?? [];
+      });
+    }
+  }
+
+  toggleIonizerCategory(cat: Category): void {
+    const id = cat.category_id;
+    this.expandedIonizerCategoryId = this.expandedIonizerCategoryId === id ? null : id;
+    if (this.expandedIonizerCategoryId === null) return;
+
+    if (!this.ionizerProductsMap[id]) {
+      this.productService.getProductsByCategory(id).subscribe(res => {
+        this.ionizerProductsMap[id] = res?.products ?? [];
+      });
+    }
+  }
+
+  navigateAndClose(route: string | null | undefined): void {
+    if (route) {
+      this.router.navigate([route]);
+    }
+    this.closeMenu();
+  }
+
+  private handleBodyScroll(): void {
+    document.body.style.overflow = this.menuOpen ? 'hidden' : '';
+  }
+
+  private focusPanelSoon(): void {
+    if (!this.menuOpen) return;
+    setTimeout(() => {
+      this.mobilePanel?.nativeElement?.focus();
+    }, 0);
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEsc(ev: KeyboardEvent | Event) {
+    if (this.menuOpen) {
+      ev.preventDefault();
+      this.closeMenu();
+    }
+  }
+
   onIonizerEnter(): void {
     if (this.ionizerCloseTimeout) {
       clearTimeout(this.ionizerCloseTimeout);
@@ -307,24 +412,6 @@ closeIonizerMenu(): void {
     }
   }
 
-
-//   onIonizerLeave(): void {
-//   this.ionizerCloseTimeout = setTimeout(() => {
-//     this.showIonizerMenu = false;
-//     this.ionizerProducts = [];            
-//     this.activeIonizerCategoryId = null;
-//   }, 150);
-// }
-
-//   closeIonizerMenu(): void {
-//     if (this.ionizerCloseTimeout) {
-//       clearTimeout(this.ionizerCloseTimeout);
-//       this.ionizerCloseTimeout = null;
-//     }
-//     this.showIonizerMenu = false;
-//     this.ionizerProducts = [];
-//     this.activeIonizerCategoryId = null;
-//   }
 
   getIonizerCollectionSlug(name: string | undefined): string {
     const normalized = (name ?? '').toLowerCase();
@@ -373,12 +460,6 @@ showCartPopup = false;
     this.showCartPopup = false;
   }
  
-  // cartItemRemove(index: number) {
-  //   const token = sessionStorage.getItem('token') ?? undefined;
-  //   const user = JSON.parse(sessionStorage.getItem('user') || '{}');
-  //   const user_Id = user.user_id || user.id;
-  //   this.cart.removeFromCart(index, user_Id, token);
-  // }
 
  cartItemRemove(index: number) {
   const item = this.cart.getItems()[index];

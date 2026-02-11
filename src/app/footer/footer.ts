@@ -1,23 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CurrencyService, CurrencyCode } from '../shared/currency.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './footer.html',
   styleUrls: ['./footer.css']
 })
 export class FooterComponent implements OnInit {
   newsletterForm!: FormGroup;
+  currency: CurrencyCode = 'USD';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private currencyService: CurrencyService) {
     this.initializeForm();
   }
 
   ngOnInit(): void {
-    // Component initialized
+    this.currencyService.loadFromStorage();
+    this.currency = this.currencyService.getCurrency();
   }
 
   private initializeForm(): void {
@@ -42,5 +45,10 @@ export class FooterComponent implements OnInit {
       this.newsletterForm.reset();
       alert('Thank you for subscribing! Check your email for confirmation.');
     }
+  }
+
+  onCurrencyChange(code: CurrencyCode) {
+    this.currency = code;
+    this.currencyService.setCurrency(code);
   }
 }

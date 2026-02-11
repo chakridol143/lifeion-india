@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from './services/cartservice';
 import { resolveAssetUrl } from '../config/api.config';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
 
 @Component({
   selector: 'app-cart-details',
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './cart-details.html',
   styleUrl: './cart-details.css',
 })
@@ -24,17 +25,16 @@ export class CartDetails {
 
   constructor(private router: Router,private cart : CartService) {}
 
-  getItemPrice(price: any): number {
-  if (!price) return 0;
-  return Number(String(price).replace(/,/g, ''));
+get subtotal(): number {
+  return this.cart.getConvertedTotal();
 }
 
-getTotal(): number {
-  return this.items.reduce((sum, item) => {
-    const price = this.getItemPrice(item.price);
-    const qty = item.quantity ?? 1;
-    return sum + price * qty;
-  }, 0);
+get gst(): number {
+  return this.cart.getGstAmount();
+}
+
+get grandTotal(): number {
+  return this.cart.getGrandTotal();
 }
 
 

@@ -17,7 +17,7 @@
     <h1 class="product-title">{{ product.name }}</h1>
 
     <!-- Price -->
-    <h2 class="price">₹{{ product.price }}</h2>
+    <h2 class="price">{{ product.price | currencyDisplay }} <small class="price-note">+18% GST</small></h2>
 
     <!-- Short description -->
     <p class="short-desc">
@@ -156,3 +156,5 @@
     <img src="images/4s.png" alt="Perfect Fit" />
   </div>
 </section>
+
+

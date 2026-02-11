@@ -143,8 +143,8 @@
           <span class="review-count">({{ product.reviews }})</span>
         </div>
         <div class="price-section">
-          <p class="price">${{ product.price }}</p>
-          <p class="emi">EMI Starts at ${{ product.emi }} / month</p>
+          <p class="price">{{ product.price | currencyDisplay }} <span class="price-note">+18% GST</span></p>
+          <p class="emi">EMI Starts at {{ product.emi | currencyDisplay }} / month</p>
         </div>
 
         <button class="view-product-btn" (click)="viewProduct(product)">
@@ -476,3 +476,4 @@
     <button class="video-section-btn">Learn More</button>
   </div> -->
 </section>
+

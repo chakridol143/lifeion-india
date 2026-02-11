@@ -30,6 +30,8 @@ export class login implements AfterViewInit {
   showDialog = false;
   error = '';
   showPassword = false;
+  private googleRendered = false;
+  private googleScriptInjected = false;
 
   constructor(
     private router: Router,
@@ -42,7 +44,26 @@ export class login implements AfterViewInit {
   /* ---------------- GOOGLE INIT ---------------- */
 
   ngAfterViewInit() {
+    this.ensureGoogleScript();
     this.waitForGoogle();
+  }
+
+  /** Inject the Google script if it is not already on the page. */
+  private ensureGoogleScript() {
+    if ((window as any).google?.accounts?.id) {
+      return;
+    }
+    if (this.googleScriptInjected || document.querySelector('script[data-gsi-client]')) {
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://accounts.google.com/gsi/client';
+    script.async = true;
+    script.defer = true;
+    script.dataset['gsiClient'] = 'true';
+    script.onload = () => this.initGoogle();
+    document.head.appendChild(script);
+    this.googleScriptInjected = true;
   }
 
   private waitForGoogle() {
@@ -54,6 +75,10 @@ export class login implements AfterViewInit {
   }
 
   private initGoogle() {
+    if (this.googleRendered) return;
+    const target = document.getElementById('googleLoginBtn');
+    if (!target) return;
+
     google.accounts.id.initialize({
       client_id: '127997694068-djgvmqj311ldteojrtc84gbkc8h7e9bb.apps.googleusercontent.com',
       callback: (response: any) => this.handleGoogleLogin(response),
@@ -61,10 +86,14 @@ export class login implements AfterViewInit {
       auto_select: false
     });
 
-    google.accounts.id.renderButton(
-      document.getElementById('googleLoginBtn')!,
-      { theme: 'outline', size: 'large', width: '100%' }
-    );
+    target.innerHTML = '';
+    google.accounts.id.renderButton(target, {
+      theme: 'outline',
+      size: 'large',
+      width: '100%'
+    });
+
+    this.googleRendered = true;
   }
 
   /* ---------------- GOOGLE LOGIN ---------------- */

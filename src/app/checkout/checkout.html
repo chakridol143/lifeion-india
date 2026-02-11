@@ -62,15 +62,16 @@
 
     <div class="right">
       <h3 class="section">ORDER SUMMARY</h3>
+      <p class="gst-note">Prices exclude GST. 18% GST is applied below.</p>
 
       <div class="summary-row">
         <span>Subtotal</span>
-        <span>&#8377;{{ totalAmount.toFixed(2) }}</span>
+        <span>{{ totalAmount | currencyDisplay }}</span>
       </div>
 
       <div class="summary-row">
         <span>Taxes</span>
-        <span>&#8377;{{ gstAmount.toFixed(2) }}</span>
+        <span>{{ gstAmount | currencyDisplay }}</span>
       </div>
 
       <div class="summary-row">
@@ -79,8 +80,8 @@
       </div>
 
       <div class="summary-total">
-        <span>TOTAL</span>
-        <span>&#8377;{{ grandTotal.toFixed(2) }}</span>
+        <span>TOTAL (incl. GST)</span>
+        <span>{{ grandTotal | currencyDisplay }}</span>
       </div>
 
       <div class="promo-box">APPLY A PROMO CODE OR DISCOUNT</div>
@@ -106,7 +107,8 @@
 
           <p class="bag-price-row">
             <span class="old-price">&#8377;{{ item.mrp || 4999 }}</span>
-            <span class="new-price">&#8377;{{ item.price }}</span>
+            <span class="new-price">{{ item.price | currencyDisplay }}</span>
+            <span class="price-note">+18% GST</span>
             <span class="qty">x {{ item.quantity || 1 }}</span>
           </p>
 
@@ -131,7 +133,9 @@
   <p>
     Thank you for your purchase!<br />
     Your total payment is
-    <strong>&#8377;{{ grandTotal.toFixed(2) }}</strong>.
+    <strong>{{ grandTotal | currencyDisplay }}</strong>.
   </p>
   <button class="ok-btn" (click)="confirmPurchase()">OK</button>
 </div>
+
+

@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { CategoryService } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
 import { resolveAssetUrl } from '../config/api.config';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
 
 @Component({
   selector: 'app-water-systems',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './water-systems.html',
   styleUrl: './water-systems.css'
 })

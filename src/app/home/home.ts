@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../water-systems/product.service';
 import { Router } from '@angular/router';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
 
 interface Review {
   title: string;
@@ -30,7 +31,7 @@ interface Product {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CurrencyDisplayPipe],
   templateUrl: './home.html',
   styleUrl: './home.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

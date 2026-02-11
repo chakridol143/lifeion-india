@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, catchError, of, switchMap, takeUntil } from 'rxjs';
 
 import { CategoryService } from '../water-systems/category.service';
-import { ProductService } from '../water-systems/product.service';
 import { resolveAssetUrl } from '../config/api.config';
 import { CartService } from '../cart-details/services/cartservice';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
 
 type CollectionSlug =
   | 'series-7500-7600-8000'
@@ -18,7 +18,7 @@ type CollectionSlug =
 @Component({
   selector: 'app-product.details',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './product.details.html',
   styleUrl: './product.details.css',
 })
@@ -155,49 +155,11 @@ export class ProductDetails implements OnInit, OnDestroy {
     description:
       'Enhance the quality of your drinking water and take control of your health with Life Ionizer Filters. Browse our selection of filters designed to suit every need, and enjoy pure, revitalizing water every time you drink. Trust Life Ionizers to provide the best filtration solutions for your home, office, or business.',
   };
-
-  private readonly fallbackProducts: Partial<Record<
-    CollectionSlug,
-    Array<{ product_id: number; name: string; price: number; image: string; menu_type_id: number }>
-  >> = {
-    'accessories': [
-      {
-        product_id: 8001,
-        name: '.25″ BPA-Free Tubing (3 Foot Increments)',
-        price: 3.99,
-        image: 'https://lifeionizers.com/cdn/shop/files/sku_419781_1.jpg?v=1729123626',
-        menu_type_id: 1,
-      },
-      {
-        product_id: 8002,
-        name: 'Life Faucet Diverter Valve (New & Improved)',
-        price: 39.97,
-        image: 'https://lifeionizers.com/cdn/shop/files/LC-11-Diverter-Vavle.jpg?v=1729124026',
-        menu_type_id: 1,
-      },
-      {
-        product_id: 8003,
-        name: 'pH Testing Kit (Drops & Chart)',
-        price: 9.97,
-        image: 'https://lifeionizers.com/cdn/shop/files/Ph-TestKit-1.jpg?v=1729123699',
-        menu_type_id: 1,
-      },
-      {
-        product_id: 8004,
-        name: 'Pre Filter Wrench',
-        price: 4.97,
-        image: 'https://lifeionizers.com/cdn/shop/files/Pre-Filter-Wrench.jpg?v=1729111060',
-        menu_type_id: 1,
-      },
-    ],
-  };
-
   private readonly defaultProductImage = '/images/Types_of_Life_Ionizer_Replacement_Filters_2.webp';
 
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private productService: ProductService,
     private router: Router,
     private cdr: ChangeDetectorRef,
     private cartService: CartService
@@ -281,7 +243,7 @@ export class ProductDetails implements OnInit, OnDestroy {
             description: match.description || this.hero.description,
           };
 
-          return this.productService.getProductsByCategory(match.category_id).pipe(
+          return this.categoryService.getProductsByCategory(match.category_id).pipe(
             catchError(() => of({ products: [] }))
           );
         })
@@ -295,10 +257,6 @@ export class ProductDetails implements OnInit, OnDestroy {
           image: this.resolveProductImage(product.image_url),
           menu_type_id: product.menu_type_id,
         }));
-
-        if (!this.products.length && this.fallbackProducts[slug]?.length) {
-          this.products = [...(this.fallbackProducts[slug] as any[])];
-        }
 
         this.hero.subtitle = `(${this.products.length} products)`;
         this.detectChangesSafe();
@@ -368,4 +326,5 @@ export class ProductDetails implements OnInit, OnDestroy {
     }
   }
 }
+
 

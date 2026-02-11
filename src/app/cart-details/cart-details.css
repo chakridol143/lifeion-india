@@ -713,3 +713,9 @@
     bottom: 100px !important;
   }
 }
+
+.gst-note,
+.price-note {
+  font-size: 12px;
+  color: #666;
+}

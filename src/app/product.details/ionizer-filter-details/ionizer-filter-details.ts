@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CurrencyDisplayPipe } from '../../shared/currency-display.pipe';
 
 import { ProductService } from '../../water-systems/product.service';
 import { CartService } from '../../cart-details/services/cartservice';
@@ -9,7 +10,7 @@ import { resolveAssetUrl } from '../../config/api.config';
 @Component({
   selector: 'app-ionizer-filter-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './ionizer-filter-details.html',
   styleUrls: ['./ionizer-filter-details.css'],
 })

@@ -83,65 +83,6 @@
 <!-- ================= IONIZER FILTERS ================= -->
 <nav class="header-nav desktop-only">
 
-  <!-- ================= IONIZER FILTERS ================= -->
-<!-- <div
-  class="nav-dropdown-wrapper"
-  (mouseenter)="onIonizerEnter()"
-  (mouseleave)="onIonizerLeave()"
->
-  <a class="nav-link no-route">
-    Ionizer Filters <i class="bx bx-chevron-down"></i>
-  </a>
-
-  <div
-    class="mega-menu ionizer-layout"
-    *ngIf="showIonizerMenu"
-    (mouseenter)="onIonizerEnter()"
-    (mouseleave)="onIonizerLeave()"
-  >
-
-    <div
-      class="ionizer-column"
-      *ngFor="let cat of ionizerCategories"
-    >
-     
-      <div class="ionizer-title">
-        <img
-          *ngIf="cat.image_url"
-          [src]="resolveImageUrl(cat.image_url)"
-          alt=""
-        />
-        <a
-          [routerLink]="['/product-details']"
-          [queryParams]="{ collection: getIonizerCollectionSlug(cat.name) }"
-          (click)="closeIonizerMenu()"
-        >
-          <span>{{ cat.name }}</span>
-        </a>
-      </div>
-
- 
-      <ul class="ionizer-products">
-        <li
-          *ngFor="let p of ionizerProductsMap[cat.category_id]"
-         (click)="goToProduct(p)"
-
-
-        >
-          {{ p.name }}
-        </li>
-
-        <li
-          *ngIf="!ionizerProductsMap[cat.category_id]?.length"
-          class="empty-products"
-        >
-          No products
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> -->
-
 <div
   class="nav-dropdown-wrapper"
   (mouseenter)="onIonizerHover()"
@@ -198,7 +139,11 @@
   (mouseenter)="onDropdownHover()"
   (mouseleave)="onDropdownLeave()"
 >
-  <a class="nav-link no-route">
+  <a
+    class="nav-link no-route"
+    [routerLink]="'/water-systems'"
+    (click)="navigateAndClose('/water-systems')"
+  >
     Water Systems <i class="bx bx-chevron-down"></i>
   </a>
 
@@ -259,7 +204,10 @@
 
       <!-- DROPDOWNS -->
       <div *ngIf="hasSubmenu(item)" class="nav-link nav-dropdown">
-        <a href="javascript:void(0)">
+        <a
+          [routerLink]="item.route || null"
+          (click)="navigateAndClose(item.route)"
+        >
           {{ item.label }} <i class="bx bx-chevron-down"></i>
         </a>
 
@@ -296,51 +244,220 @@
 ></div>
 
 <!-- =======================
-   MOBILE MENU
+   MOBILE MENU PANEL
 ======================= -->
-<div class="mobile-menu-panel" [class.active]="menuOpen">
+<div
+  class="mobile-menu-panel"
+  [class.active]="menuOpen"
+  #mobilePanel
+  tabindex="-1"
+>
   <div class="mobile-menu-header">
-    <span class="close-menu-btn" (click)="closeMenu()">✕</span>
+    <ng-container [ngSwitch]="mobileScreen">
+      <div *ngSwitchCase="'water'" class="panel-title-row">
+        <span class="panel-title">Menu</span>
+        <button class="icon-btn close-btn" (click)="closeMenu()" aria-label="Close menu">&#10005;</button>
+      </div>
+      <div *ngSwitchDefault class="panel-title-row">
+        <span class="panel-title">Menu</span>
+        <button class="icon-btn close-btn" (click)="closeMenu()" aria-label="Close menu">&#10005;</button>
+      </div>
+    </ng-container>
   </div>
 
-  <nav class="mobile-nav">
-    <ng-container *ngFor="let item of navItems">
+  <!-- Root screen -->
+  <div class="mobile-screen" [class.active]="mobileScreen === 'root'">
+    <div class="mobile-row">
+      <button class="mobile-item" (click)="navigateAndClose('/')">
+        <span>Home</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
 
-      <!-- MOBILE DROPDOWN -->
-      <div *ngIf="item.submenu" class="mobile-nav-item">
-        <div class="mobile-nav-link" (click)="toggleDropdown(item.label)">
-          <span>{{ item.label }}</span>
-          <i
-            class="bx bx-chevron-down"
-            [class.rotated]="activeDropdown === item.label"
-          ></i>
-        </div>
+    <div class="mobile-row">
+      <button class="mobile-item has-children" (click)="openWaterScreen()">
+        <span>Water Systems</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
 
-        <div
-          class="mobile-submenu"
-          [class.active]="activeDropdown === item.label"
+    <div class="mobile-row">
+      <button class="mobile-item has-children" (click)="openIonizerScreen()">
+        <span>Ionizer Filters</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mobile-row">
+      <button class="mobile-item" (click)="navigateAndClose('/comparison')">
+        <span>Comparison</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mobile-row">
+      <button class="mobile-item has-children" (click)="openSimpleScreen('learn')">
+        <span>Learn</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mobile-row">
+      <button class="mobile-item has-children" (click)="openSimpleScreen('testimonials')">
+        <span>Testimonials</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <button class="mobile-item" (click)="navigateAndClose('/finance')">Finance</button>
+
+    <div class="mobile-row">
+      <button class="mobile-item has-children" (click)="openSimpleScreen('support')">
+        <span>Support</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mobile-row">
+      <button class="mobile-item" (click)="navigateAndClose('/contact')">
+        <span>About Us</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+
+    <div class="mobile-row">
+      <button class="mobile-item" (click)="navigateAndClose('/contact')">
+        <span>Contact</span>
+        <i class="bx bx-chevron-right"></i>
+      </button>
+    </div>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Water Systems screen -->
+  <div class="mobile-screen" [class.active]="mobileScreen === 'water'">
+    <div class="section-heading">
+      <button class="icon-btn back-btn" (click)="backToRoot()" aria-label="Back">&#8249;</button>
+      <span>Water Systems</span>
+    </div>
+    <div class="accordion">
+      <div
+        class="accordion-item"
+        *ngFor="let cat of waterSystemCategories"
+      >
+        <button
+          class="accordion-toggle"
+          (click)="toggleWaterCategory(cat)"
+          [attr.aria-expanded]="expandedWaterCategoryId === cat.category_id"
         >
-          <a
-            *ngFor="let sub of item.submenu"
-            [routerLink]="sub.route"
-            class="mobile-submenu-link"
-            (click)="onNavClick()"
-          >
-            {{ sub.label }}
-          </a>
+          <span class="toggle-left">
+            <img *ngIf="cat.image_url" class="item-icon" [src]="resolveImageUrl(cat.image_url)" alt="" />
+            {{ cat.name }}
+          </span>
+          <i class="bx" [ngClass]="expandedWaterCategoryId === cat.category_id ? 'bx-chevron-up' : 'bx-chevron-down'"></i>
+        </button>
+        <div class="accordion-body" [class.open]="expandedWaterCategoryId === cat.category_id">
+          <div class="product-grid">
+            <button
+              class="product-card"
+              *ngFor="let p of waterProductsMap[cat.category_id]"
+              (click)="goToProduct(p); closeMenu()"
+            >
+              <img [src]="resolveImageUrl(p.image_url)" alt="" />
+              <span>{{ p.name }}</span>
+            </button>
+          </div>
+          <div class="accordion-empty" *ngIf="(waterProductsMap[cat.category_id]?.length || 0) === 0">
+            No products
+          </div>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- MOBILE NORMAL LINK -->
-      <a
-        *ngIf="!item.submenu"
-        [routerLink]="item.route"
-        class="mobile-nav-link mobile-nav-item"
-        (click)="onNavClick()"
+  <!-- Ionizer Filters screen -->
+  <div class="mobile-screen" [class.active]="mobileScreen === 'ionizer'">
+    <div class="section-heading">
+      <button class="icon-btn back-btn" (click)="backToRoot()" aria-label="Back">&#8249;</button>
+      <span>Ionizer Filters</span>
+    </div>
+    <div class="accordion">
+      <div
+        class="accordion-item"
+        *ngFor="let cat of ionizerCategories"
       >
-        {{ item.label }}
-      </a>
+        <button
+          class="accordion-toggle"
+          (click)="toggleIonizerCategory(cat)"
+          [attr.aria-expanded]="expandedIonizerCategoryId === cat.category_id"
+        >
+          <span class="toggle-left">
+            <img *ngIf="cat.image_url" class="item-icon" [src]="resolveImageUrl(cat.image_url)" alt="" />
+            {{ cat.name }}
+          </span>
+          <i class="bx" [ngClass]="expandedIonizerCategoryId === cat.category_id ? 'bx-chevron-up' : 'bx-chevron-down'"></i>
+        </button>
+        <div class="accordion-body" [class.open]="expandedIonizerCategoryId === cat.category_id">
+          <div class="product-grid">
+            <button
+              class="product-card"
+              *ngFor="let p of ionizerProductsMap[cat.category_id]"
+              (click)="goToProduct(p); closeMenu()"
+            >
+              <img [src]="resolveImageUrl(p.image_url)" alt="" />
+              <span>{{ p.name }}</span>
+            </button>
+          </div>
+          <div class="accordion-empty" *ngIf="(ionizerProductsMap[cat.category_id]?.length || 0) === 0">
+            No products
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    </ng-container>
-  </nav>
+  <!-- Simple screens: Learn / Testimonials / Support -->
+  <div class="mobile-screen" [class.active]="mobileScreen === 'learn'">
+    <div class="section-heading">
+      <button class="icon-btn back-btn" (click)="backToRoot()" aria-label="Back">&#8249;</button>
+      <span>Learn</span>
+    </div>
+    <div class="mobile-group">
+      <button class="mobile-subitem" *ngFor="let sub of learnItems" (click)="navigateAndClose(sub.route)">
+        {{ sub.label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-screen" [class.active]="mobileScreen === 'testimonials'">
+    <div class="section-heading">
+      <button class="icon-btn back-btn" (click)="backToRoot()" aria-label="Back">&#8249;</button>
+      <span>Testimonials</span>
+    </div>
+    <div class="mobile-group">
+      <button class="mobile-subitem" *ngFor="let sub of testimonialsItems" (click)="navigateAndClose(sub.route)">
+        {{ sub.label }}
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-screen" [class.active]="mobileScreen === 'support'">
+    <div class="section-heading">
+      <button class="icon-btn back-btn" (click)="backToRoot()" aria-label="Back">&#8249;</button>
+      <span>Support</span>
+    </div>
+    <div class="mobile-group">
+      <button class="mobile-subitem" *ngFor="let sub of supportItems" (click)="navigateAndClose(sub.route)">
+        {{ sub.label }}
+      </button>
+    </div>
+  </div>
 </div>

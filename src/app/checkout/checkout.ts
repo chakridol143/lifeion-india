@@ -6,11 +6,13 @@ import { LoginService } from '../login/services/loginservices';
 import { CartService } from '../cart-details/services/cartservice';
 import { resolveAssetUrl } from '../config/api.config';
 import { Subscription } from 'rxjs';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
+import { CurrencyService } from '../shared/currency.service';
 
 
 @Component({
   selector: 'app-checkout',
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl:'./checkout.html',
   styleUrl: './checkout.css'
 })
@@ -26,13 +28,14 @@ export class Checkout {
   resolveImageUrl = resolveAssetUrl;
   private cartSub?: Subscription;
   
-  constructor(private cartService : CartService, private router:Router, public loginService: LoginService) {}
+  constructor(private cartService : CartService, private router:Router, public loginService: LoginService, private currency: CurrencyService) {}
 
   ngOnInit():void{
     this.cartSub = this.cartService.cart$.subscribe(items => {
       this.items = items;
       this.calculateTotals();
     });
+    this.currency.currencyChanges().subscribe(() => this.calculateTotals());
     // also initialize once in case cart$ has current value
     this.items = this.cartService.getItems();
     this.calculateTotals();
@@ -50,8 +53,8 @@ export class Checkout {
 
 calculateTotals() {
   this.totalAmount = this.cartService.getTotal();
-  this.gstAmount = this.totalAmount * 0.18;
-  this.grandTotal = this.totalAmount + this.gstAmount;
+  this.gstAmount = this.cartService.getGstAmount();
+  this.grandTotal = this.cartService.getGrandTotal();
   this.totalItems = this.cartService.getCount(); // ✅ correct method
 }
 

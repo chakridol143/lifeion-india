@@ -60,7 +60,7 @@
       </div>
       <p class="brand">Life Ionizers</p>
       <h3>{{ product.name }}</h3>
-      <p class="price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</p>
+      <p class="price">{{ product.price | currencyDisplay }} <span class="price-note">+18% GST</span></p>
       <button class="add-btn" (click)="addToCart(product)">Add to cart</button>
     </article>
   </section>
@@ -129,3 +129,5 @@
     </div>
   </section>
 </div>
+
+

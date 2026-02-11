@@ -82,8 +82,10 @@
       <div class="bottom-left">
         <div class="currency-selector">
           <i class="bx bx-globe"></i>
-          <span>United States (USD $)</span>
-          <i class="bx bx-chevron-down"></i>
+          <select [ngModel]="currency" (ngModelChange)="onCurrencyChange($event)">
+            <option value="USD">United States (USD $)</option>
+            <option value="INR">India (INR ₹)</option>
+          </select>
         </div>
       </div>
 
@@ -117,3 +119,4 @@
     </div>
   </div>
 </footer>
+

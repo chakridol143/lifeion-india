@@ -4,12 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../water-systems/product.service';
 import { resolveAssetUrl } from '../../config/api.config';
 import { CartService } from '../../cart-details/services/cartservice';
+import { CurrencyDisplayPipe } from '../../shared/currency-display.pipe';
 
 
 @Component({
   selector: 'app-water-system-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './water-system-details.html',
   styleUrl: './water-system-details.css',
 })

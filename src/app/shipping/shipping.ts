@@ -7,11 +7,13 @@ import { CartService } from '../cart-details/services/cartservice';
 import { resolveAssetUrl } from '../config/api.config';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
+import { CurrencyService } from '../shared/currency.service';
 
 @Component({
   selector: 'app-shipping',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CurrencyDisplayPipe],
   templateUrl: './shipping.html',
   styleUrl: './shipping.css',
 })
@@ -42,6 +44,7 @@ export class Shipping implements OnInit, OnDestroy {
     private shippingService: ShippingService,
     public loginService: LoginService,
     private cartService: CartService,
+    private currency: CurrencyService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
@@ -51,6 +54,7 @@ export class Shipping implements OnInit, OnDestroy {
       this.items = items;
       this.calculateTotals();
     });
+    this.currency.currencyChanges().subscribe(() => this.calculateTotals());
 
     // initial load
     this.items = this.cartService.getItems();
@@ -60,8 +64,8 @@ export class Shipping implements OnInit, OnDestroy {
   calculateTotals() {
     this.totalAmount = this.cartService.getTotal();
     this.totalItems = this.cartService.getCount();
-    this.gstAmount = this.totalAmount * 0.18;
-    this.grandTotal = this.totalAmount + this.gstAmount;
+    this.gstAmount = this.cartService.getGstAmount();
+    this.grandTotal = this.cartService.getGrandTotal();
   }
 
   buyNow() {

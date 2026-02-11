@@ -2,11 +2,13 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { API_BASE_URL } from "../../config/api.config";
+import { CurrencyService } from "../../shared/currency.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  private readonly GST_RATE = 0.18;
 
   private LOCAL_CART_KEY = 'guest_cart';
   private items: any[] = [];
@@ -16,11 +18,13 @@ export class CartService {
 
   private apiUrl = `${API_BASE_URL}/api/cart`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private currency: CurrencyService) {
     // 🔹 Load local cart initially
     const local = localStorage.getItem(this.LOCAL_CART_KEY);
     this.items = local ? JSON.parse(local) : [];
     this.cartSubject.next(this.items);
+
+    this.currency.loadFromStorage();
   }
 
   /* =====================================================
@@ -179,6 +183,33 @@ export class CartService {
     return this.items.reduce(
       (sum, i) => sum + (i.price * i.quantity), 0
     );
+  }
+
+  getGstAmount(): number {
+    const subtotal = this.getConvertedTotal();
+    return subtotal * this.GST_RATE;
+  }
+
+  getGrandTotal(): number {
+    const subtotal = this.getConvertedTotal();
+    return subtotal + this.getGstAmount();
+  }
+
+  getGstRate(): number {
+    return this.GST_RATE;
+  }
+
+  getConvertedTotal(): number {
+    return this.currency.convert(this.getTotal());
+  }
+
+  getCurrencyCode() {
+    return this.currency.getCurrency();
+  }
+
+  setCurrency(code: 'USD' | 'INR') {
+    this.currency.setCurrency(code);
+    this.cartSubject.next(this.items);
   }
 
   getCount() {

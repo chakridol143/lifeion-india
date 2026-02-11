@@ -1,8 +1,9 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { resolveAssetUrl } from '../config/api.config';
 import { CartService } from '../cart-details/services/cartservice';
 import { ProductService } from '../water-systems/product.service';
+import { CurrencyDisplayPipe } from '../shared/currency-display.pipe';
 
 interface ROProduct {
   product_id: number;
@@ -17,7 +18,7 @@ interface ROProduct {
 @Component({
   selector: 'app-reverse-osmosis',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyDisplayPipe],
   templateUrl: './reverse-osmosis.html',
   styleUrl: './reverse-osmosis.css',
 })
