@@ -1098,3 +1098,336 @@
     font-size: 18px;
   }
 }
+
+
+/* =====================================================
+   GLOBAL RESPONSIVE SAFETY
+===================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fluid typography */
+.hero-text h1 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.hero-description,
+.split-text p,
+.why-center p,
+.cta-dark p {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+}
+
+/* =====================================================
+   MOBILE (320px – 480px)
+===================================================== */
+
+@media (max-width: 480px) {
+
+  .collection-page {
+    padding: 1.25rem 1rem 2.5rem;
+    gap: 2.5rem;
+  }
+
+  .collection-hero {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .collection-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .toolbar-left,
+  .toolbar-center,
+  .toolbar-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .toolbar-select {
+    width: 100%;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .add-btn,
+  .primary-btn,
+  .ghost-btn,
+  .outline-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .split-section {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .split-image,
+  .split-text {
+    width: 100%;
+  }
+
+  .range-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .cta-dark {
+    padding: 2rem 1rem;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE (480px – 576px)
+===================================================== */
+
+@media (min-width: 481px) and (max-width: 576px) {
+
+  .collection-page {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .range-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .split-section {
+    flex-direction: column;
+  }
+}
+
+/* =====================================================
+   TABLET PORTRAIT (576px – 768px)
+===================================================== */
+
+@media (min-width: 577px) and (max-width: 768px) {
+
+  .collection-page {
+    padding: 2rem 1.75rem 3.5rem;
+  }
+
+  .collection-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .range-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .split-section {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+/* =====================================================
+   TABLET LANDSCAPE (768px – 992px)
+   TWO COLUMN LAYOUT STARTS
+===================================================== */
+
+@media (min-width: 769px) and (max-width: 992px) {
+
+  .collection-page {
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  .collection-hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .split-section {
+    flex-direction: row;
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .split-image,
+  .split-text {
+    width: 50%;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .range-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* =====================================================
+   SMALL DESKTOP (992px – 1200px)
+===================================================== */
+
+@media (min-width: 993px) and (max-width: 1200px) {
+
+  .collection-page {
+    padding: 3rem 3rem 4.5rem;
+    gap: 4rem;
+  }
+
+  .split-section {
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .range-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+}
+
+/* =====================================================
+   DESKTOP (1200px+)
+===================================================== */
+
+@media (min-width: 1201px) {
+
+  .collection-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3.5rem 4rem 5rem;
+    gap: 4.5rem;
+  }
+
+  .collection-hero {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .split-section {
+    flex-direction: row;
+    gap: 3.5rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .range-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .cta-dark {
+    padding: 4rem 3rem;
+  }
+}
+
+/* =====================================================
+   LARGE DESKTOP (1920px+)
+   PREMIUM SCALE EFFECT
+===================================================== */
+
+@media (min-width: 1920px) {
+
+  .collection-page {
+    max-width: 1700px;
+    gap: 5.5rem;
+  }
+
+  .hero-text h1 {
+    font-size: 3rem;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+  }
+
+  .product-card {
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+  }
+
+  .product-image {
+    min-height: 220px;
+  }
+
+  .product-image img {
+    max-height: 180px;
+  }
+
+  .product-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .product-price {
+    font-size: 1.4rem;
+  }
+
+  .add-btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+
+  .split-text h2 {
+    font-size: 2.2rem;
+  }
+
+  .split-text p {
+    font-size: 1.2rem;
+  }
+
+  .range-card {
+    padding: 2.5rem 2rem;
+    border-radius: 28px;
+  }
+
+  .range-card img {
+    max-width: 280px;
+    height: 220px;
+  }
+
+  .cta-dark {
+    padding: 5rem 4rem;
+    border-radius: 20px;
+  }
+
+  .cta-dark h2 {
+    font-size: 2.8rem;
+  }
+
+  .cta-dark p {
+    font-size: 1.2rem;
+  }
+}
