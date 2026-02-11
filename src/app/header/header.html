@@ -10,7 +10,7 @@
    MAIN HEADER
 ======================= -->
 <div class="header-main">
-  <div class="header-logo">
+  <div class="header-logo" [class.home-logo]="isHomePage">
     <img src="/images/Ionizer_Logo.png" alt="Life Ionizers" />
   </div>
 
@@ -82,6 +82,42 @@
 
 <!-- ================= IONIZER FILTERS ================= -->
 <nav class="header-nav desktop-only">
+
+  
+  <!-- ================= OTHER NAV ITEMS ================= -->
+  <ng-container *ngFor="let item of navItems">
+
+    <!-- Skip Water Systems here -->
+    <ng-container *ngIf="item.label !== 'Water Systems'">
+
+      <!-- DROPDOWNS -->
+      <div *ngIf="hasSubmenu(item)" class="nav-link nav-dropdown">
+        <a
+          [routerLink]="item.route || null"
+          (click)="navigateAndClose(item.route)"
+        >
+          {{ item.label }} <i class="bx bx-chevron-down"></i>
+        </a>
+
+        <div class="dropdown-wrapper">
+          <ul class="dropdown-menu">
+            <li *ngFor="let sub of item.submenu">
+              <a [routerLink]="sub.route" (click)="navigateAndClose(sub.route)">{{ sub.label }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- NORMAL LINKS -->
+      <a
+        *ngIf="!hasSubmenu(item)"
+        [routerLink]="item.route"
+        class="nav-link" >
+        {{ item.label }}
+      </a>
+
+    </ng-container>
+  </ng-container>
 
 <div
   class="nav-dropdown-wrapper"
@@ -196,41 +232,6 @@
 
 
 
-  <!-- ================= OTHER NAV ITEMS ================= -->
-  <ng-container *ngFor="let item of navItems">
-
-    <!-- Skip Water Systems here -->
-    <ng-container *ngIf="item.label !== 'Water Systems'">
-
-      <!-- DROPDOWNS -->
-      <div *ngIf="hasSubmenu(item)" class="nav-link nav-dropdown">
-        <a
-          [routerLink]="item.route || null"
-          (click)="navigateAndClose(item.route)"
-        >
-          {{ item.label }} <i class="bx bx-chevron-down"></i>
-        </a>
-
-        <div class="dropdown-wrapper">
-          <ul class="dropdown-menu">
-            <li *ngFor="let sub of item.submenu">
-              <a [routerLink]="sub.route">{{ sub.label }}</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- NORMAL LINKS -->
-      <a
-        *ngIf="!hasSubmenu(item)"
-        [routerLink]="item.route"
-        class="nav-link"
-      >
-        {{ item.label }}
-      </a>
-
-    </ng-container>
-  </ng-container>
 </nav>
 
 

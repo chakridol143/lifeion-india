@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../water-systems/product.service';
@@ -47,7 +47,8 @@ currentIndex = 0;
 
 constructor(
   private productService: ProductService,
-  private router: Router
+  private router: Router,
+  private cdr: ChangeDetectorRef
 ) {}
 
 
@@ -90,11 +91,15 @@ ngOnInit(): void {
     id: p.product_id,
     name: p.name,
     price: p.price,
+    emi: p.emi ?? 0,
+    reviews: p.reviews ?? 0,
     menuTypeId: p.menu_type_id,
     image: p.image_url
       ? 'https://lifeion-backend-production.up.railway.app/assets/images/' + p.image_url
       : 'assets/images/placeholder.png'
   }));
+
+    this.cdr.detectChanges();
 
   });
 }

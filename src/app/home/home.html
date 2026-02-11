@@ -134,7 +134,7 @@
   <div class="products-carousel">
     <button class="product-carousel-btn prev" (click)="prevProduct()" aria-label="Previous product">❮</button>
 
-    <div class="products-container">
+    <div class="products-container" *ngIf="products.length; else productsLoading">
       <div class="product-card" *ngFor="let product of products">
         <img [src]="product.image" [alt]="product.name" />
         <h3>{{ product.name }}</h3>
@@ -156,6 +156,13 @@
 
     <button class="product-carousel-btn next" (click)="nextProduct()" aria-label="Next product">❯</button>
   </div>
+
+  <ng-template #productsLoading>
+    <div class="products-loading">
+      <div class="spinner"></div>
+      <p>Loading popular products...</p>
+    </div>
+  </ng-template>
 </section>
 
 <!-- BENEFITS SHOWCASE SECTION -->

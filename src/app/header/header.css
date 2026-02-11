@@ -35,6 +35,12 @@
   height: 15rem;
   width: auto;
   object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.header-logo.home-logo img {
+  transform: scale(1.15);
+  transform-origin: left center;
 }
 
 /* SEARCH - DESKTOP */

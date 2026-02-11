@@ -8,18 +8,19 @@
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 /* Footer Main Content */
 .footer-main {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 60px;
-  margin-bottom: 40px;
-  padding-bottom: 40px;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 36px;
+  padding-bottom: 36px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -56,8 +57,16 @@
 /* Social Icons */
 .social-icons {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  background-color: #0077b6;
+}
+.social-icon:hover {
+  background-color: #009fc7;
 }
 
 .social-icon {
@@ -139,6 +148,7 @@
 
 .newsletter-form {
   display: flex;
+  width: 100%;
 }
 
 .newsletter-input-wrapper {
@@ -196,10 +206,10 @@
 .footer-bottom {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 40px;
+  gap: 32px;
   align-items: center;
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 26px;
+  padding-bottom: 26px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -250,10 +260,11 @@
 .footer-legal {
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 22px;
   text-align: center;
-  padding-top: 20px;
+  padding-top: 18px;
   border-top: 1px solid #ddd;
+  flex-wrap: wrap;
 }
 
 .footer-legal a {
@@ -275,6 +286,28 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+.payment-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.payment-icons li {
+  display: flex;
+}
+
+.payment-icon {
+  width: 44px;
+  height: 28px;
+}
+
+.desktop-only { display: initial; }
+.mobile-only { display: none; }
 
 .payment-badge {
   display: inline-flex;
@@ -370,33 +403,41 @@
    ============================================ */
 
 /* TABLET (601px - 900px) */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .footer-main {
-    grid-template-columns: repeat(2, 1fr);
-    /* 2 columns */
-    gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
   }
 
   .footer-brand {
-    grid-column: 1 / -1;
-    /* Full width */
+    grid-column: span 2;
   }
 
-  /* Newsletter takes full width on tablet too, or stays in grid */
   .footer-newsletter {
-    grid-column: 1 / -1;
+    grid-column: span 2;
   }
 
   .footer-bottom {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
     text-align: center;
+    justify-items: center;
   }
 
-  .bottom-left,
-  .bottom-center,
   .bottom-right {
     justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer-main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .footer-brand,
+  .footer-newsletter {
+    grid-column: 1 / -1;
   }
 }
 
@@ -408,13 +449,10 @@
 
   .footer-main {
     grid-template-columns: 1fr;
-    /* 1 column */
-    gap: 30px;
+    gap: 26px;
     border-bottom: none;
-    /* optional: remove separator on mobile if desired */
   }
 
-  /* Reset grid spans since everything is 1 col */
   .footer-brand,
   .footer-newsletter {
     grid-column: auto;
@@ -422,7 +460,7 @@
 
   .footer-legal {
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
   }
 
   .newsletter-form {
@@ -435,18 +473,64 @@
 
   .logo-img {
     transform: scale(1);
-    /* Reset scale */
-    width: 10rem;
+    width: 9rem;
   }
 
-  .payment-methods {
-    justify-content: center;
+  .desktop-only { display: none; }
+  .mobile-only { display: block; }
+
+  .footer-accordions {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
+    margin-bottom: 18px;
   }
 
-  /* ensure full width inputs */
-  .newsletter-input {
-    width: 100%;
+  .footer-accordion {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 14px;
+    background: #f7f7f7;
+  }
+
+  .footer-accordion summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .footer-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .footer-accordion[open] summary i {
+    transform: rotate(180deg);
+  }
+
+  .footer-accordion i {
+    transition: transform 0.2s ease;
+    font-size: 18px;
+  }
+
+  .footer-accordion .footer-list,
+  .footer-accordion .newsletter-text,
+  .footer-accordion .newsletter-form {
+    padding: 0 0 12px 0;
+  }
+
+  .payment-icons {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .payment-icon {
+    width: 40px;
+    height: 24px;
   }
 }
 

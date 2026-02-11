@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { filter } from 'rxjs/operators';
 
 import { CategoryService, Category, Product } from '../water-systems/category.service';
 import { ProductService } from '../water-systems/product.service';
@@ -199,6 +200,11 @@ ngOnInit() {
     this.cartCount = items.length;
   });
 
+  this.setHomeFlag(this.router.url);
+  this.router.events
+    .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+    .subscribe(event => this.setHomeFlag(event.urlAfterRedirects || event.url));
+
   this.categoryService.getAllCategories().subscribe(res => {
     this.categories = res;
   });
@@ -271,6 +277,7 @@ onCategoryHover(categoryId: number): void {
   ionizerProductsMap: { [categoryId: number]: Product[] } = {};
   private ionizerCloseTimeout: ReturnType<typeof setTimeout> | null = null;
   waterSystemCategories: Category[] = [];
+  isHomePage = false;
 
 
 loadIonizerFilters(): void {
@@ -432,6 +439,11 @@ closeIonizerMenu(): void {
 
   resolveImageUrl(imageUrl?: string): string {
     return resolveAssetUrl(imageUrl);
+  }
+
+  private setHomeFlag(url: string): void {
+    const cleanUrl = (url || '').split('?')[0].split('#')[0];
+    this.isHomePage = cleanUrl === '/' || cleanUrl === '' || cleanUrl === '/home';
   }
 
 onIonizerCategoryHover(categoryId: number): void {
